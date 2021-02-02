@@ -1,4 +1,10 @@
-#include "../includes/minirt.h"
+#include "./minilibx-linux/mlx.h"
+#include "./minilibx-linux/mlx_int.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+# define ESC 65307
 
 int     cnt = 0;
 void    *mlx_ptr;

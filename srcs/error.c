@@ -27,3 +27,16 @@ void	arg_error(int argc, char **argv)
 	printf("Usage 2 : %s <scene.rt> --save\n", argv[0]);
 	exit(EXIT_FAILURE);
 }
+
+int		file_error(char **argv)
+{
+	int	fd;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		printf("ERROR : Can't open file %s \n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	return (fd);
+}

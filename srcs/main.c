@@ -14,5 +14,10 @@
 
 int		main(int argc, char **argv)
 {
+	int	fd;
+
 	arg_error(argc, argv);
+	fd = file_error(argv);
+	
+	close(fd);
 }

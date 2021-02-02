@@ -26,5 +26,6 @@
 # endif
 
 void	arg_error(int argc, char **argv);
+int		file_error(char **argv);
 
 #endif
