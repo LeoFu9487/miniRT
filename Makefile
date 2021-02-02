@@ -15,7 +15,8 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
 
 UNAME = $(shell uname)
 
-FILES = main.c	error.c
+FILES = main.c	error.c	parse_scene.c	parse_func_0.c\
+	parse_func_1.c
 
 SRCS_DIR = srcs/
 

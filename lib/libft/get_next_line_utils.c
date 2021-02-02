@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/minirt.h"
 
 char	*ft_substr2(char const *s, int start, int len)
 {
 	char	*ans;
 	int		ct;
 
-	if (!(ans = (char*)malloc((len + 1) * sizeof(char))))
+	if (!(ans = ft_malloc((len + 1), sizeof(char))))
 		return (NULL);
 	ct = 0;
 	while (ct < len && s[ct] != '\0')
@@ -35,11 +35,11 @@ int		ft_str_add(t_lst *dst, char *s, int len)
 	t_str	*temp;
 	int		idx;
 
-	if (len < 0 || !s || !(str = (t_str*)malloc(1 * sizeof(t_str))))
+	if (len < 0 || !s || !(str = ft_malloc(1, sizeof(t_str))))
 		return (-1);
 	idx = -1;
 	str->next = 0;
-	if (!(str->s = (char*)malloc((len + 1) * sizeof(char))))
+	if (!(str->s = ft_malloc((len + 1), sizeof(char))))
 		return (-1);
 	while (++idx < len)
 		str->s[idx] = s[idx];
@@ -62,7 +62,7 @@ t_lst	*ft_lst_add(t_lst **dst, int fd)
 {
 	t_lst	*temp;
 
-	if (!(temp = (t_lst*)malloc(1 * sizeof(t_lst))))
+	if (!(temp = ft_malloc(1, sizeof(t_lst))))
 		return (NULL);
 	temp->str = 0;
 	temp->len = 0;
@@ -89,8 +89,8 @@ int		ft_clean_lst(t_lst *lst)
 	{
 		temp = lst->str;
 		lst->str = lst->str->next;
-		free(temp->s);
-		free(temp);
+		ft_free(temp->s);
+		ft_free(temp);
 	}
 	lst->str = 0;
 	return (0);
@@ -110,7 +110,7 @@ int		ft_del_lst(t_lst *target, t_lst **head, int *res)
 			*head = target->next;
 		else
 			*head = 0;
-		free(target);
+		ft_free(target);
 		return (res[1] == -1 ? -1 : (res[1] == 1 && res[0]));
 	}
 	temp = *head;
@@ -119,6 +119,6 @@ int		ft_del_lst(t_lst *target, t_lst **head, int *res)
 	temp->next = target->next;
 	if (target->str)
 		ft_clean_lst(target);
-	free(target);
+	ft_free(target);
 	return (res[1] == -1 ? -1 : (res[1] == 1 && res[0]));
 }

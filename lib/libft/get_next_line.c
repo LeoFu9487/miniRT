@@ -10,15 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/minirt.h"
 
 static int		ft_fill(char **line, t_lst *temp)
 {
 	int		idx[2];
 	t_str	*str;
 
-	if (!(*line =
-		(char*)malloc(((temp->len) - (temp->idx) + 1) * sizeof(char))))
+	if (!(*line = ft_malloc(((temp->len) - (temp->idx) + 1), sizeof(char))))
 		return (-1);
 	idx[0] = temp->idx;
 	idx[1] = 0;

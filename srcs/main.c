@@ -14,10 +14,12 @@
 
 int		main(int argc, char **argv)
 {
-	int	fd;
+	int			fd;
+	t_parse		*parse;
 
 	arg_error(argc, argv);
 	fd = file_error(argv);
-	
-	close(fd);
+	parse = init_parse();
+	parse_scene(fd, parse);
+	ft_free_all();
 }

@@ -19,22 +19,36 @@
 ** ft_memory(0, 0, NULL, clear);
 */
 
-void	*ft_malloc(size_t elem_cnt, size_t elem_size)
+void			*ft_malloc(size_t elem_cnt, size_t elem_size)
 {
 	return (ft_memory(elem_cnt, elem_size, NULL, push));
 }
 
-void	ft_free(void *del)
+void			ft_free(void *del)
 {
 	ft_memory(0U, 0U, del, pop);
 }
 
-void	ft_free_all(void)
+void			ft_free_all(void)
 {
 	ft_memory(0U, 0U, NULL, clear);
 }
 
-void	*ft_memory(size_t elem_cnt, size_t elem_size, void *del, t_memory type)
+static t_list	*ft_lstnew_2(void *content)
+{
+	t_list	*nw;
+
+	if (!(nw = (t_list*)malloc(sizeof(t_list))))
+	{
+		ft_putstr_fd("ERROR_IN_FT_LSTNEW\n", 1);
+		return (NULL);
+	}
+	nw->content = content;
+	nw->next = NULL;
+	return (nw);
+}
+
+void			*ft_memory(size_t elem_cnt, size_t elem_size, void *del, t_memory type)
 {
 	static t_list	*head;
 	void			*new_mem;
@@ -43,7 +57,7 @@ void	*ft_memory(size_t elem_cnt, size_t elem_size, void *del, t_memory type)
 	{
 		if (!(new_mem = ft_calloc(elem_cnt, elem_size)))
 			ft_putstr_fd("ERROR_IN_FT_MEMORY_0\n", 1);
-		else if (!(ft_lstadd_front(&head, ft_lstnew(new_mem))))
+		else if (!(ft_lstadd_front(&head, ft_lstnew_2(new_mem))))
 			ft_putstr_fd("ERROR_IN_FT_MEMORY_1\n", 1);
 		return (new_mem);
 	}
