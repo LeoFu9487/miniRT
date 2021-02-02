@@ -6,7 +6,7 @@
 #    By: yfu <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 12:17:32 by yfu               #+#    #+#              #
-#    Updated: 2020/12/22 12:28:03 by yfu              ###   ########lyon.fr    #
+#    Updated: 2021/02/02 12:02:56 by yfu              ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,7 @@ fclean:
 
 re: fclean all
 
-go :	$(NAME)
-	$(CC) -fsanitize=address main.c $(NAME) -o test
-	./test
+norm :
+	norminette $(shell find *.c *.h)
 
 .PHONY : all bonus clean fclean re

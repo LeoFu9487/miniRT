@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
 
 UNAME = $(shell uname)
 
-FILES = main.c
+FILES = main.c	error.c
 
 SRCS_DIR = srcs/
 
@@ -66,4 +66,8 @@ fclean :
 	
 re :	fclean all
 
-.PHONY : all clean fclean re
+norm :
+	norminette srcs/*.c includes/*.h
+	$(MAKE) norm -C lib/libft/
+
+.PHONY : all clean fclean re norm
