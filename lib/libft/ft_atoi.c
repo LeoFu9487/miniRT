@@ -24,6 +24,8 @@ int			ft_atoi(const char *str)
 {
 	long long int	ct[3];
 
+	if (str[0] == 0)
+		return (0);
 	if (ft_isspace(*str))
 		return (ft_atoi(str + 1));
 	ct[0] = (str[0] == '+' || str[0] == '-') ? 0 : -1;

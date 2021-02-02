@@ -12,6 +12,13 @@
 
 #include "../includes/minirt.h"
 
+void	error_exit(const char *str)
+{
+	printf("ERROR : %s\n", str);
+	ft_free_all();
+	exit(EXIT_FAILURE);
+}
+
 void	arg_error(int argc, char **argv)
 {
 	if (argc < 2 || argc > 3)

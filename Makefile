@@ -38,6 +38,8 @@ MACOS_FLAGS =  -I $(MACOS_MINILIBX) -L $(MACOS_MINILIBX) -lmlx -framework OpenGL
 
 LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lm -lX11 -lXext -lpthread
 
+DEBUG_FLAGS = -D DEBUG
+
 ifeq ($(UNAME),Darwin)
 	LIBFLAGS += $(MACOS_FLAGS)
 	CFLAGS += $(MACOS_MACRO)

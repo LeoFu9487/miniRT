@@ -59,6 +59,17 @@ static void	assigned_func(void **func)
 	func[8] = &parse_tr;
 }
 
+#ifdef DEBUG
+
+static void	print_parse(t_parse *parse)
+{
+	printf("Rx : %d Ry : %d\n", parse->Rx, parse->Ry);
+	printf("Aratio : %g Acolors : %d %d %d\n",
+	parse->Aratio, parse->Acolor[0], parse->Acolor[1], parse->Acolor[2]);
+}
+
+#endif
+
 void		parse_scene(int fd, t_parse *parse)
 {
 	char	*str;
@@ -75,4 +86,12 @@ void		parse_scene(int fd, t_parse *parse)
 			func[num[1]](parse, str);
 		ft_free(str);
 	}
+	if (parse->Rx == 0 || parse->Ry == 0)
+		error_exit("couldn't find rendering size\n");
+	if (parse->Aratio == -1.0 || parse->Acolor[0] == -1 ||
+	parse->Acolor[1] == -1 || parse->Acolor[2] == -1)
+		error_exit("couldn't find Ambient lightning\n");
+#ifdef DEBUG
+	print_parse(parse);
+#endif
 }
