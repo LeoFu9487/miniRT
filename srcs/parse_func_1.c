@@ -2,8 +2,12 @@
 
 void	parse_sp(t_parse *parse, char *str)
 {
-	(void)parse;
-	printf("SP!! %s\n", str);
+	t_sphere	*sphere;
+
+	sphere = init_sphere();
+	ft_lstadd_front(&(parse->objects), ft_lstnew(init_objects(sp, sphere)));
+	(void)str;
+
 }
 
 void	parse_pl(t_parse *parse, char *str)

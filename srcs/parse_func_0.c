@@ -39,18 +39,16 @@ void	parse_a(t_parse *parse, char *str)
 
 void	parse_c(t_parse *parse, char *str)
 {
-	t_list		*cam;
 	t_camera	*cam_info;
 	int			ct;
 	double		sign;
 
-	if (!(cam = ft_lstnew(init_camera())))
+	if (!(cam_info = init_camera()))
 	{
 		printf("ERROR_IN_PARSE_C\n");
 		return ;
 	}
-	ft_lstadd_back(&(parse->camera), cam);
-	cam_info = cam->content;
+	ft_lstadd_back(&(parse->camera), ft_lstnew(cam_info));
 	ct = -1;
 	while (++ct < 3)
 	{
@@ -89,17 +87,15 @@ void	parse_c(t_parse *parse, char *str)
 
 void	parse_l(t_parse *parse, char *str)
 {
-	t_list		*light;
 	t_light		*light_info;
 	int			ct;
 
-	if (!(light = ft_lstnew(init_light())))
+	if (!(light_info = init_light()))
 	{
 		printf("ERROR_IN_PARSE_L\nABANDON THE LIGHT\n");
 		return ;
 	}
-	ft_lstadd_back(&(parse->light), light);
-	light_info = light->content;
+	ft_lstadd_front(&(parse->light), ft_lstnew(light_info));
 	ct = -1;
 	while (++ct < 3)
 	{
