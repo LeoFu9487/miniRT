@@ -4,16 +4,20 @@ t_parse		*init_parse(void)
 {
 	t_parse	*parse;
 
-	parse = ft_malloc(1, sizeof(t_parse));
-	parse->Rx = 0;
-	parse->Ry = 0;
+	if (!(parse = ft_malloc(1, sizeof(t_parse))))
+	{
+		printf("ERROR_IN_INIT_PARSE\n");
+		return (NULL);
+	}
+	parse->rx = 0;
+	parse->ry = 0;
 	parse->obj = NULL;
 	parse->light = NULL;
 	parse->camera = NULL;
-	parse->Aratio = -1.0;
-	parse->Acolor[0] = -1;
-	parse->Acolor[1] = -1;
-	parse->Acolor[2] = -1;
+	parse->aratio = -1.0;
+	parse->acolor[0] = -1;
+	parse->acolor[1] = -1;
+	parse->acolor[2] = -1;
 	return (parse);
 }
 
@@ -48,27 +52,16 @@ static int	parse_type(char *str)
 
 static void	assigned_func(void **func)
 {
-	func[0] = &parse_r;
-	func[1] = &parse_a;
-	func[2] = &parse_c;
-	func[3] = &parse_l;
-	func[4] = &parse_sp;
-	func[5] = &parse_pl;
-	func[6] = &parse_sq;
-	func[7] = &parse_cy;
-	func[8] = &parse_tr;
+	func[(t_parse_type)R] = &parse_r;
+	func[(t_parse_type)A] = &parse_a;
+	func[(t_parse_type)c] = &parse_c;
+	func[(t_parse_type)l] = &parse_l;
+	func[(t_parse_type)sp] = &parse_sp;
+	func[(t_parse_type)pl] = &parse_pl;
+	func[(t_parse_type)sq] = &parse_sq;
+	func[(t_parse_type)cy] = &parse_cy;
+	func[(t_parse_type)tr] = &parse_tr;
 }
-
-#ifdef DEBUG
-
-static void	print_parse(t_parse *parse)
-{
-	printf("Rx : %d Ry : %d\n", parse->Rx, parse->Ry);
-	printf("Aratio : %g Acolors : %d %d %d\n",
-	parse->Aratio, parse->Acolor[0], parse->Acolor[1], parse->Acolor[2]);
-}
-
-#endif
 
 void		parse_scene(int fd, t_parse *parse)
 {
@@ -86,10 +79,10 @@ void		parse_scene(int fd, t_parse *parse)
 			func[num[1]](parse, str);
 		ft_free(str);
 	}
-	if (parse->Rx == 0 || parse->Ry == 0)
+	if (parse->rx == 0 || parse->ry == 0)
 		error_exit("couldn't find rendering size\n");
-	if (parse->Aratio == -1.0 || parse->Acolor[0] == -1 ||
-	parse->Acolor[1] == -1 || parse->Acolor[2] == -1)
+	if (parse->aratio == -1.0 || parse->acolor[0] == -1 ||
+	parse->acolor[1] == -1 || parse->acolor[2] == -1)
 		error_exit("couldn't find Ambient lightning\n");
 #ifdef DEBUG
 	print_parse(parse);

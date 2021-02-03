@@ -39,3 +39,26 @@ int			ft_atoi(const char *str)
 	}
 	return (ct[1] * ct[2]);
 }
+
+double		ft_atodouble(char **str)
+{
+	double	ans;
+	double	num;
+
+	if (!str || !(*str))
+		return (0.0);
+	while (**str && ft_isdigit(**str) == 0 && **str != '.')
+		(*str)++;
+	ans = (double)ft_atoi(*str);
+	while (**str && ft_isdigit(**str))
+		(*str)++;
+	if (**str != '.')
+		return (ans);
+	(*str)++;
+	num = (double)ft_atoi(*str);
+	while (**str && ft_isdigit(**str))
+		(*str)++;
+	while (num >= 1.0)
+		num /= 10.0;
+	return (ans + num);
+}

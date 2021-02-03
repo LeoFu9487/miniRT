@@ -48,7 +48,8 @@ static t_list	*ft_lstnew_2(void *content)
 	return (nw);
 }
 
-void			*ft_memory(size_t elem_cnt, size_t elem_size, void *del, t_memory type)
+void			*ft_memory(size_t elem_cnt,
+size_t elem_size, void *del, t_memory type)
 {
 	static t_list	*head;
 	void			*new_mem;

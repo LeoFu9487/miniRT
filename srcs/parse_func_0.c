@@ -1,73 +1,130 @@
 #include "../includes/minirt.h"
 
-/*
-Deal with '-' for r and a ?
-*/
-
 void	parse_r(t_parse *parse, char *str)
 {
-	if (parse->Rx || parse->Ry)
+	if (parse->rx || parse->ry)
 		error_exit("Define render size multiple times!\n");
-	while (*str && ft_isdigit(*str) == 0)
-		str++;
-	parse->Rx = ft_atoi(str);
-	while (*str && ft_isdigit(*str))
-		str++;
-	while (*str && ft_isdigit(*str) == 0)
-		str++;
-	parse->Ry = ft_atoi(str);
-	if (parse->Rx <= 0 || parse->Ry <= 0)
+	parse->rx = (int)ft_atodouble(&str);
+	parse->ry = (int)ft_atodouble(&str);
+	if (parse->rx <= 0 || parse->ry <= 0)
 		error_exit("couldn't find valid x and y rendering size\n");
 }
 
 void	parse_a(t_parse *parse, char *str)
 {
-	double	num;
 	int		cnt;
 
-	if (parse->Aratio != -1.0 || parse->Acolor[0] != -1 ||
-	parse->Acolor[1] != -1 || parse->Acolor[2] != -1)
+	if (parse->aratio != -1.0 || parse->acolor[0] != -1 ||
+	parse->acolor[1] != -1 || parse->acolor[2] != -1)
 		error_exit("Define Ambient lightning multiple times\n");
-	while (*str && ft_isdigit(*str) == 0)
+	while (*str && ft_isdigit(*str) == 0 && *str != '.')
 		str++;
 	if (*str == 0)
 		error_exit("couldn't find valid Ambient lightning ratio\n");
-	parse->Aratio = (double)(*(str++) - '0');
-	if (*(str) == '.')
-	{
-		str++;
-		num = (double)ft_atoi(str);
-		while (num >= 1.0)
-			num /= 10.0;
-		(parse->Aratio) += num;
-		while (*str && ft_isdigit(*str))
-			str++;
-	}
+	parse->aratio = ft_atodouble(&str);
+	if (parse->aratio < 0.0 || parse->aratio > 1.0)
+		error_exit("couldn't find valid Ambient lightning ratio\n");
 	cnt = -1;
 	while (++cnt < 3)
 	{
-		while (*str && ft_isdigit(*str) == 0)
+		while (*str && ft_isdigit(*str) == 0 && *str != '.')
 			str++;
 		if (*str == 0)
 			error_exit("couldn't find valid Ambient lightning color\n");
-		parse->Acolor[cnt] = ft_atoi(str);
-		while (*str && ft_isdigit(*str))
-			str++;
-		if (parse->Acolor[cnt] < 0 || parse->Acolor[cnt] > 255)
+		parse->acolor[cnt] = (int)ft_atodouble(&str);
+		if (parse->acolor[cnt] < 0 || parse->acolor[cnt] > 255)
 			error_exit("couldn't find valid Ambient lightning color\n");
 	}
-	if (parse->Aratio < 0.0 || parse->Aratio > 1.0)
-		error_exit("couldn't find valid Ambient lightning ratio\n");
 }
 
 void	parse_c(t_parse *parse, char *str)
 {
-	(void)parse;
-	printf("C!! %s\n", str);
+	t_list		*cam;
+	t_camera	*cam_info;
+	int			ct;
+	double		sign;
+
+	if (!(cam = ft_lstnew(init_camera())))
+	{
+		printf("ERROR_IN_PARSE_C\n");
+		return ;
+	}
+	ft_lstadd_back(&(parse->camera), cam);
+	cam_info = cam->content;
+	ct = -1;
+	while (++ct < 3)
+	{
+		while (*str && ft_isdigit(*str) == 0 && *str != '.')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid coordinate for cameras\n");
+		cam_info->coordinate[ct] = ft_atodouble(&str);
+	}
+	ct = -1;
+	while (++ct < 3)
+	{
+		sign = 1.0;
+		while (*str && ft_isdigit(*str) == 0 && *str != '.' && *str != '-')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid orientation for cameras\n");
+		if (*str == '-')
+		{
+			sign *= -1.0;
+			if (!ft_isdigit(*(++str)))
+				error_exit("find negative number in wrong format\n");
+		}
+		cam_info->orientation[ct] = sign * ft_atodouble(&str);
+		if (cam_info->orientation[ct] < -1.0 || cam_info->orientation[ct] > 1.0)
+			error_exit("Camera orientation out of range\n");
+	}
+	while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		str++;
+	if (*str == 0)
+		error_exit("couldn't find valid orientation for cameras\n");
+	cam_info->vof = ft_atodouble(&str);
+	if (cam_info->vof < 0.0 || cam_info->vof > 180.0)
+		error_exit("Camera vof out of range\n");
 }
 
 void	parse_l(t_parse *parse, char *str)
 {
-	(void)parse;
-	printf("L!! %s\n", str);
+	t_list		*light;
+	t_light		*light_info;
+	int			ct;
+
+	if (!(light = ft_lstnew(init_light())))
+	{
+		printf("ERROR_IN_PARSE_L\nABANDON THE LIGHT\n");
+		return ;
+	}
+	ft_lstadd_back(&(parse->light), light);
+	light_info = light->content;
+	ct = -1;
+	while (++ct < 3)
+	{
+		while (*str && ft_isdigit(*str) == 0 && *str != '.')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid coordinate for light\n");
+		light_info->coordinate[ct] = ft_atodouble(&str);
+	}
+	while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		str++;
+	if (*str == 0)
+		error_exit("couldn't find valid brightness for light\n");
+	light_info->brightness = ft_atodouble(&str);
+	ct = -1;
+	if (light_info->brightness < 0.0 || light_info->brightness > 1.0)
+		error_exit("Light brightness out of range\n");
+	while (++ct < 3)
+	{
+		while (*str && ft_isdigit(*str) == 0 && *str != '.')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid color for light\n");
+		light_info->color[ct] = (int)ft_atodouble(&str);
+		if (light_info->color[ct] < 0 || light_info->color[ct] > 255)
+			error_exit("Light color out of range\n");
+	}
 }

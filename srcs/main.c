@@ -19,7 +19,8 @@ int		main(int argc, char **argv)
 
 	arg_error(argc, argv);
 	fd = file_error(argv);
-	parse = init_parse();
+	if (!(parse = init_parse()))
+		error_exit("ERROR_IN_MAIN\n");
 	parse_scene(fd, parse);
 	ft_free_all();
 }

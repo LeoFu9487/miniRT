@@ -2,6 +2,7 @@
 #if uname == darwin ? 
 #change minilibx
 # if change minilibx, change minirt.h
+# take away DEBUG_FLAGS
 
 NAME = miniRT
 
@@ -16,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
 UNAME = $(shell uname)
 
 FILES = main.c	error.c	parse_scene.c	parse_func_0.c\
-	parse_func_1.c
+	parse_func_1.c	print_parse.c	camera.c	light.c
 
 SRCS_DIR = srcs/
 
@@ -38,7 +39,13 @@ MACOS_FLAGS =  -I $(MACOS_MINILIBX) -L $(MACOS_MINILIBX) -lmlx -framework OpenGL
 
 LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lm -lX11 -lXext -lpthread
 
+#delete here
+
 DEBUG_FLAGS = -D DEBUG
+
+CFLAGS += $(DEBUG_FLAGS)
+
+#delete here
 
 ifeq ($(UNAME),Darwin)
 	LIBFLAGS += $(MACOS_FLAGS)

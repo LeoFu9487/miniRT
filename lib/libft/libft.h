@@ -31,6 +31,7 @@ typedef enum	e_memory
 }				t_memory;
 
 void			*ft_malloc(size_t elem_cnt, size_t elem_size);
+double			ft_atodouble(char **str);
 void			ft_free(void *del);
 void			ft_free_all(void);
 void			*ft_memory(size_t ec, size_t es, void *add, t_memory type);
