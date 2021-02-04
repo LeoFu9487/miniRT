@@ -57,8 +57,9 @@ double		ft_atodouble(char **str)
 	(*str)++;
 	num = (double)ft_atoi(*str);
 	while (**str && ft_isdigit(**str))
+	{
 		(*str)++;
-	while (num >= 1.0)
 		num /= 10.0;
+	}
 	return (ans + num);
 }

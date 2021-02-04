@@ -52,6 +52,36 @@ typedef struct	s_sphere
 	int				color[3];
 }				t_sphere;
 
+typedef struct	s_plane
+{
+	double			coordinate[3];
+	double			orientation[3];
+	int				color[3];
+}				t_plane;
+
+typedef struct	s_square
+{
+	double			coordinate[3];
+	double			orientation[3];
+	double			side_size;
+	int				color[3];
+}				t_square;
+
+typedef struct	s_cylinder
+{
+	double			coordinate[3];
+	double			orientation[3];
+	double			diameter;
+	double			height;
+	int				color[3];
+}				t_cylinder;
+
+typedef struct	s_triangle
+{
+	double			point[3][3];
+	int				color[3];
+}				t_triangle;
+
 void			parse_scene(int fd, t_parse *parse);
 void			parse_r(t_parse *parse, char *str);
 void			parse_a(t_parse *parse, char *str);
@@ -67,10 +97,18 @@ t_camera		*init_camera(void);
 t_light			*init_light(void);
 t_objects		*init_objects(t_parse_type	type, void	*add);
 t_sphere		*init_sphere(void);
+t_plane			*init_plane(void);
+t_square		*init_square(void);
+t_cylinder		*init_cylinder(void);
+t_triangle		*init_triangle(void);
 void			print_parse(t_parse *parse);
 void			print_camera(void *lst);
 void			print_light(void *lst);
 void			print_objects(void *lst);
 void			print_sp(void *lst);
+void			print_pl(void *lst);
+void			print_sq(void *lst);
+void			print_cy(void *lst);
+void			print_tr(void *lst);
 
 #endif

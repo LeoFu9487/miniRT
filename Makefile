@@ -18,7 +18,8 @@ UNAME = $(shell uname)
 
 FILES = main.c	error.c	parse_scene.c	parse_func_0.c\
 	parse_func_1.c	print_parse.c	camera.c	light.c\
-	objects.c	sphere.c
+	objects.c	sphere.c	plane.c		square.c\
+	cylinder.c	triangle.c
 
 SRCS_DIR = srcs/
 
@@ -80,5 +81,9 @@ re :	fclean all
 norm :
 	norminette srcs/*.c includes/*.h
 	$(MAKE) norm -C lib/libft/
+
+git :
+	git add srcs/*.c includes/*.h Makefile lib/*/*.c lib/*/*.h lib/*/Makefile
+	git commit -m "$(message)"
 
 .PHONY : all clean fclean re norm

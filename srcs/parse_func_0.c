@@ -52,11 +52,18 @@ void	parse_c(t_parse *parse, char *str)
 	ct = -1;
 	while (++ct < 3)
 	{
-		while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		sign = 1.0;
+		while (*str && ft_isdigit(*str) == 0 && *str != '.' && *str != '-')
 			str++;
 		if (*str == 0)
 			error_exit("couldn't find valid coordinate for cameras\n");
-		cam_info->coordinate[ct] = ft_atodouble(&str);
+		if (*str == '-')
+		{
+			sign *= -1.0;
+			if (!ft_isdigit(*(++str)))
+				error_exit("find negative number in wrong format\n");
+		}
+		cam_info->coordinate[ct] = sign * ft_atodouble(&str);
 	}
 	ct = -1;
 	while (++ct < 3)
@@ -79,7 +86,7 @@ void	parse_c(t_parse *parse, char *str)
 	while (*str && ft_isdigit(*str) == 0 && *str != '.')
 		str++;
 	if (*str == 0)
-		error_exit("couldn't find valid orientation for cameras\n");
+		error_exit("couldn't find valid vof for cameras\n");
 	cam_info->vof = ft_atodouble(&str);
 	if (cam_info->vof < 0.0 || cam_info->vof > 180.0)
 		error_exit("Camera vof out of range\n");
@@ -89,6 +96,7 @@ void	parse_l(t_parse *parse, char *str)
 {
 	t_light		*light_info;
 	int			ct;
+	double		sign;
 
 	if (!(light_info = init_light()))
 	{
@@ -99,11 +107,18 @@ void	parse_l(t_parse *parse, char *str)
 	ct = -1;
 	while (++ct < 3)
 	{
-		while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		sign = 1.0;
+		while (*str && ft_isdigit(*str) == 0 && *str != '.' && *str != '-')
 			str++;
 		if (*str == 0)
-			error_exit("couldn't find valid coordinate for light\n");
-		light_info->coordinate[ct] = ft_atodouble(&str);
+			error_exit("couldn't find valid coordinate for lights\n");
+		if (*str == '-')
+		{
+			sign *= -1.0;
+			if (!ft_isdigit(*(++str)))
+				error_exit("find negative number in wrong format\n");
+		}
+		light_info->coordinate[ct] = sign * ft_atodouble(&str);
 	}
 	while (*str && ft_isdigit(*str) == 0 && *str != '.')
 		str++;
