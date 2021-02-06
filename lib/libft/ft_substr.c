@@ -12,11 +12,6 @@
 
 #include "libft.h"
 
-static size_t	ft_min(size_t a, size_t b)
-{
-	return ((a < b) ? a : b);
-}
-
 char			*ft_substr(char const *s, size_t start, size_t len)
 {
 	char	*ans;
@@ -30,7 +25,7 @@ char			*ft_substr(char const *s, size_t start, size_t len)
 		ans[0] = '\0';
 		return (ans);
 	}
-	l = ft_min(ft_strlen(s) - start, len);
+	l = (size_t)ft_min((int)(ft_strlen(s) - start), (int)len);
 	if (!s || !(ans = ft_memory(l + 1, sizeof(char), 0, push)))
 		return (NULL);
 	ct = -1;

@@ -16,12 +16,17 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
 
 UNAME = $(shell uname)
 
-FILES = main.c	error.c	parse_scene.c	parse_func_0.c\
-	parse_func_1.c	print_parse.c	camera.c	light.c\
+FILES = main.c	error.c	camera.c	light.c\
 	objects.c	sphere.c	plane.c		square.c\
 	cylinder.c	triangle.c
 
+PARSE_FILES = parse_scene.c	parse_func_0.c	parse_func_1.c	print_parse.c
+
+PARSE_SRCS = parse/
+
 SRCS_DIR = srcs/
+
+FILES += $(addprefix $(PARSE_SRCS), $(PARSE_FILES))
 
 SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 
@@ -41,13 +46,7 @@ MACOS_FLAGS =  -I $(MACOS_MINILIBX) -L $(MACOS_MINILIBX) -lmlx -framework OpenGL
 
 LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lm -lX11 -lXext -lpthread
 
-#delete here
-
-DEBUG_FLAGS = -D DEBUG
-
 CFLAGS += $(DEBUG_FLAGS)
-
-#delete here
 
 ifeq ($(UNAME),Darwin)
 	LIBFLAGS += $(MACOS_FLAGS)
@@ -78,12 +77,17 @@ fclean :
 	
 re :	fclean all
 
+debug :
+	$(MAKE) fclean
+	$(MAKE) DEBUG_FLAGS=-D\ DEBUG=1
+	$(MAKE) clean
+
 norm :
 	norminette srcs/*.c includes/*.h
 	$(MAKE) norm -C lib/libft/
 
 git :
-	git add srcs/*.c includes/*.h Makefile lib/*/*.c lib/*/*.h lib/*/Makefile
+	git add srcs/*.c includes/*.h Makefile lib/*/*.c lib/*/*.h lib/*/Makefile tests/*
 	git commit -m "$(message)"
 
 .PHONY : all clean fclean re norm

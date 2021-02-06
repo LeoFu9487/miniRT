@@ -25,6 +25,9 @@
 #  include "../lib/minilibx_opengl_20191021/mlx.h"
 #  define ESC 53
 # endif
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 void	arg_error(int argc, char **argv);
 int		file_error(char **argv);

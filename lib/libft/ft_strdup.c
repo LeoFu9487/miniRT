@@ -18,6 +18,8 @@ char			*ft_strdup(const char *source)
 	int		len;
 	int		i;
 
+	if (!source)
+		return (NULL);
 	len = ft_strlen(source);
 	if (!(ans = ft_memory(len + 1, sizeof(char), 0, push)))
 		return (NULL);

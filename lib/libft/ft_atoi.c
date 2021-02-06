@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minirt.h"
 
 static int	ft_isspace(char c)
 {
@@ -24,7 +24,7 @@ int			ft_atoi(const char *str)
 {
 	long long int	ct[3];
 
-	if (str[0] == 0)
+	if (!str || str[0] == 0)
 		return (0);
 	if (ft_isspace(*str))
 		return (ft_atoi(str + 1));
@@ -62,4 +62,28 @@ double		ft_atodouble(char **str)
 		num /= 10.0;
 	}
 	return (ans + num);
+}
+
+double		ft_neg_double(char **str, char *message)
+{
+	double	sign;
+
+	if (!str || !message || str[0] == 0)
+		return (0.0);
+	sign = 1.0;
+	while (**str && ft_isdigit(**str) == 0 && **str != '.' && **str != '-')
+		(*str)++;
+	if (**str == 0)
+	{
+		printf("%s ", message);
+		error_exit("not found\n");
+	}
+	if (**str == '-')
+	{
+		sign *= -1.0;
+		(*str)++;
+		if (!ft_isdigit(**str))
+			error_exit("negative number in wrong format\n");
+	}
+	return (sign * ft_atodouble(str));
 }

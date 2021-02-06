@@ -37,7 +37,10 @@ char			*ft_itoa(int n)
 		return (ft_strdup("0"));
 	ct = ft_cnt(n);
 	if (!(ans = ft_memory(ct + 1, sizeof(char), 0, push)))
+	{
+		ft_putstr_fd("ERROR_IN_FT_ITOA\n", 1);
 		return (NULL);
+	}
 	if (n < 0)
 		ans[0] = '-';
 	ans[ct] = '\0';

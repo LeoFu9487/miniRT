@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 t_plane		*init_plane(void)
 {

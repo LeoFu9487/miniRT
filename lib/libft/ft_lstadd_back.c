@@ -16,7 +16,7 @@ int			ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*temp;
 
-	if (!new)
+	if (!new || !lst)
 	{
 		ft_putstr_fd("ERROR_IN_FT_LSTADD_BACK\n", 1);
 		return (0);

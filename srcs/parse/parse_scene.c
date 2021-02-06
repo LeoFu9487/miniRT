@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 t_parse		*init_parse(void)
 {
@@ -84,7 +84,8 @@ void		parse_scene(int fd, t_parse *parse)
 	if (parse->aratio == -1.0 || parse->acolor[0] == -1 ||
 	parse->acolor[1] == -1 || parse->acolor[2] == -1)
 		error_exit("couldn't find Ambient lightning\n");
-#ifdef DEBUG
-	print_parse(parse);
-#endif
+	if (parse->camera == 0)
+		error_exit("couldn't find any camera\n");
+	if (DEBUG == 1)
+		print_parse(parse);
 }

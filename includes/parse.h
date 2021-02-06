@@ -27,6 +27,7 @@ typedef enum	e_parse_type
 
 typedef struct	s_camera
 {
+	int		num;
 	double	coordinate[3];
 	double	orientation[3];
 	double	vof;
@@ -42,6 +43,7 @@ typedef struct	s_light
 typedef struct	s_objects
 {
 	t_parse_type	type;
+	int				num;
 	void			*ptr;
 }				t_objects;
 

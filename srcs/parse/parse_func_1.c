@@ -1,4 +1,4 @@
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 void	parse_sp(t_parse *parse, char *str)
 {
@@ -6,8 +6,12 @@ void	parse_sp(t_parse *parse, char *str)
 	int			ct;
 	double		sign;
 
-	sphere_info = init_sphere();
-	ft_lstadd_front(&(parse->objects), ft_lstnew(init_objects(sp, sphere_info)));
+	if (!(sphere_info = init_sphere()))
+	{
+		printf("Error : not able to malloc\nabandon this line %s\n", str);
+		return ;
+	}
+	ft_lstadd_back(&(parse->objects), ft_lstnew(init_objects(sp, sphere_info)));
 	ct = -1;
 	while (++ct < 3)
 	{
@@ -50,8 +54,12 @@ void	parse_pl(t_parse *parse, char *str)
 	int		ct;
 	double	sign;
 
-	plane_info = init_plane();
-	ft_lstadd_front(&(parse->objects), ft_lstnew(init_objects(pl, plane_info)));
+	if (!(plane_info = init_plane()))
+	{
+		printf("Error : not able to malloc\nabandon this line %s\n", str);
+		return ;
+	}
+	ft_lstadd_back(&(parse->objects), ft_lstnew(init_objects(pl, plane_info)));
 	ct = -1;
 	while (++ct < 3)
 	{
@@ -105,8 +113,12 @@ void	parse_sq(t_parse *parse, char *str)
 	int			ct;
 	double		sign;
 
-	square_info = init_square();
-	ft_lstadd_front(&(parse->objects), ft_lstnew(init_objects(sq, square_info)));
+	if (!(square_info = init_square()))
+	{
+		printf("Error : not able to malloc\nabandon this line %s\n", str);
+		return ;
+	}
+	ft_lstadd_back(&(parse->objects), ft_lstnew(init_objects(sq, square_info)));
 	ct = -1;
 	while (++ct < 3)
 	{
@@ -165,8 +177,12 @@ void	parse_cy(t_parse *parse, char *str)
 	int			ct;
 	double		sign;
 
-	cylinder_info = init_cylinder();
-	ft_lstadd_front(&(parse->objects), ft_lstnew(init_objects(cy, cylinder_info)));
+	if (!(cylinder_info = init_cylinder()))
+	{
+		printf("Error : not able to malloc\nabandon this line %s\n", str);
+		return ;
+	}
+	ft_lstadd_back(&(parse->objects), ft_lstnew(init_objects(cy, cylinder_info)));
 	ct = -1;
 	while (++ct < 3)
 	{
@@ -230,8 +246,12 @@ void	parse_tr(t_parse *parse, char *str)
 	int			ct[2];
 	double		sign;
 
-	triangle_info = init_triangle();
-	ft_lstadd_front(&(parse->objects), ft_lstnew(init_objects(tr, triangle_info)));
+	if (!(triangle_info = init_triangle()))
+	{
+		printf("Error : not able to malloc\nabandon this line %s\n", str);
+		return ;
+	}
+	ft_lstadd_back(&(parse->objects), ft_lstnew(init_objects(tr, triangle_info)));
 	ct[0] = -1;
 	while (++ct[0] < 3)
 	{

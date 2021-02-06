@@ -18,6 +18,10 @@ char				*ft_strtrim(char const *s1, char const *set)
 	int		ct[2];
 	int		ascii[1000];
 
+	if (!s1)
+		return (NULL);
+	if (!set)
+		return (ft_substr(s1, 0, ft_strlen(s1)));
 	ct[0] = -1;
 	while (++ct[0] < 1000)
 		ascii[ct[0]] = 0;

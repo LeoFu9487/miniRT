@@ -16,7 +16,7 @@ void			*ft_calloc(size_t elementcount, size_t elementsize)
 {
 	void	*ans;
 
-	if (!(ans = malloc(elementcount * elementsize)))
+	if (!(ans = ft_malloc(elementcount, elementsize)))
 	{
 		ft_putstr_fd("ERROR_IN_FT_CALLOC\n", 1);
 		return (NULL);

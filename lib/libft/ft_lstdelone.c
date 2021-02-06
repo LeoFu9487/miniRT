@@ -16,7 +16,7 @@ void			ft_lstdelone(t_list **head, t_list *lst, void (*del)(void *))
 {
 	t_list	*temp;
 
-	if (!lst)
+	if (!lst || !head)
 		return ;
 	temp = *head;
 	if (temp == lst)
@@ -34,5 +34,5 @@ void			ft_lstdelone(t_list **head, t_list *lst, void (*del)(void *))
 	}
 	if (del)
 		del(lst->content);
-	free(lst);
+	ft_free(lst);
 }

@@ -1,9 +1,10 @@
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 t_camera	*init_camera(void)
 {
 	int			cnt;
 	t_camera	*cam;
+	static int	num = 0;
 
 	if (!(cam = ft_malloc(1, sizeof(t_camera))))
 	{
@@ -17,5 +18,6 @@ t_camera	*init_camera(void)
 	while (++cnt < 3)
 		cam->orientation[cnt] = 0.0;
 	cam->vof = 0;
+	cam->num = num++;
 	return (cam);
 }
