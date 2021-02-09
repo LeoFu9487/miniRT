@@ -12,12 +12,12 @@ t_plane		*init_plane(void)
 	}
 	ct = -1;
 	while (++ct < 3)
-		plane->coordinate[3] = 0.0;
+		plane->coordinate[ct] = 0.0;
 	ct = -1;
 	while (++ct < 3)
-		plane->orientation[3] = 0.0;
+		plane->orientation[ct] = 0.0;
 	ct = -1;
 	while (++ct < 3)
-		plane->color[3] = 0;
+		plane->color[ct] = 0;
 	return (plane);
 }

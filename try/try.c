@@ -1,4 +1,7 @@
-#include "./minilibx-linux/mlx.h"
+//#include "mlx.h"
+//#include "mlx_new_window.h"
+//#include "mlx_opengl.h"
+//#include "mlx_png.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -49,7 +52,12 @@ int     close_program(void *param)
 int main()
 {
 mlx_ptr = mlx_init();
-        win_ptr = mlx_new_window(mlx_ptr, 500, 500, "Hello World !");
+		int x,y,sizex,sizey;
+		scanf("%d%d", &x, &y);
+        mlx_get_screen_size(mlx_ptr, &sizex, &sizey);
+        if (x > sizex) x = sizex;
+        if (y > sizey) y = sizey;
+        win_ptr = mlx_new_window(mlx_ptr, x, y, "Hello World !");
         for(int i = 0 ; i < 100 ; i++)
           for(int j = 0 ; j < 100 ; j++)
            mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0100);
