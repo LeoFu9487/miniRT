@@ -8,6 +8,7 @@ typedef struct	s_parse
 	double	aratio;
 	int		acolor[3];
 	t_list	*camera;
+	t_list	*cur_camera;
 	t_list	*light;
 	t_list	*objects;
 }				t_parse;
@@ -31,6 +32,7 @@ typedef struct	s_camera
 	double	coordinate[3];
 	double	orientation[3];
 	double	vof;
+	double	distance_to_screen;
 }				t_camera;
 
 typedef struct	s_light

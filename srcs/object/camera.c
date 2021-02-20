@@ -19,5 +19,6 @@ t_camera	*init_camera(void)
 		cam->orientation[cnt] = 0.0;
 	cam->vof = 0;
 	cam->num = num++;
+	cam->distance_to_screen = 0.0;
 	return (cam);
 }

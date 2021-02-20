@@ -16,17 +16,35 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
 
 UNAME = $(shell uname)
 
-FILES = main.c	error.c	camera.c	light.c\
+FILES = main.c	error.c
+
+OBJECT_FILES = 	camera.c	light.c\
 	objects.c	sphere.c	plane.c		square.c\
 	cylinder.c	triangle.c
 
 PARSE_FILES = parse_scene.c	parse_func_0.c	parse_func_1.c	print_parse.c
 
-PARSE_SRCS = parse/
+PUT_FILES = open_window.c	put_screen.c	color.c
+
+MATH_FILES = vector.c	math.c
+
+OBJECT_DIR = object/
+
+PARSE_DIR = parse/
 
 SRCS_DIR = srcs/
 
-FILES += $(addprefix $(PARSE_SRCS), $(PARSE_FILES))
+PUT_DIR = put/
+
+MATH_DIR = math/
+
+FILES += $(addprefix $(OBJECT_DIR), $(OBJECT_FILES))
+
+FILES += $(addprefix $(PUT_DIR), $(PUT_FILES))
+
+FILES += $(addprefix $(PARSE_DIR), $(PARSE_FILES))
+
+FILES += $(addprefix $(MATH_DIR), $(MATH_FILES))
 
 SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 

@@ -14,6 +14,7 @@ t_parse		*init_parse(void)
 	parse->objects = NULL;
 	parse->light = NULL;
 	parse->camera = NULL;
+	parse->cur_camera = NULL;
 	parse->aratio = -1.0;
 	parse->acolor[0] = -1;
 	parse->acolor[1] = -1;
