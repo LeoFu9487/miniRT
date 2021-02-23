@@ -32,5 +32,14 @@ double			dot(double *v1, double *v2);
 double			len(double *v);
 double			cos_vector(double *v1, double *v2);
 double			*add_vector(double *v1, double *v2);
+void			intersect_r(t_intersect *is, t_line *l, void *ptr);
+void			intersect_a(t_intersect *is, t_line *l, void *ptr);
+void			intersect_c(t_intersect *is, t_line *l, void *ptr);
+void			intersect_l(t_intersect *is, t_line *l, void *ptr);
+void			intersect_sp(t_intersect *is, t_line *l, void *ptr);
+void			intersect_pl(t_intersect *is, t_line *l, void *ptr);
+void			intersect_sq(t_intersect *is, t_line *l, void *ptr);
+void			intersect_cy(t_intersect *is, t_line *l, void *ptr);
+void			intersect_tr(t_intersect *is, t_line *l, void *ptr);
 
 #endif

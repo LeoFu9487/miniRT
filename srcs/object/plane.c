@@ -21,3 +21,13 @@ t_plane		*init_plane(void)
 		plane->color[3] = 0;
 	return (plane);
 }
+
+void		intersect_pl(t_intersect *is, t_line *l, void *ptr)
+{
+	(void)is;
+	(void)l;
+	(void)ptr;
+	/*
+	 * ptr is already t_cyliner * or t_triagle *...etc.
+	 * */
+}

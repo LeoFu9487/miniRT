@@ -22,3 +22,13 @@ t_triangle		*init_triangle(void)
 		triangle->color[ct[0]] = 0;
 	return (triangle);
 }
+
+void			intersect_tr(t_intersect *is, t_line *l, void *ptr)
+{
+	(void)is;
+	(void)l;
+	(void)ptr;
+	/*
+	 * ptr is already t_cyliner * or t_triagle *...etc.
+	 * */
+}

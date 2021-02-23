@@ -22,3 +22,13 @@ t_square	*init_square(void)
 		square->color[ct] = 0;
 	return (square);
 }
+
+void		intersect_sq(t_intersect *is, t_line *l, void *ptr)
+{
+	(void)is;
+	(void)l;
+	(void)ptr;
+	/*
+	 * ptr is already t_cyliner * or t_triagle *...etc.
+	 * */
+}

@@ -23,3 +23,13 @@ t_cylinder	*init_cylinder(void)
 	cylinder->height = 0.0;
 	return (cylinder);
 }
+
+void			intersect_cy(t_intersect *is, t_line *l, void *ptr)
+{
+	(void)is;
+	(void)l;
+	(void)ptr;
+	/*
+	 * ptr is already t_cyliner * or t_triagle *...etc.
+	 * */
+}

@@ -19,3 +19,13 @@ t_sphere	*init_sphere(void)
 		sphere->color[cnt] = 0;
 	return (sphere);
 }
+
+void		intersect_sp(t_intersect *is, t_line *l, void *ptr)
+{
+	(void)is;
+	(void)l;
+	(void)ptr;
+	/*
+	 * ptr is already t_cyliner * or t_triagle *...etc.
+	 * */
+}

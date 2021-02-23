@@ -39,11 +39,21 @@ t_intersect	*init_intersect(void)
 	return (intersect);
 }
 
-void		find_intersect(t_intersect *is, t_line *l, t_list *obj)
+static void	assigned_func(void **func)
 {
-	
-	(void)is;
-	(void)l;
-	(void)obj;
-	
+	func[(t_parse_type)sp] = &intersect_sp;
+	func[(t_parse_type)pl] = &intersect_pl;
+	func[(t_parse_type)sq] = &intersect_sq;
+	func[(t_parse_type)cy] = &intersect_cy;
+	func[(t_parse_type)tr] = &intersect_tr;
+}
+
+void		find_intersect(t_intersect *is, t_line *l, t_list *lst)
+{
+	void		(*func[9])(t_intersect*, t_line*, void*);
+	t_objects	*obj;
+
+	assigned_func((void**)func);
+	obj = (t_objects*)(lst->content);
+	func[obj->type](is, l, obj->ptr);
 }
