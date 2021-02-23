@@ -41,7 +41,10 @@ void	put_pixel(t_info *info, int *pixel, double *u, double *v)
 	find_intersect(intersect, line, info->parse->objects);
 	if (intersect->intersect == 0)
 		return ;
+	intersect_color(intersect, info->parse);
 	mlx_pixel_put(info->mlx_ptr, info->win_ptr, pixel[0], pixel[1], get_color(intersect->color));
+	ft_free(line);
+	ft_free(intersect);
 }
 
 void	put_screen(t_info *info)

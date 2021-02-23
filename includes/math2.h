@@ -24,6 +24,14 @@ typedef struct	s_intersect
 	double	dist;
 }				t_intersect;
 
+t_line			*two_points(double	*p1, double	*p2);
+int				have_intersection(t_list *lst, t_line *line);
+int				have_intersection_sp(t_line *l, void *ptr);
+int				have_intersection_pl(t_line *l, void *ptr);
+int				have_intersection_sq(t_line *l, void *ptr);
+int				have_intersection_cy(t_line *l, void *ptr);
+int				have_intersection_tr(t_line *l, void *ptr);
+void			intersect_color(t_intersect *it, t_parse *parse);
 int				quadratic_equation(double *coef, double *answer);
 t_intersect		*init_intersect(void);
 void			find_intersect(t_intersect *is, t_line *l, t_list *obj);
@@ -34,10 +42,6 @@ double			dot(double *v1, double *v2);
 double			len(double *v);
 double			cos_vector(double *v1, double *v2);
 double			*add_vector(double *v1, double *v2);
-void			intersect_r(t_intersect *is, t_line *l, void *ptr);
-void			intersect_a(t_intersect *is, t_line *l, void *ptr);
-void			intersect_c(t_intersect *is, t_line *l, void *ptr);
-void			intersect_l(t_intersect *is, t_line *l, void *ptr);
 void			intersect_sp(t_intersect *is, t_line *l, void *ptr);
 void			intersect_pl(t_intersect *is, t_line *l, void *ptr);
 void			intersect_sq(t_intersect *is, t_line *l, void *ptr);

@@ -36,6 +36,9 @@ t_intersect	*init_intersect(void)
 	if (!(intersect = ft_malloc(1, sizeof(t_intersect))))
 		return (NULL);
 	intersect->intersect = 0;
+	intersect->color[0] = 0;
+	intersect->color[1] = 0;
+	intersect->color[2] = 0;
 	intersect->dist = 1e300;
 	return (intersect);
 }
