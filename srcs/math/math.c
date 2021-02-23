@@ -54,14 +54,14 @@ static void	assigned_func(void **func)
 
 void		find_intersect(t_intersect *is, t_line *l, t_list *lst)
 {
-	void		(*func[9])(t_intersect*, t_line*, void*);
+	void		(*func[9])(t_intersect*, t_line*, void*, int);
 	t_objects	*obj;
 
 	assigned_func((void**)func);
 	while (lst)
 	{
 		obj = (t_objects*)(lst->content);
-		func[obj->type](is, l, obj->ptr);
+		func[obj->type](is, l, obj->ptr, obj->num);
 		lst = lst->next;
 	}
 }

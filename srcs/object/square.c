@@ -23,12 +23,27 @@ t_square	*init_square(void)
 	return (square);
 }
 
-void		intersect_sq(t_intersect *is, t_line *l, void *ptr)
+void		intersect_sq(t_intersect *is, t_line *l, void *ptr, int num)
 {
+	(void)num;
 	(void)is;
 	(void)l;
 	(void)ptr;
 	/*
 	 * ptr is already t_cyliner * or t_triagle *...etc.
 	 * */
+}
+
+int				have_intersection_sq(t_line *l, void *ptr)
+{
+		(void)l;(void)ptr;
+
+	return (0);
+}
+
+double			*normal_vector_sq(double *point, void *ptr)
+{
+	(void)point;
+	(void)ptr;
+	return (NULL);
 }

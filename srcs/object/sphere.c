@@ -20,7 +20,7 @@ t_sphere	*init_sphere(void)
 	return (sphere);
 }
 
-void		intersect_sp(t_intersect *is, t_line *l, void *ptr)
+void		intersect_sp(t_intersect *is, t_line *l, void *ptr, int num)
 {
 	t_sphere	*sphere;
 	double		answer[2];
@@ -46,6 +46,7 @@ void		intersect_sp(t_intersect *is, t_line *l, void *ptr)
 			is->coordinate[0] = l->x[0] * is->dist + l->x[1];
 			is->coordinate[1] = l->y[0] * is->dist + l->y[1];
 			is->coordinate[2] = l->z[0] * is->dist + l->z[1];
+			is->obj_num = num;
 		}
 	}
 }
@@ -65,4 +66,11 @@ int			have_intersection_sp(t_line *l, void *ptr)
 	if (answer[0] > 1e-6 && answer[0] < 1.0 - 1e-6)
 		return (1);
 	return ((answer[1] > 1e-6 && answer[1] < 1.0 - 1e-6) ? 1 : 0);
+}
+
+double			*normal_vector_sp(double *point, void *ptr)
+{
+	(void)point;
+	(void)ptr;
+	return (NULL);
 }

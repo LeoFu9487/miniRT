@@ -8,6 +8,7 @@ typedef struct	s_info
 	void	*win_ptr;
 }				t_info;
 
+void			clean_screen(t_info *info);
 int				get_color(int *rgb);
 void			put_all(t_info *info);
 void			put_pixel(t_info *info, int	*pixel, double *u, double *v);

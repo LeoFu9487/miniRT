@@ -1,5 +1,18 @@
 #include "minirt.h"
 
+void	clean_screen(t_info *info)
+{
+	int	pixel[2];
+
+	pixel[0] = -1;
+	while (++pixel[0] < info->parse->rx)
+	{
+		pixel[1] = -1;
+		while (++pixel[1] < info->parse->ry)
+			mlx_pixel_put(info->mlx_ptr, info->win_ptr, pixel[0], pixel[1], 0);
+	}
+}
+
 void	put_all(t_info *info)
 {
 	int			ct[2];
@@ -54,7 +67,7 @@ void	put_screen(t_info *info)
 	if (info->parse->cur_camera == NULL)
 		error_exit("Camera not found !! cannot put_screen\n");
 	camera = (t_camera*)(info->parse->cur_camera->content);
-	if (camera->vof >= 170.0)
+	if (camera->vof > 170.0)
 		camera->vof = 170.0;
 	if (camera->distance_to_screen == 0.0)
 		camera->distance_to_screen =

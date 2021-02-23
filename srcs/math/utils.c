@@ -1,42 +1,6 @@
 #include "minirt.h"
 
-/*
-** utilisation : 
-** double answer[2];
-** double coef[3] = {1,2,3};
-** int has_real_solutions = quadratic_equation(coef, answer);
-*/
-
-int		quadratic_equation(double *coef, double *answer)
-{
-	double	det;
-
-	if (!coef || !answer)
-		return (-1);
-	det = coef[1] * coef[1] - 4 * coef[0] * coef[2];
-	if (det < 0.0)
-		return (0);
-	answer[0] = (-1.0 * coef[1] + sqrt(det)) / (2.0 * coef[0]);
-	answer[1] = (-1.0 * coef[1] - sqrt(det)) / (2.0 * coef[0]);
-	return (1);
-}
-
-t_line	*two_points(double	*p1, double	*p2)
-{
-	t_line	*line;
-
-	if (!p1 || !p2 || (p1[0] == p2[0] && p1[1] == p2[1] && p1[2] == p2[2]) || !(line = ft_malloc(1, sizeof(t_line))))
-		return (NULL);
-	line->x[1] = p1[0];
-	line->y[1] = p1[1];
-	line->z[1] = p1[2];
-	line->x[0] = p2[0] - p1[0];
-	line->y[0] = p2[1] - p1[1];
-	line->z[0] = p2[2] - p1[2];
-	return (line);
-}
-
-void	assigned_func(void **func)
+static void	assigned_func(void **func)
 {
 	func[sp] = &have_intersection_sp;
 	func[pl] = &have_intersection_pl;
@@ -45,7 +9,7 @@ void	assigned_func(void **func)
 	func[sq] = &have_intersection_sq;
 }
 
-int		have_intersection(t_list *lst, t_line *line)
+int			have_intersection(t_list *lst, t_line *line)
 {
 	t_objects	*objs;
 	int			(*func[9])(t_line*, void*);
@@ -61,44 +25,97 @@ int		have_intersection(t_list *lst, t_line *line)
 	return (0);
 }
 
-void	intersect_color(t_intersect *it, t_parse *parse)
+static int	*get_obj_color(t_objects *obj)
 {
-	t_light	*light;
-	t_list	*lst;
+	if (obj->type == sp)
+		return (((t_sphere*)(obj->ptr))->color);
+	if (obj->type == pl)
+		return (((t_plane*)(obj->ptr))->color);
+	if (obj->type == sq)
+		return (((t_square*)(obj->ptr))->color);
+	if (obj->type == cy)
+		return (((t_cylinder*)(obj->ptr))->color);
+	if (obj->type == tr)
+		return (((t_triangle*)(obj->ptr))->color);
+	return (NULL);
+}
 
+static void		assigned_func2(void **func)
+{
+	func[sp] = &normal_vector_sp;
+	func[pl] = &normal_vector_pl;
+	func[tr] = &normal_vector_tr;
+	func[cy] = &normal_vector_cy;
+	func[sq] = &normal_vector_sq;
+}
+
+static double	get_new_brightness(t_objects *obj, t_intersect *it, t_light *light, t_parse *parse)
+{
+	double	ans;
+	double	*(*func[9])(double*, void*);
+	//double	len_sum;
+
+	ans = light->brightness;
+	//len_sum = two_points_distance(it->coordinate, light->coordinate) + two_points_distance(it->coordinate, ((t_camera*)(parse->cur_camera->content))->coordinate);
+	//len_sum /= 100.0;
+	//ans /= len_sum * len_sum;
+	assigned_func2((void**)func);
+	(void)obj;
+	(void)it;
+	(void)parse;
+	return (ans);
+}
+
+void		intersect_color(t_intersect *it, t_parse *parse)
+{
+	t_light		*light;
+	int			*obj_color;
+	t_list		*lst;
+	t_line		*line;
+	int			ct;
+	int			*new_color;
+	int			color_max;
+	double		new_brightness;
+	t_objects	*obj;
+
+	lst = parse->objects;
+	while (lst)
+	{
+		obj = lst->content;
+		if (obj->num == it->obj_num)
+			break ;
+		lst = lst->next;
+	}
+	if (!lst)
+		error_exit("intersect_color1\n");
+	obj_color = get_obj_color(obj);
 	lst = parse->light;
 	while (lst)
 	{
 		light = lst->content;
 		lst = lst->next;
-		if (have_intersection(parse->objects, two_points(light->coordinate, it->coordinate)))
+		if (!(line = two_points(light->coordinate, it->coordinate)))
+			error_exit("intersect_color3\n");
+		if (have_intersection(parse->objects, line))
 			continue ;
-		it->color[2] = 255;
-		/*
-		do colors
-		*/
+		new_brightness = get_new_brightness(obj, it, light, parse);
+		if (!(new_color = reflection_color(obj_color, light, new_brightness)))
+			error_exit("intersect_color2\n");
+		ct = -1;
+		while (++ct < 3)
+			it->color[ct] += new_color[ct];
+		ft_free(new_color);
+		ft_free(line);
 	}
-}
-
-
-int				have_intersection_pl(t_line *l, void *ptr)
-{
-	(void)l;(void)ptr;
-	return (0);
-}
-int				have_intersection_sq(t_line *l, void *ptr)
-{
-		(void)l;(void)ptr;
-
-	return (0);
-}
-int				have_intersection_cy(t_line *l, void *ptr)
-{	(void)l;(void)ptr;
-
-	return (0);
-}
-int				have_intersection_tr(t_line *l, void *ptr)
-{	(void)l;(void)ptr;
-
-	return (0);
+	ct = -1;
+	color_max = 0;
+	while (++ct < 3)
+		color_max = ft_max(color_max, it->color[ct]);
+	ct = -1;
+	if (color_max > 255)
+		while (++ct < 3)
+			it->color[ct] = it->color[ct] * 255 / color_max;
+	/*
+	also do ambient lighting
+	*/
 }

@@ -22,8 +22,16 @@ typedef struct	s_intersect
 	double	coordinate[3];
 	int		color[3];
 	double	dist;
+	int		obj_num;
 }				t_intersect;
 
+double			*normal_vector_sp(double *point, void *ptr);
+double			*normal_vector_pl(double *point, void *ptr);
+double			*normal_vector_tr(double *point, void *ptr);
+double			*normal_vector_sq(double *point, void *ptr);
+double			*normal_vector_cy(double *point, void *ptr);
+double			two_points_distance(double *a, double *b);
+int				*reflection_color(int *color, t_light *light, double new_brightness);
 t_line			*two_points(double	*p1, double	*p2);
 int				have_intersection(t_list *lst, t_line *line);
 int				have_intersection_sp(t_line *l, void *ptr);
@@ -42,10 +50,10 @@ double			dot(double *v1, double *v2);
 double			len(double *v);
 double			cos_vector(double *v1, double *v2);
 double			*add_vector(double *v1, double *v2);
-void			intersect_sp(t_intersect *is, t_line *l, void *ptr);
-void			intersect_pl(t_intersect *is, t_line *l, void *ptr);
-void			intersect_sq(t_intersect *is, t_line *l, void *ptr);
-void			intersect_cy(t_intersect *is, t_line *l, void *ptr);
-void			intersect_tr(t_intersect *is, t_line *l, void *ptr);
+void			intersect_sp(t_intersect *is, t_line *l, void *ptr, int num);
+void			intersect_pl(t_intersect *is, t_line *l, void *ptr, int num);
+void			intersect_sq(t_intersect *is, t_line *l, void *ptr, int num);
+void			intersect_cy(t_intersect *is, t_line *l, void *ptr, int num);
+void			intersect_tr(t_intersect *is, t_line *l, void *ptr, int num);
 
 #endif

@@ -13,6 +13,7 @@ void	change_camera(t_info *info)
 {
 	t_parse	*parse;
 
+	clean_screen(info);
 	parse = info->parse;
 	if (parse->cur_camera == NULL || parse->cur_camera->next == NULL)
 		parse->cur_camera = parse->camera;
