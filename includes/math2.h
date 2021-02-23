@@ -21,8 +21,10 @@ typedef struct	s_intersect
 	int		intersect;
 	double	coordinate[3];
 	int		color[3];
+	double	dist;
 }				t_intersect;
 
+int				quadratic_equation(double *coef, double *answer);
 t_intersect		*init_intersect(void);
 void			find_intersect(t_intersect *is, t_line *l, t_list *obj);
 void			modify_length(double *vector, double length);

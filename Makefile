@@ -26,7 +26,7 @@ PARSE_FILES = parse_scene.c	parse_func_0.c	parse_func_1.c	print_parse.c
 
 PUT_FILES = open_window.c	put_screen.c	color.c
 
-MATH_FILES = vector.c	math.c
+MATH_FILES = vector.c	math.c	utils.c
 
 OBJECT_DIR = object/
 

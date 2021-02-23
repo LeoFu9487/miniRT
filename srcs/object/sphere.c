@@ -22,10 +22,55 @@ t_sphere	*init_sphere(void)
 
 void		intersect_sp(t_intersect *is, t_line *l, void *ptr)
 {
-	(void)is;
-	(void)l;
-	(void)ptr;
-	/*
-	 * ptr is already t_cyliner * or t_triagle *...etc.
-	 * */
+	t_sphere	*sphere;
+	double		answer[2];
+	double		coef[3];
+	int			ct;
+
+	sphere = (t_sphere*)ptr;
+	coef[0] = l->x[0] * l->x[0] + l->y[0] * l->y[0] + l->z[0] * l->z[0];
+	coef[1] = 2.0 * (l->x[0] * (l->x[1] - sphere->coordinate[0]) + l->y[0] * (l->y[1] - sphere->coordinate[1]) + l->z[0] * (l->z[1] - sphere->coordinate[2]));
+	coef[2] = (l->x[1] - sphere->coordinate[0]) * (l->x[1] - sphere->coordinate[0]) + (l->y[1] - sphere->coordinate[1]) * (l->y[1] - sphere->coordinate[1]) + (l->z[1] - sphere->coordinate[2]) * (l->z[1] - sphere->coordinate[2]) - (sphere->diameter / 2.0) * (sphere->diameter / 2.0);
+	if (!(quadratic_equation(coef, answer)))
+		return ;
+	//answer <= 1 ignore ? 
+	ct = -1;
+	while (++ct < 2)
+	{
+		if (answer[ct] < 0.0)
+			return ;
+		if (is->intersect == 0 || answer[ct] < is->dist)
+		{
+			is->dist = answer[ct];
+			is->intersect = 1;
+			is->coordinate[0] = l->x[0] * is->dist + l->x[1];
+			is->coordinate[1] = l->y[0] * is->dist + l->y[1];
+			is->coordinate[2] = l->z[0] * is->dist + l->z[1];
+			//change color
+		}
+	}
 }
+
+
+/*
+typedef struct	s_sphere
+{
+	double			coordinate[3];
+	double			diameter;
+	int				color[3];
+}				t_sphere;
+
+typedef struct	s_line
+{
+	double	x[2];
+	double	y[2];
+	double	z[2];
+}				t_line;
+
+typedef struct	s_intersect
+{
+	int		intersect;
+	double	coordinate[3];
+	int		color[3];
+}				t_intersect;
+*/

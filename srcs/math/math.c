@@ -7,7 +7,7 @@ void		modify_length(double *vector, double length)
 
 	if (length <= 0.0)
 		return ;
-	multiply = length / sqrt(len(vector));
+	multiply = length / len(vector);
 	ct = -1;
 	while (++ct < 3)
 		vector[ct] *= multiply;
@@ -36,6 +36,7 @@ t_intersect	*init_intersect(void)
 	if (!(intersect = ft_malloc(1, sizeof(t_intersect))))
 		return (NULL);
 	intersect->intersect = 0;
+	intersect->dist = 1e300;
 	return (intersect);
 }
 
@@ -54,6 +55,10 @@ void		find_intersect(t_intersect *is, t_line *l, t_list *lst)
 	t_objects	*obj;
 
 	assigned_func((void**)func);
-	obj = (t_objects*)(lst->content);
-	func[obj->type](is, l, obj->ptr);
+	while (lst)
+	{
+		obj = (t_objects*)(lst->content);
+		func[obj->type](is, l, obj->ptr);
+		lst = lst->next;
+	}
 }
