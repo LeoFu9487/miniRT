@@ -26,7 +26,7 @@ t_line	*two_points_line(double	*p1, double	*p2)
 	t_line	*line;
 
 	if (!p1 || !p2 || (p1[0] == p2[0] && p1[1] == p2[1] && p1[2] == p2[2]) || !(line = ft_malloc(1, sizeof(t_line))))
-		return (NULL);
+		error_exit("two_points_line\n");
 	line->x[1] = p1[0];
 	line->y[1] = p1[1];
 	line->z[1] = p1[2];

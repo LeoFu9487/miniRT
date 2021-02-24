@@ -13,7 +13,7 @@ void		modify_length(double *vector, double length)
 		vector[ct] *= multiply;
 }
 
-t_line		*new_line(t_camera *camera, double *u, double *v, int *position)
+t_line		*new_line(t_camera *camera, double *u, double *v, double *position)
 {
 	t_line	*line;
 
@@ -22,7 +22,6 @@ t_line		*new_line(t_camera *camera, double *u, double *v, int *position)
 	line->x[1] = camera->coordinate[0];
 	line->y[1] = camera->coordinate[1];
 	line->z[1] = camera->coordinate[2];
-	modify_length(camera->orientation, camera->distance_to_screen);
 	line->x[0] = camera->orientation[0] + position[0] * u[0] + position[1] * v[0];
 	line->y[0] = camera->orientation[1] + position[0] * u[1] + position[1] * v[1];
 	line->z[0] = camera->orientation[2] + position[0] * u[2] + position[1] * v[2];
