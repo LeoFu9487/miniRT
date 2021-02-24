@@ -1,6 +1,8 @@
 #ifndef PARSE_H
 # define PARSE_H
-
+# ifndef AMBIENT_LIGHT_INTENSITY
+# define AMBIENT_LIGHT_INTENSITY 0.05
+# endif
 typedef struct	s_parse
 {
 	int		rx;

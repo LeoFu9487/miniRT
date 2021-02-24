@@ -42,7 +42,7 @@ int				have_intersection_cy(t_line *l, void *ptr);
 int				have_intersection_tr(t_line *l, void *ptr);
 void			intersect_color(t_intersect *it, t_parse *parse);
 int				quadratic_equation(double *coef, double *answer);
-t_intersect		*init_intersect(void);
+t_intersect		*init_intersect(t_parse *parse);
 void			find_intersect(t_intersect *is, t_line *l, t_list *obj);
 void			modify_length(double *vector, double length);
 t_line			*new_line(t_camera *camera, double *u, double *v, double *position);

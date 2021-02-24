@@ -123,7 +123,4 @@ void		intersect_color(t_intersect *it, t_parse *parse)
 	if (color_max > 255)
 		while (++ct < 3)
 			it->color[ct] = it->color[ct] * 255 / color_max;
-	/*
-	also do ambient lighting
-	*/
 }

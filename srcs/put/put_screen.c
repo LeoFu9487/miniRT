@@ -48,7 +48,7 @@ void	put_pixel(t_info *info, int *pixel, double *u, double *v)
 
 	position[0] = ((double)pixel[0]) - ((double)info->parse->rx) / 2.0;
 	position[1] = ((double)pixel[1]) - ((double)info->parse->ry) / 2.0;
-	if (!(line = new_line(info->parse->cur_camera->content, u, v, position)) || !(intersect = init_intersect()))
+	if (!(line = new_line(info->parse->cur_camera->content, u, v, position)) || !(intersect = init_intersect(info->parse)))
 		return ;
 	find_intersect(intersect, line, info->parse->objects);
 	if (intersect->intersect == 0)

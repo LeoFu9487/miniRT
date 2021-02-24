@@ -28,16 +28,16 @@ t_line		*new_line(t_camera *camera, double *u, double *v, double *position)
 	return (line);
 }
 
-t_intersect	*init_intersect(void)
+t_intersect	*init_intersect(t_parse *parse)
 {
 	t_intersect	*intersect;
 
 	if (!(intersect = ft_malloc(1, sizeof(t_intersect))))
 		return (NULL);
 	intersect->intersect = 0;
-	intersect->color[0] = 0;
-	intersect->color[1] = 0;
-	intersect->color[2] = 0;
+	intersect->color[0] = (int)((double)parse->acolor[0] * parse->aratio * AMBIENT_LIGHT_INTENSITY);
+	intersect->color[1] = (int)((double)parse->acolor[1] * parse->aratio * AMBIENT_LIGHT_INTENSITY);
+	intersect->color[2] = (int)((double)parse->acolor[2] * parse->aratio * AMBIENT_LIGHT_INTENSITY);
 	intersect->dist = 1e300;
 	return (intersect);
 }
