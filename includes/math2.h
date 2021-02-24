@@ -56,5 +56,6 @@ void			intersect_pl(t_intersect *is, t_line *l, void *ptr, int num);
 void			intersect_sq(t_intersect *is, t_line *l, void *ptr, int num);
 void			intersect_cy(t_intersect *is, t_line *l, void *ptr, int num);
 void			intersect_tr(t_intersect *is, t_line *l, void *ptr, int num);
+double			linear_equation(double *coef, t_line *line);
 
 #endif

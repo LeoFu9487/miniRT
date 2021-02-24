@@ -52,3 +52,8 @@ int		*reflection_color(int *color, t_light *light, double new_brightness)
 	}
 	return (ans);
 }
+
+double	linear_equation(double *coef, t_line *line)
+{
+	return (-1 * (coef[0] * line->x[1] + coef[1] * line->y[1] + coef[2] * line->z[1] + coef[3]) / (coef[0] * line->x[0] + coef[1] * line->y[0] + coef[2] * line->z[0]));
+}
