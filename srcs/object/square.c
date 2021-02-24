@@ -43,7 +43,15 @@ int				have_intersection_sq(t_line *l, void *ptr)
 
 double			*normal_vector_sq(double *point, void *ptr)
 {
-	(void)point;
-	(void)ptr;
-	return (NULL);
+	double		*ans;
+    t_square	*plane;
+
+    if (!(ans = ft_malloc(3, sizeof(double))))
+            error_exit("normal_vector_pl\n");
+	plane = ptr;
+    ans[0] = plane->orientation[0];
+    ans[1] = plane->orientation[1];
+    ans[2] = plane->orientation[2];
+    (void)point;
+    return (ans);
 }
