@@ -70,7 +70,8 @@ int			have_intersection_sp(t_line *l, void *ptr)
 
 double			*normal_vector_sp(double *point, void *ptr)
 {
-	(void)point;
-	(void)ptr;
-	return (NULL);
+	t_sphere	*sphere;
+
+	sphere = (t_sphere*)ptr;
+	return (two_points_vector(point, sphere->coordinate));
 }

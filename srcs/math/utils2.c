@@ -21,7 +21,7 @@ int		quadratic_equation(double *coef, double *answer)
 	return (1);
 }
 
-t_line	*two_points(double	*p1, double	*p2)
+t_line	*two_points_line(double	*p1, double	*p2)
 {
 	t_line	*line;
 
