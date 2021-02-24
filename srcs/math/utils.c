@@ -81,7 +81,8 @@ void		intersect_color(t_intersect *it, t_parse *parse)
 	t_list		*lst;
 	t_line		*line;
 	int			ct;
-	int			*new_color;
+	double		*new_color;
+	double		cur_color[3];
 	int			color_max;
 	double		new_brightness;
 	t_objects	*obj;
@@ -97,6 +98,12 @@ void		intersect_color(t_intersect *it, t_parse *parse)
 	if (!lst)
 		error_exit("intersect_color1\n");
 	obj_color = get_obj_color(obj);
+	ct = -1;
+	while (++ct < 3)
+		it->color[ct] *= (int)((double)obj_color[ct] / 255.0);
+	ct = -1;
+	while (++ct < 3)
+		cur_color[ct] = 0.0;
 	lst = parse->light;
 	while (lst)
 	{
@@ -111,12 +118,15 @@ void		intersect_color(t_intersect *it, t_parse *parse)
 			error_exit("intersect_color2\n");
 		ct = -1;
 		while (++ct < 3)
-			it->color[ct] += new_color[ct];
+			cur_color[ct] += new_color[ct];
 		ft_free(new_color);
 		ft_free(line);
 	}
 	ct = -1;
+	while (++ct < 3)
+		it->color[ct] += (int)cur_color[ct];
 	color_max = 0;
+	ct = -1;
 	while (++ct < 3)
 		color_max = ft_max(color_max, it->color[ct]);
 	ct = -1;

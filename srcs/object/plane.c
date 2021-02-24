@@ -52,6 +52,17 @@ void		intersect_pl(t_intersect *is, t_line *l, void *ptr, int num)
 	}
 }
 
+/*
+typedef struct	s_intersect
+{
+	int		intersect;
+	double	coordinate[3];
+	int		color[3];
+	double	dist;
+	int		obj_num;
+}				t_intersect;
+*/
+
 int				have_intersection_pl(t_line *l, void *ptr)
 {
 	t_plane	*plane;
@@ -68,7 +79,7 @@ int				have_intersection_pl(t_line *l, void *ptr)
 		return (0);
 	plane_coef(coef, plane);
 	res = linear_equation(coef, l);
-	if (res < 1.0 && res > 0.0)
+	if (res < 1.0 - 1e-6 && res > 1e-6)
 		return (1);
 	return (0);
 }

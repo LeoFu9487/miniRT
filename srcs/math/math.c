@@ -37,7 +37,7 @@ t_intersect	*init_intersect(t_parse *parse)
 	intersect->intersect = 0;
 	intersect->color[0] = (int)((double)parse->acolor[0] * parse->aratio * AMBIENT_LIGHT_INTENSITY);
 	intersect->color[1] = (int)((double)parse->acolor[1] * parse->aratio * AMBIENT_LIGHT_INTENSITY);
-	intersect->color[2] = (int)((double)parse->acolor[2] * parse->aratio * AMBIENT_LIGHT_INTENSITY);
+	intersect->color[2] = (int)((double)parse->acolor[2] * parse->aratio / 10.0);
 	intersect->dist = 1e300;
 	return (intersect);
 }

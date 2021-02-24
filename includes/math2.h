@@ -32,7 +32,7 @@ double			*normal_vector_sq(double *point, void *ptr);
 double			*normal_vector_cy(double *point, void *ptr);
 double			two_points_distance(double *a, double *b);
 double			*two_points_vector(double *a, double *b);
-int				*reflection_color(int *color, t_light *light, double new_brightness);
+double			*reflection_color(int *color, t_light *light, double new_brightness);
 t_line			*two_points_line(double	*p1, double	*p2);
 int				have_intersection(t_list *lst, t_line *line);
 int				have_intersection_sp(t_line *l, void *ptr);

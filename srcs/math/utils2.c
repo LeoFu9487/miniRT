@@ -36,20 +36,16 @@ t_line	*two_points_line(double	*p1, double	*p2)
 	return (line);
 }
 
-int		*reflection_color(int *color, t_light *light, double new_brightness)
+double	*reflection_color(int *color, t_light *light, double new_brightness)
 {
-	double	temp;
-	int		*ans;
+	double	*ans;
 	int		ct;
 
-	if (!(ans = ft_malloc(3, sizeof(int))))
-		return (NULL);
+	if (!(ans = ft_malloc(3, sizeof(double))))
+		error_exit("reflection_color\n");
 	ct = -1;
 	while (++ct < 3)
-	{
-		temp = (double)color[ct] * (double)(light->color[ct]) / 255.0 * new_brightness;
-		ans[ct] = (int)temp;
-	}
+		ans[ct] = (double)color[ct] * (double)(light->color[ct]) / 255.0 * new_brightness;
 	return (ans);
 }
 
