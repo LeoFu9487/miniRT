@@ -12,13 +12,13 @@ t_plane		*init_plane(void)
 	}
 	ct = -1;
 	while (++ct < 3)
-		plane->coordinate[3] = 0.0;
+		plane->coordinate[ct] = 0.0;
 	ct = -1;
 	while (++ct < 3)
-		plane->orientation[3] = 0.0;
+		plane->orientation[ct] = 0.0;
 	ct = -1;
 	while (++ct < 3)
-		plane->color[3] = 0;
+		plane->color[ct] = 0;
 	return (plane);
 }
 
@@ -51,17 +51,6 @@ void		intersect_pl(t_intersect *is, t_line *l, void *ptr, int num)
 		is->obj_num = num;
 	}
 }
-
-/*
-typedef struct	s_intersect
-{
-	int		intersect;
-	double	coordinate[3];
-	int		color[3];
-	double	dist;
-	int		obj_num;
-}				t_intersect;
-*/
 
 int				have_intersection_pl(t_line *l, void *ptr)
 {

@@ -112,6 +112,7 @@ void	parse_sq(t_parse *parse, char *str)
 	t_square	*square_info;
 	int			ct;
 	double		sign;
+	double		base_v[3];
 
 	if (!(square_info = init_square()))
 	{
@@ -169,6 +170,19 @@ void	parse_sq(t_parse *parse, char *str)
 		if (square_info->color[ct] < 0 || square_info->color[ct] > 255)
 			error_exit("Square color out of range\n");
 	}
+	base_v[0] = 0.0;
+	if (square_info->orientation[1] == 0.0 && square_info->orientation[0] == 0.0)
+		base_v[1] = 1.0;
+	else
+		base_v[1] = 0.0;
+	base_v[2] = 1.0 - base_v[1];
+	square_info->vector[0] = cross(base_v, square_info->orientation);
+	square_info->vector[1] = cross(square_info->vector[0], square_info->orientation);
+	modify_length(square_info->vector[0], square_info->side_size);
+	modify_length(square_info->vector[1], square_info->side_size);
+	ct = -1;
+	while (++ct < 3)
+		square_info->start_point[ct] = square_info->coordinate[ct] - square_info->vector[0][ct] / 2.0 - square_info->vector[1][ct] / 2.0;
 }
 
 void	parse_cy(t_parse *parse, char *str)

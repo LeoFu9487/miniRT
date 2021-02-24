@@ -49,6 +49,20 @@ double	*reflection_color(int *color, t_light *light, double new_brightness)
 	return (ans);
 }
 
+void	linear_equations(double *u, double *v, double *w, double *ans)
+{
+	int		ct[3];
+
+	ct[0] = 0;
+	ct[1] = 1;
+	if (u[0] == 0.0 && v[0] == 0.0)
+		ct[0] = 2;
+	else if (u[0] * v[1] == v[0] * u[1])
+		ct[1] = 2;
+	ans[1] = (w[ct[0]] * u[ct[1]] - u[ct[0]] * w[ct[1]]) / (v[ct[0]] * u[ct[1]] - u[ct[0]] * v[ct[1]]);
+	ans[0] = (w[ct[0]] - v[ct[0]] * ans[1]) / u[ct[0]];
+}
+
 double	linear_equation(double *coef, t_line *line)
 {
 	return (-1 * (coef[0] * line->x[1] + coef[1] * line->y[1] + coef[2] * line->z[1] + coef[3]) / (coef[0] * line->x[0] + coef[1] * line->y[0] + coef[2] * line->z[0]));

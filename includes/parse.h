@@ -69,6 +69,8 @@ typedef struct	s_square
 {
 	double			coordinate[3];
 	double			orientation[3];
+	double			start_point[3];
+	double			*vector[2];
 	double			side_size;
 	int				color[3];
 }				t_square;

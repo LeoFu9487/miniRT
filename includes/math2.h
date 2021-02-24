@@ -31,7 +31,7 @@ double			*normal_vector_tr(double *point, void *ptr);
 double			*normal_vector_sq(double *point, void *ptr);
 double			*normal_vector_cy(double *point, void *ptr);
 double			two_points_distance(double *a, double *b);
-double			*two_points_vector(double *a, double *b);
+double			*two_points_vector(double *start_point, double *end_point);
 double			*reflection_color(int *color, t_light *light, double new_brightness);
 t_line			*two_points_line(double	*p1, double	*p2);
 int				have_intersection(t_list *lst, t_line *line);
@@ -57,5 +57,7 @@ void			intersect_sq(t_intersect *is, t_line *l, void *ptr, int num);
 void			intersect_cy(t_intersect *is, t_line *l, void *ptr, int num);
 void			intersect_tr(t_intersect *is, t_line *l, void *ptr, int num);
 double			linear_equation(double *coef, t_line *line);
+void			linear_equations(double *u, double *v, double *w, double *ans);
+double			det(double **mat, int size);
 
 #endif
