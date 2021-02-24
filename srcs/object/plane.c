@@ -46,7 +46,7 @@ void		intersect_pl(t_intersect *is, t_line *l, void *ptr, int num)
 		return ;
 	plane_coef(coef, plane);
 	ans = linear_equation(coef, l);
-	if (ans < 0.0)
+	if (ans <= 0.0)
 		return ;
 	if (is->intersect == 0 || ans < is->dist)
 	{
