@@ -35,12 +35,19 @@ void		intersect_pl(t_intersect *is, t_line *l, void *ptr, int num)
 	t_plane	*plane;
 	double	ans;
 	double	coef[4];
+	double	vector[3];
 
-	if (!have_intersection_pl(l, ptr))
-		return ;
 	plane = ptr;
+	vector[0] = l->x[0];
+	vector[1] = l->y[0];
+	vector[2] = l->z[0];
+	ans = cos_vector(plane->orientation, vector);
+	if (ans < 1e-6 && ans > -1e-6)
+		return ;
 	plane_coef(coef, plane);
 	ans = linear_equation(coef, l);
+	if (ans < 0.0)
+		return ;
 	if (is->intersect == 0 || ans < is->dist)
 	{
 		is->dist = ans;
