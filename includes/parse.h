@@ -87,6 +87,8 @@ typedef struct	s_cylinder
 typedef struct	s_triangle
 {
 	double			point[3][3];
+	double			*orientation;
+	double			*vector[2];
 	int				color[3];
 }				t_triangle;
 

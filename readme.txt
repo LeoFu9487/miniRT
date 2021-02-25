@@ -5,7 +5,6 @@ need to do ambient lighting in math/utils.c, intersect_color
 need to think get_new_brightness in math/utils.c 
 for intersect_objects, deal with every element in t_intersect *
 remember not to use have_intersection_* in intersect_*
-todo : test linear_equations(double *u, double *v, double *w, double *ans)
 
 
 

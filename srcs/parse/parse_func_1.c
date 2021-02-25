@@ -297,4 +297,10 @@ void	parse_tr(t_parse *parse, char *str)
 		if (triangle_info->color[ct[0]] < 0 || triangle_info->color[ct[0]] > 255)
 			error_exit("triangle color out of range\n");
 	}
+	triangle_info->vector[0] = two_points_vector(triangle_info->point[0], triangle_info->point[1]);
+	triangle_info->vector[1] = two_points_vector(triangle_info->point[0], triangle_info->point[2]);
+	if (!(triangle_info->orientation = cross(triangle_info->vector[0], triangle_info->vector[1])))
+		error_exit("parse_tr\n");
+	if (triangle_info->orientation[0] == 0.0 && triangle_info->orientation[1] == 0.0 && triangle_info->orientation[2] == 0.0)
+		error_exit("invalid points of triangle : form a line instead of a triangle\n");
 }
