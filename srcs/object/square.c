@@ -53,13 +53,31 @@ static int	in_square(t_line *line, t_square *square, double t)
 
 void		intersect_sq(t_intersect *is, t_line *l, void *ptr, int num)
 {
-	(void)num;
-	(void)is;
-	(void)l;
-	(void)ptr;
-	/*
-	 * ptr is already t_cyliner * or t_triagle *...etc.
-	 * */
+	t_square	*square;
+	double		coef[4];
+	double		res;
+	double		vector[3];
+
+	square = ptr;
+	vector[0] = l->x[0];
+	vector[1] = l->y[0];
+	vector[2] = l->z[0];
+	res = cos_vector(square->orientation, vector);
+	if (res < 1e-6 && res > -1e-6)
+		return ;
+	square_coef(coef, square);
+	res = linear_equation(coef, l);
+	if (res <= 0.0 || !(in_square(l, square, res)))
+		return ;
+	if (is->intersect == 0 || res < is->dist)
+	{
+		is->dist = res;
+		is->intersect = 1;
+		is->coordinate[0] = l->x[0] * is->dist + l->x[1];
+		is->coordinate[1] = l->y[0] * is->dist + l->y[1];
+		is->coordinate[2] = l->z[0] * is->dist + l->z[1];
+		is->obj_num = num;
+	}
 }
 
 int				have_intersection_sq(t_line *l, void *ptr)

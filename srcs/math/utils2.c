@@ -59,6 +59,8 @@ void	linear_equations(double *u, double *v, double *w, double *ans)
 		ct[0] = 2;
 	else if (u[0] * v[1] == v[0] * u[1])
 		ct[1] = 2;
+	if ((v[ct[0]] * u[ct[1]] - u[ct[0]] * v[ct[1]] == 0.0) || u[ct[0]] == 0.0)
+		error_exit("linear_equations\n");
 	ans[1] = (w[ct[0]] * u[ct[1]] - u[ct[0]] * w[ct[1]]) / (v[ct[0]] * u[ct[1]] - u[ct[0]] * v[ct[1]]);
 	ans[0] = (w[ct[0]] - v[ct[0]] * ans[1]) / u[ct[0]];
 }
