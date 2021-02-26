@@ -36,14 +36,26 @@ void			intersect_cy(t_intersect *is, t_line *l, void *ptr, int num)
 }
 
 int				have_intersection_cy(t_line *l, void *ptr)
-{	(void)l;(void)ptr;
-
+{
+	(void)l;(void)ptr;
 	return (0);
 }
 
 double			*normal_vector_cy(double *point, void *ptr)
 {
-	(void)point;
+	//t_cylinder	*cylinder;
+	//double		*ans;
+	/*
+	if point distance to cylinder->middle line == diameter / 2.0 (error < 1e-6)
+	make a plane, find the intersect point on middle line , and connect the two
+	
+	else same as orientation
+	*/
+	/*if (!(ans = ft_malloc(3, sizeof(double))))
+		error_exit("normal_vector_cy\n");
+	cylinder = ptr;
+	*/
 	(void)ptr;
+	(void)point;
 	return (NULL);
 }

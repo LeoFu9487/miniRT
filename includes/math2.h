@@ -1,21 +1,6 @@
 #ifndef MATH2_H
 # define MATH2_H
 
-/*
-** L : 
-** x = 5t + 2
-** y = 6t + 1
-** z = 7y + 3
-** => x[0] = 5, x[1] = 2 ...
-*/
-
-typedef struct	s_line
-{
-	double	x[2];
-	double	y[2];
-	double	z[2];
-}				t_line;
-
 typedef struct	s_intersect
 {
 	int		intersect;
@@ -59,5 +44,7 @@ void			intersect_tr(t_intersect *is, t_line *l, void *ptr, int num);
 double			linear_equation(double *coef, t_line *line);
 void			linear_equations(double *u, double *v, double *w, double *ans);
 double			det(double **mat, int size);
+double			*make_point(double a, double b, double c);
+double			point_to_line_distance(double *point, t_line *line);
 
 #endif

@@ -48,7 +48,7 @@ void		intersect_pl(t_intersect *is, t_line *l, void *ptr, int num)
 	ans = linear_equation(coef, l);
 	if (ans <= 0.0)
 		return ;
-	if (is->intersect == 0 || ans < is->dist)
+	if (is->intersect == 0 || ans < is->dist - 1e-6)
 	{
 		is->dist = ans;
 		is->intersect = 1;

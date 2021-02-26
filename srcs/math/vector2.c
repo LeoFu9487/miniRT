@@ -16,3 +16,15 @@ double	*two_points_vector(double *start_point, double *end_point)
 	ans[2] = end_point[2] - start_point[2];
 	return (ans);
 }
+
+double	*make_point(double a, double b, double c)
+{
+	double	*ans;
+
+	if (!(ans = ft_malloc(3, sizeof(double))))
+		error_exit("make_point\n");
+	ans[0] = a;
+	ans[1] = b;
+	ans[2] = c;
+	return (ans);
+}

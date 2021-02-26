@@ -43,7 +43,7 @@ static int	in_triangle(t_line *line, t_triangle *triangle, double t)
 	v = two_points_vector(triangle->point[0], point);
 	linear_equations(triangle->vector[0], triangle->vector[1], v, ans);
 	ft_free(v);
-	if (ans[0] > 1e-6 && ans[1] > 1e-6 && ans[0] + ans[1] <= 1.0)
+	if (ans[0] > 1e-6 && ans[1] > 1e-6 && ans[0] + ans[1] <= 1.0 - 1e-6)
 		return (1);
 	return (0);
 }
@@ -66,7 +66,7 @@ void			intersect_tr(t_intersect *is, t_line *l, void *ptr, int num)
 	res = linear_equation(coef, l);
 	if (res <= 0.0 || !(in_triangle(l, triangle, res)))
 		return ;
-	if (is->intersect == 0 || res < is->dist)
+	if (is->intersect == 0 || res < is->dist - 1e-6)
 	{
 		is->dist = res;
 		is->intersect = 1;

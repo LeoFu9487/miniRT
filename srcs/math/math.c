@@ -5,8 +5,6 @@ void		modify_length(double *vector, double length)
 	double	multiply;
 	int		ct;
 
-	if (length <= 0.0)
-		return ;
 	multiply = length / len(vector);
 	ct = -1;
 	while (++ct < 3)

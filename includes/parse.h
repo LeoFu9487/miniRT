@@ -3,6 +3,22 @@
 # ifndef AMBIENT_LIGHT_INTENSITY
 # define AMBIENT_LIGHT_INTENSITY 0.05
 # endif
+
+/*
+** L : 
+** x = 5t + 2
+** y = 6t + 1
+** z = 7y + 3
+** => x[0] = 5, x[1] = 2 ...
+*/
+
+typedef struct	s_line
+{
+	double	x[2];
+	double	y[2];
+	double	z[2];
+}				t_line;
+
 typedef struct	s_parse
 {
 	int		rx;
@@ -82,6 +98,8 @@ typedef struct	s_cylinder
 	double			diameter;
 	double			height;
 	int				color[3];
+	t_line			*middle_line;
+	double			*end_point[2];
 }				t_cylinder;
 
 typedef struct	s_triangle

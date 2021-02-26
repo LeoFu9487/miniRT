@@ -69,7 +69,7 @@ void		intersect_sq(t_intersect *is, t_line *l, void *ptr, int num)
 	res = linear_equation(coef, l);
 	if (res <= 0.0 || !(in_square(l, square, res)))
 		return ;
-	if (is->intersect == 0 || res < is->dist)
+	if (is->intersect == 0 || res < is->dist - 1e-6)
 	{
 		is->dist = res;
 		is->intersect = 1;

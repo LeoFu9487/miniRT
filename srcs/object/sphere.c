@@ -39,7 +39,7 @@ void		intersect_sp(t_intersect *is, t_line *l, void *ptr, int num)
 	{
 		if (answer[ct] < 0.0)
 			return ;
-		if (is->intersect == 0 || answer[ct] < is->dist)
+		if (is->intersect == 0 || answer[ct] < is->dist - 1e-6)
 		{
 			is->dist = answer[ct];
 			is->intersect = 1;
