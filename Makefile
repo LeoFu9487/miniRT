@@ -29,6 +29,8 @@ PUT_FILES = open_window.c	put_screen.c	color.c	load_images.c
 MATH_FILES = vector.c	math.c	utils.c	utils2.c\
 	     vector2.c	utils3.c
 
+BMP_FILES = do_bmp.c
+
 OBJECT_DIR = object/
 
 PARSE_DIR = parse/
@@ -39,6 +41,8 @@ PUT_DIR = put/
 
 MATH_DIR = math/
 
+BMP_DIR = bmp/
+
 FILES += $(addprefix $(OBJECT_DIR), $(OBJECT_FILES))
 
 FILES += $(addprefix $(PUT_DIR), $(PUT_FILES))
@@ -46,6 +50,8 @@ FILES += $(addprefix $(PUT_DIR), $(PUT_FILES))
 FILES += $(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 FILES += $(addprefix $(MATH_DIR), $(MATH_FILES))
+
+FILES += $(addprefix $(BMP_DIR), $(BMP_FILES))
 
 SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 

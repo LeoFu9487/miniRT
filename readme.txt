@@ -1,6 +1,6 @@
 remember to abandon in parsing when orientaion = (0,0,0) (reconsider parsing)
 
-todo : need to redefine for apple, --save
+todo : need to redefine for apple, --save, bonus, create more tests, error_exit needs to put close_program ?
 
 usage :
 
@@ -8,7 +8,7 @@ usage :
 
 ./miniRt <scene.rt> --save 
 
-will save the picture as a bmp file
+will save the picture as a bmp file in the repository images
 
 2.
 

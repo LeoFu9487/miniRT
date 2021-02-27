@@ -1,6 +1,7 @@
 #ifndef MATH2_H
 # define MATH2_H
 # define LEN_UNIT 500.0
+
 typedef struct	s_intersect
 {
 	int		intersect;

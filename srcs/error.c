@@ -15,7 +15,6 @@
 void	error_exit(const char *str)
 {
 	printf("ERROR\n%s", str);
-	ft_free_all();
 	exit(EXIT_FAILURE);
 }
 

@@ -58,6 +58,7 @@ int				ft_tolower(int character);
 void			*ft_calloc(size_t elementcount, size_t elementsize);
 char			*ft_strdup(const char *source);
 size_t			ft_strlcat(char *s1, const char *s2, size_t n);
+void			ft_strcat(char *s1, char *s2);
 size_t			ft_strlen(const char *s);
 char			*ft_substr(char const *s, size_t start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);

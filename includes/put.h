@@ -16,7 +16,7 @@ void			put_scene(t_parse *parse);
 int				close_program(void *param);
 void			change_camera(t_info *info);
 int				deal_key(int key, void *parse);
-void			open_window(t_parse *parse);
+void			open_window(t_parse *parse, t_info *info);
 void			put_screen(t_info *info);
 void			load_images(t_info *info);
 t_info			*init_info(t_parse *parse, void *mlx_ptr, void *win_ptr);

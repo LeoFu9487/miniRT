@@ -12,8 +12,12 @@ int		close_program(void *param)
 		mlx_destroy_image(info->mlx_ptr, cam->img_ptr);
 		info->parse->camera = info->parse->camera->next;
 	}
-	printf("\nprogram is closed!\n");
+	
+	if (info->win_ptr)
+		mlx_destroy_window(info->mlx_ptr, info->win_ptr);
+	free(info->mlx_ptr);
 	ft_free_all();
+	printf("\nfinished!\n");
 	exit(EXIT_SUCCESS);
 	return (1);
 }
@@ -54,25 +58,14 @@ t_info	*init_info(t_parse *parse, void *mlx_ptr, void *win_ptr)
 	return (info);
 }
 
-void	open_window(t_parse *parse)
+void	open_window(t_parse *parse, t_info *info)
 {
-	void	*mlx_ptr;
 	void	*win_ptr;
-	int		sizex;
-	int		sizey;
-	t_info	*info;
 
-	mlx_ptr = mlx_init();
-	mlx_get_screen_size(mlx_ptr, &sizex, &sizey);
-	parse->rx = ft_min(parse->rx, sizex);
-	parse->ry = ft_min(parse->ry, sizey);
-	info = init_info(parse, mlx_ptr, (void*)NULL);
-	load_images(info);
-	ft_putendl_fd("finish loading", 2);
-	win_ptr = mlx_new_window(mlx_ptr, parse->rx, parse->ry, "miniRT");
+	win_ptr = mlx_new_window(info->mlx_ptr, parse->rx, parse->ry, "miniRT");
 	info->win_ptr = win_ptr;
 	ft_putendl_fd("current camera :", 2);
 	mlx_hook(win_ptr, 17, 131072, close_program, info);
 	mlx_key_hook(win_ptr, deal_key, info);
-	mlx_loop(mlx_ptr);
+	mlx_loop(info->mlx_ptr);
 }

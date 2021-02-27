@@ -19,6 +19,7 @@
 # include "parse.h"
 # include "put.h"
 # include "math2.h"
+# include "bmp.h"
 # ifdef LINUX
 #  include "../lib/minilibx-linux/mlx.h"
 #  include "../lib/minilibx-linux/mlx_int.h"
@@ -38,5 +39,6 @@
 void	arg_error(int argc, char **argv);
 int		file_error(char **argv);
 void	error_exit(const char *str);
+t_info	*get_images(t_parse *parse);
 
 #endif
