@@ -12,7 +12,7 @@ int		close_program(void *param)
 		mlx_destroy_image(info->mlx_ptr, cam->img_ptr);
 		info->parse->camera = info->parse->camera->next;
 	}
-	printf("program is closed!\n");
+	printf("\nprogram is closed!\n");
 	ft_free_all();
 	exit(EXIT_SUCCESS);
 	return (1);
@@ -29,7 +29,8 @@ void	change_camera(t_info *info)
 	else
 		parse->cur_camera = parse->cur_camera->next;
 	camera = parse->cur_camera->content;
-	printf("\rcamera : %d\n", camera->num);
+	ft_putstr_fd("\rcamera ", 2);
+	ft_putnbr_fd(camera->num, 2);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr, 0, 0);
 }
 
@@ -67,8 +68,10 @@ void	open_window(t_parse *parse)
 	parse->ry = ft_min(parse->ry, sizey);
 	info = init_info(parse, mlx_ptr, (void*)NULL);
 	load_images(info);
+	ft_putendl_fd("finish loading", 2);
 	win_ptr = mlx_new_window(mlx_ptr, parse->rx, parse->ry, "miniRT");
 	info->win_ptr = win_ptr;
+	ft_putendl_fd("current camera :", 2);
 	mlx_hook(win_ptr, 17, 131072, close_program, info);
 	mlx_key_hook(win_ptr, deal_key, info);
 	mlx_loop(mlx_ptr);
