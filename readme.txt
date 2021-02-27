@@ -1,4 +1,4 @@
-remember to abandon in parsing when orientaion = (0,0,0)
+remember to abandon in parsing when orientaion = (0,0,0) (reconsider parsing)
 
 todo : need to redefine for apple, --save
 

@@ -57,7 +57,6 @@ void	put_pixel(t_info *info, int *pixel, double *u, double *v)
 	intersect_color(intersect, info->parse);
 	camera = info->parse->cur_camera->content;
 	camera->pixel[pixel[0] + pixel[1] * info->parse->rx] = get_color(intersect->color);
-	//mlx_pixel_put(info->mlx_ptr, info->win_ptr, pixel[0], pixel[1], get_color(intersect->color));
 	ft_free(line);
 	ft_free(intersect);
 }
