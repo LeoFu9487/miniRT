@@ -33,10 +33,14 @@ void	put_all(t_info *info)
 	ct[0] = -1;
 	while (++ct[0] < info->parse->rx)
 	{
+		ft_putstr_fd("\rloading ... ", 2);
+		ft_putnbr_fd(ct[0] * 100 / info->parse->rx, 2);
+		ft_putstr_fd(" %", 2);
 		ct[1] = -1;
 		while (++ct[1] < info->parse->ry)
 			put_pixel(info, ct, u, base_v);
 	}
+	ft_putendl_fd("\rloading ... 100 %", 2);
 	ft_free(u);
 }
 

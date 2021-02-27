@@ -13,7 +13,7 @@ void	load_images(t_info *info)
 		ft_putstr_fd("loading camera : ", 2);
 		ft_putnbr_fd(camera->num,  2);
 		ft_putendl_fd("", 2);
-		put_screen(info);
+		put_screen(info);;
 		info->parse->cur_camera = info->parse->cur_camera->next;
 	}
 }

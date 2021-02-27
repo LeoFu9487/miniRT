@@ -104,5 +104,6 @@ void	do_bmp(t_info *info, char *file_name)
 		ft_free(str[0]);
 		ft_free(str[1]);
 	}
+	ft_putendl_fd("check the repository \"images\" to find the pictures in bmp format", 2);
 	exit(EXIT_SUCCESS);
 }
