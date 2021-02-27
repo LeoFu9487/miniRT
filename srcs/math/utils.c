@@ -54,23 +54,23 @@ static double	get_new_brightness(t_objects *obj, t_intersect *it, t_light *light
 	double	ans;
 	double	*(*func[9])(double*, void*);
 	double	*vector[3];
-	//double	len_sum;
+	double	len_sum;
 
 	ans = light->brightness;
-	//len_sum = two_points_distance(it->coordinate, light->coordinate) + two_points_distance(it->coordinate, ((t_camera*)(parse->cur_camera->content))->coordinate);
-	//len_sum /= 100.0;
-	//ans /= len_sum * len_sum;
+	len_sum = two_points_distance(it->coordinate, light->coordinate) + two_points_distance(it->coordinate, ((t_camera*)(parse->cur_camera->content))->coordinate);
+	len_sum /= LEN_UNIT;
+	ans /= len_sum * len_sum;
 	assigned_func2((void**)func);
 	vector[0] = func[obj->type](it->coordinate, obj->ptr);
 	vector[1] = two_points_vector(it->coordinate, ((t_camera*)parse->cur_camera->content)->coordinate);
 	vector[2] = two_points_vector(it->coordinate, light->coordinate);
-	ans *= cos_vector(vector[0], vector[1]);
-	ans *= cos_vector(vector[0], vector[2]);
+	ans *= cos(acos(cos_vector(vector[0], vector[1])) - acos(cos_vector(vector[0], vector[2])));
 	if (ans < 0.0)
 		ans *= -1.0;
 	ft_free(vector[0]);
 	ft_free(vector[1]);
 	ft_free(vector[2]);
+	(void)obj;
 	return (ans);
 }
 
