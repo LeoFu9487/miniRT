@@ -21,11 +21,13 @@
 # include "math2.h"
 # ifdef LINUX
 #  include "../lib/minilibx-linux/mlx.h"
+#  define OS 0
 #  define ESC 65307
 #  define SPACE 32
 # endif
 # ifdef MACOS
 #  include "../lib/minilibx_opengl_20191021/mlx.h"
+#  define OS 1
 #  define ESC 53
 # endif
 # ifndef DEBUG

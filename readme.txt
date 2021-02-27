@@ -1,13 +1,6 @@
-how to improve : solve linear_equations in polynominal time(right now it's O(n!))
-
 remember to abandon in parsing when orientaion = (0,0,0)
-need to do ambient lighting in math/utils.c, intersect_color
-need to think get_new_brightness in math/utils.c 
-for intersect_objects, deal with every element in t_intersect *
-remember not to use have_intersection_* in intersect_*
 
-todo : utils3.c : point_to_line_distance, cyylinder.c
-
+todo : new to redefine for apple
 
 usage :
 
