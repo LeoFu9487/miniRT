@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 int		main(int argc, char **argv)
 {
@@ -22,5 +22,6 @@ int		main(int argc, char **argv)
 	if (!(parse = init_parse()))
 		error_exit("ERROR_IN_MAIN\n");
 	parse_scene(fd, parse);
+	open_window(parse);
 	ft_free_all();
 }

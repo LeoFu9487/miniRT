@@ -17,13 +17,19 @@
 # include <fcntl.h>
 # include "../lib/libft/libft.h"
 # include "parse.h"
+# include "put.h"
+# include "math2.h"
 # ifdef LINUX
 #  include "../lib/minilibx-linux/mlx.h"
 #  define ESC 65307
+#  define SPACE 32
 # endif
 # ifdef MACOS
 #  include "../lib/minilibx_opengl_20191021/mlx.h"
 #  define ESC 53
+# endif
+# ifndef DEBUG
+#  define DEBUG 0
 # endif
 
 void	arg_error(int argc, char **argv);

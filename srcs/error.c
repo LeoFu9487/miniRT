@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 void	error_exit(const char *str)
 {
-	printf("ERROR : %s\n", str);
+	printf("ERROR\n%s", str);
 	ft_free_all();
 	exit(EXIT_FAILURE);
 }
@@ -22,12 +22,12 @@ void	error_exit(const char *str)
 void	arg_error(int argc, char **argv)
 {
 	if (argc < 2 || argc > 3)
-		printf("ERROR : Wrong amounts of arguments.\n");
+		printf("ERROR\nWrong amounts of arguments.\n");
 	else if (ft_strlen(argv[1]) < 3 ||
-			ft_strncmp(".rt", ft_substr(argv[1], ft_strlen(argv[1]) - 3, 3), 3))
-		printf("ERROR : The second argument should be in type *.rt\n");
+		ft_strncmp(".rt", ft_substr(argv[1], ft_strlen(argv[1]) - 3, 3), 3))
+		printf("ERROR\nThe second argument should be in type *.rt\n");
 	else if (argc == 3 && ft_strncmp(argv[2], "--save", 7))
-		printf("ERROR : The third argument should be --save or nothing\n");
+		printf("ERROR\nThe third argument should be --save or nothing\n");
 	else
 		return ;
 	printf("Usage 1 : %s <scene.rt>\n", argv[0]);
@@ -42,7 +42,7 @@ int		file_error(char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
-		printf("ERROR : Can't open file %s \n", argv[1]);
+		printf("ERROR\nCan't open file %s \n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

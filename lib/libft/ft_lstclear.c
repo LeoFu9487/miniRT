@@ -17,6 +17,11 @@ void			ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*temp;
 	t_list	*dd;
 
+	if (!(lst))
+	{
+		ft_putstr_fd("ERROR_IN_FT_LSTCLEAR\n", 1);
+		return ;
+	}
 	temp = *lst;
 	*lst = NULL;
 	while (temp)
@@ -25,6 +30,6 @@ void			ft_lstclear(t_list **lst, void (*del)(void *))
 			del(temp->content);
 		dd = temp;
 		temp = temp->next;
-		free(dd);
+		ft_free(dd);
 	}
 }

@@ -16,7 +16,7 @@ int			ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (!new || !lst)
 	{
-		ft_putstr_fd("ERROR_IN_FT_LSRADD_FRONT\n", 1);
+		ft_putstr_fd("ERROR_IN_FT_LSTADD_FRONT\n", 1);
 		return (0);
 	}
 	if (!*lst)

@@ -16,6 +16,8 @@ char	*ft_strrchr(const char *s, int c)
 {
 	char	*add;
 
+	if (!s)
+		return (NULL);
 	add = (char*)s;
 	add += ft_strlen(s);
 	while (add >= (char*)s)
