@@ -144,7 +144,7 @@ int				have_intersection_cy(t_line *l, void *ptr)
 		v[2][0] = v[0][0] + v[1][0] * s;
 		v[2][1] = v[0][1] + v[1][1] * s;
 		v[2][2] = v[0][2] + v[1][2] * s;
-		if (two_points_distance((double*)v[2], (double*)cylinder->end_point[ct]) <= cylinder->diameter / 2.0)
+		if (two_points_distance((double*)v[2], (double*)(cylinder->end_point[ct])) <= cylinder->diameter / 2.0)
 			return (1);
 	}
 	cylinder_coef(coef, alpha, l, cylinder);
