@@ -33,12 +33,11 @@ void		intersect_sp(t_intersect *is, t_line *l, void *ptr, int num)
 	coef[2] = (l->x[1] - sphere->coordinate[0]) * (l->x[1] - sphere->coordinate[0]) + (l->y[1] - sphere->coordinate[1]) * (l->y[1] - sphere->coordinate[1]) + (l->z[1] - sphere->coordinate[2]) * (l->z[1] - sphere->coordinate[2]) - (sphere->diameter / 2.0) * (sphere->diameter / 2.0);
 	if (quadratic_equation(coef, answer) <= 0)
 		return ;
-	//answer <= 1 ignore ? 
 	ct = -1;
 	while (++ct < 2)
 	{
 		if (answer[ct] < 0.0)
-			return ;
+			continue ;
 		if (is->intersect == 0 || answer[ct] < is->dist - 1e-6)
 		{
 			is->dist = answer[ct];
@@ -62,7 +61,7 @@ int			have_intersection_sp(t_line *l, void *ptr)
 	coef[1] = 2.0 * (l->x[0] * (l->x[1] - sphere->coordinate[0]) + l->y[0] * (l->y[1] - sphere->coordinate[1]) + l->z[0] * (l->z[1] - sphere->coordinate[2]));
 	coef[2] = (l->x[1] - sphere->coordinate[0]) * (l->x[1] - sphere->coordinate[0]) + (l->y[1] - sphere->coordinate[1]) * (l->y[1] - sphere->coordinate[1]) + (l->z[1] - sphere->coordinate[2]) * (l->z[1] - sphere->coordinate[2]) - (sphere->diameter / 2.0) * (sphere->diameter / 2.0);
 	if (quadratic_equation(coef, answer) <= 0)
-		return 0;
+		return (0);
 	if (answer[0] > 1e-6 && answer[0] < 1.0 - 1e-6)
 		return (1);
 	return ((answer[1] > 1e-6 && answer[1] < 1.0 - 1e-6) ? 1 : 0);

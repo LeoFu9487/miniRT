@@ -258,6 +258,9 @@ void	parse_cy(t_parse *parse, char *str)
 	cylinder_info->end_point[0] = two_points_vector(cylinder_info->orientation, cylinder_info->coordinate);
 	cylinder_info->middle_line = two_points_line(cylinder_info->end_point[0], cylinder_info->end_point[1]);
 }
+/*
+cy->endpoint[0] + cy->coordinate = cy->endpoint[1]
+*/
 
 void	parse_tr(t_parse *parse, char *str)
 {

@@ -45,6 +45,5 @@ double			linear_equation(double *coef, t_line *line);
 void			linear_equations(double *u, double *v, double *w, double *ans);
 double			det(double **mat, int size);
 double			*make_point(double a, double b, double c);
-double			point_to_line_distance(double *point, t_line *line);
 
 #endif
