@@ -2,16 +2,65 @@
 
 void	create_file(char *file_name, t_camera *camera, t_info *info)
 {
-	int	fd;
+	int				fd;
+	static t_bmp	*bmp;
 
 	if ((fd = open(file_name, O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR)) < 0)
 		error_exit("fail to create file\n");
-	bmp_header(camera, fd);
+	if (!bmp)
+		bmp = set_bmp(info);
+	write_bmp(bmp, fd);
+	write_pixel(fd, info->parse, camera);
+	close(fd);
 }
 
-void	bmp_header(t_info *info, int fd)
+void	write_bmp(t_bmp *bmp, int fd)
 {
-	
+	write(fd, &(bmp->id), 2);
+	write(fd, &(bmp->size), 4);
+	write(fd, &(bmp->reserved), 4);
+	write(fd, &(bmp->offset), 4);
+	write(fd, &(bmp->headersize), 4);
+	write(fd, &(bmp->width), 4);
+	write(fd, &(bmp->height), 4);
+	write(fd, &(bmp->planes), 2);
+	write(fd, &(bmp->bitsperpixel), 2);
+	write(fd, &(bmp->compression), 4);
+	write(fd, &(bmp->imagesize), 4);
+	write(fd, &(bmp->xpixelspermeter), 4);
+	write(fd, &(bmp->ypixelspermeter), 4);
+	write(fd, &(bmp->totalcolors), 4);
+	write(fd, &(bmp->importantcolors), 4);
+}
+
+t_bmp	*set_bmp(t_info *info)
+{
+	t_bmp	*bmp;
+
+	if (!(bmp = ft_malloc(1, sizeof(t_bmp))))
+		error_exit("set_bmp\n");
+	bmp->id[0] = 'B';
+	bmp->id[1] = 'M';
+	bmp->size = info->parse->rx * info->parse->ry * 4 + 54;
+	bmp->reserved = 0;
+	bmp->offset = 54;
+	bmp->headersize = 40;
+	bmp->width = info->parse->rx;
+	bmp->height = info->parse->ry;
+	bmp->planes = 1;
+	bmp->bitsperpixel = 32;
+	bmp->compression = 0;
+	bmp->imagesize = 0;
+	bmp->xpixelspermeter = 0;
+	bmp->ypixelspermeter = 0;
+	bmp->totalcolors = 0;
+	bmp->importantcolors = 0;
+	return (bmp);
+}
+
+void	write_pixel(int fd, t_parse *parse, t_camera *camera)
+{
+	write(fd, camera->pixel, parse->rx * parse->ry * sizeof(int) / sizeof(char));
 }
 
 void	do_bmp(t_info *info, char *file_name)
@@ -41,6 +90,8 @@ void	do_bmp(t_info *info, char *file_name)
 		ft_strcat(str[0], ".bmp");
 		create_file(str[0], camera, info);
 		info->parse->camera = info->parse->camera->next;
+		ft_free(str[0]);
+		ft_free(str[1]);
 	}
 	exit(EXIT_SUCCESS);
 }
