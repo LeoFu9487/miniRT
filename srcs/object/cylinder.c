@@ -62,17 +62,46 @@ void			intersect_cy(t_intersect *is, t_line *l, void *ptr, int num)
 	double		coef[3];
 	double		answer[2];
 	double		alpha[10];
+	double		v[3][3];
 	double		s;
 	int			ct;
 
 	cylinder = (t_cylinder*)ptr;
+	ct = -1;
+	v[0][0] = l->x[1];
+	v[0][1] = l->y[1];
+	v[0][2] = l->z[1];
+	v[1][0] = l->x[0];
+	v[1][1] = l->y[0];
+	v[1][2] = l->z[0];
+	while (++ct < 2)
+	{
+		s = (dot(cylinder->orientation, cylinder->end_point[ct]) - dot(cylinder->orientation, (double*)v[0])) / dot(cylinder->orientation, (double*)v[1]);
+		if (s <= 0.0)
+			continue ;
+		v[2][0] = v[0][0] + v[1][0] * s;
+		v[2][1] = v[0][1] + v[1][1] * s;
+		v[2][2] = v[0][2] + v[1][2] * s;
+		if (two_points_distance((double*)v[2], (double*)cylinder->end_point[ct]) <= cylinder->diameter / 2.0)
+		{
+			if (is->intersect == 0 || s < is->dist - 1e-6)
+			{
+				is->dist = s;
+				is->intersect = 1;
+				is->coordinate[0] = l->x[0] * is->dist + l->x[1];
+				is->coordinate[1] = l->y[0] * is->dist + l->y[1];
+				is->coordinate[2] = l->z[0] * is->dist + l->z[1];
+				is->obj_num = num;
+			}
+		}
+	}
 	cylinder_coef(coef, alpha, l, cylinder);
 	if (quadratic_equation(coef, answer) <= 0)
 		return ;
 	ct = -1;
 	while (++ct < 2)
 	{
-		if (answer[ct] < 0.0)
+		if (answer[ct] <= 0.0)
 			continue ;
 		s = (alpha[2] * answer[ct] + alpha[4] - alpha[3]) / alpha[0];
 		if (s <= 1e-6 || s >= 1.0 - 1e-6)
@@ -96,9 +125,28 @@ int				have_intersection_cy(t_line *l, void *ptr)
 	double		answer[2];
 	double		alpha[10];
 	double		s;
+	double		v[3][3];
 	int			ct;
 
 	cylinder = (t_cylinder*)ptr;
+	ct = -1;
+	v[0][0] = l->x[1];
+	v[0][1] = l->y[1];
+	v[0][2] = l->z[1];
+	v[1][0] = l->x[0];
+	v[1][1] = l->y[0];
+	v[1][2] = l->z[0];
+	while (++ct < 2)
+	{
+		s = (dot(cylinder->orientation, cylinder->end_point[ct]) - dot(cylinder->orientation, (double*)v[0])) / dot(cylinder->orientation, (double*)v[1]);
+		if (s <= 1e-6 || s >= 1.0 - 1e-6)
+			continue ;
+		v[2][0] = v[0][0] + v[1][0] * s;
+		v[2][1] = v[0][1] + v[1][1] * s;
+		v[2][2] = v[0][2] + v[1][2] * s;
+		if (two_points_distance((double*)v[2], (double*)cylinder->end_point[ct]) <= cylinder->diameter / 2.0)
+			return (1);
+	}
 	cylinder_coef(coef, alpha, l, cylinder);
 	if (quadratic_equation(coef, answer) <= 0)
 		return (0);
@@ -119,19 +167,19 @@ double			*normal_vector_cy(double *point, void *ptr)
 	double		*vector[2];
 
 	cylinder = ptr;
-	if (dot(cylinder->coordinate, point) == dot(cylinder->coordinate, cylinder->end_point[0]) || dot(cylinder->coordinate, point) == dot(cylinder->coordinate, cylinder->end_point[1]))
+	if (double_abs(dot(cylinder->orientation, point) - dot(cylinder->orientation, cylinder->end_point[0])) < 1e-6 || double_abs(dot(cylinder->orientation, point) - dot(cylinder->orientation, cylinder->end_point[1])) < 1e-6)
 	{
 		if (!(ans = ft_malloc(3, sizeof(double))))
 			error_exit("normal_vector_cy\n");
-		ans[0] = cylinder->coordinate[0];
-		ans[1] = cylinder->coordinate[1];
-		ans[2] = cylinder->coordinate[2];
+		ans[0] = cylinder->orientation[0];
+		ans[1] = cylinder->orientation[1];
+		ans[2] = cylinder->orientation[2];
 	}
 	else
 	{
 		vector[0] = two_points_vector(cylinder->end_point[0], point);
-		vector[1] = cross(vector[0], cylinder->coordinate);
-		ans = cross(vector[1], cylinder->coordinate);
+		vector[1] = cross(vector[0], cylinder->orientation);
+		ans = cross(cylinder->orientation, vector[1]);
 		ft_free(vector[0]);
 		ft_free(vector[1]);
 	}

@@ -252,9 +252,9 @@ void	parse_cy(t_parse *parse, char *str)
 		if (cylinder_info->color[ct] < 0 || cylinder_info->color[ct] > 255)
 			error_exit("Cylinder color out of range\n");
 	}
-	modify_length(cylinder_info->orientation, cylinder_info->diameter / 2.0);
+	modify_length(cylinder_info->orientation, cylinder_info->height / 2.0);
 	cylinder_info->end_point[1] = two_points_vector(cylinder_info->orientation, cylinder_info->coordinate);
-	modify_length(cylinder_info->orientation, -1.0 * cylinder_info->diameter / 2.0);
+	modify_length(cylinder_info->orientation, -1.0 * cylinder_info->height / 2.0);
 	cylinder_info->end_point[0] = two_points_vector(cylinder_info->orientation, cylinder_info->coordinate);
 	cylinder_info->middle_line = two_points_line(cylinder_info->end_point[0], cylinder_info->end_point[1]);
 }

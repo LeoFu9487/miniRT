@@ -25,3 +25,8 @@ double	det(double **mat, int size)
 	ft_free(submat);
 	return (ans);
 }
+
+double			double_abs(double a)
+{
+	return (a < 0.0 ? -1.0 * a : a);
+}
