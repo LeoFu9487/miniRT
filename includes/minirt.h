@@ -21,6 +21,7 @@
 # include "math2.h"
 # ifdef LINUX
 #  include "../lib/minilibx-linux/mlx.h"
+#  include "../lib/minilibx-linux/mlx_int.h"
 #  define OS 0
 #  define ESC 65307
 #  define SPACE 32

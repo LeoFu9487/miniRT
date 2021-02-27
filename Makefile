@@ -24,7 +24,7 @@ OBJECT_FILES = 	camera.c	light.c\
 
 PARSE_FILES = parse_scene.c	parse_func_0.c	parse_func_1.c	print_parse.c
 
-PUT_FILES = open_window.c	put_screen.c	color.c
+PUT_FILES = open_window.c	put_screen.c	color.c	load_images.c
 
 MATH_FILES = vector.c	math.c	utils.c	utils2.c\
 	     vector2.c	utils3.c
@@ -63,7 +63,7 @@ LINUX_MINILIBX = $(addprefix $(LIB), minilibx-linux)
 
 MACOS_FLAGS =  -I $(MACOS_MINILIBX) -L $(MACOS_MINILIBX) -lmlx -framework OpenGL -framework AppKit
 
-LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lm -lX11 -lXext -lpthread
+LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lmlx_Linux -lm -lX11 -lXext -lpthread
 
 CFLAGS += $(DEBUG_FLAGS)
 

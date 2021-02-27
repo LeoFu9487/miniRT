@@ -1,6 +1,6 @@
 remember to abandon in parsing when orientaion = (0,0,0)
 
-todo : new to redefine for apple
+todo : need to redefine for apple, --save
 
 usage :
 

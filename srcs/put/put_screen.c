@@ -45,6 +45,7 @@ void	put_pixel(t_info *info, int *pixel, double *u, double *v)
 	double		position[2];
 	t_line		*line;
 	t_intersect	*intersect;
+	t_camera	*camera;
 
 	position[0] = ((double)pixel[0]) - ((double)info->parse->rx) / 2.0;
 	position[1] = ((double)pixel[1]) - ((double)info->parse->ry) / 2.0;
@@ -54,7 +55,9 @@ void	put_pixel(t_info *info, int *pixel, double *u, double *v)
 	if (intersect->intersect == 0)
 		return ;
 	intersect_color(intersect, info->parse);
-	mlx_pixel_put(info->mlx_ptr, info->win_ptr, pixel[0], pixel[1], get_color(intersect->color));
+	camera = info->parse->cur_camera->content;
+	camera->pixel[pixel[0] + pixel[1] * info->parse->rx] = get_color(intersect->color);
+	//mlx_pixel_put(info->mlx_ptr, info->win_ptr, pixel[0], pixel[1], get_color(intersect->color));
 	ft_free(line);
 	ft_free(intersect);
 }
