@@ -1,6 +1,6 @@
 remember to abandon in parsing when orientaion = (0,0,0) (reconsider parsing)
 
-todo : need to redefine for apple, --save, bonus, create more tests, error_exit needs to put close_program ?
+todo : need to redefine for apple, bonus, create more tests
 
 usage :
 

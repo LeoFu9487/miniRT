@@ -60,7 +60,18 @@ t_bmp	*set_bmp(t_info *info)
 
 void	write_pixel(int fd, t_parse *parse, t_camera *camera)
 {
-	write(fd, camera->pixel, parse->rx * parse->ry * sizeof(int) / sizeof(char));
+	int	pixel[parse->rx * parse->ry];
+	int	ct[3];
+
+	ct[0] = parse->ry;
+	ct[2] = -1;
+	while (--ct[0] >= 0)
+	{
+		ct[1] = -1;
+		while (++ct[1] < parse->rx)
+			pixel[parse->rx * ct[0] + ct[1]] = camera->pixel[++ct[2]];
+	}
+	write(fd, pixel, parse->rx * parse->ry * sizeof(int) / sizeof(char));
 }
 
 void	do_bmp(t_info *info, char *file_name)
