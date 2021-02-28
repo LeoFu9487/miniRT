@@ -42,7 +42,8 @@ typedef enum	e_parse_type
 	sq,
 	cy,
 	tr,
-	cu
+	cu,
+	co
 }				t_parse_type;
 
 typedef struct	s_camera
@@ -124,6 +125,15 @@ typedef struct	s_cube
 	t_square	*square[6];
 }				t_cube;
 
+typedef struct	s_cone
+{
+	double			coordinate[3];
+	double			orientation[3];
+	double			diameter;
+	double			height;
+	int				color[3];
+	double			*end_point[2];
+}				t_cone;
 
 void			parse_scene(int fd, t_parse *parse);
 void			parse_r(t_parse *parse, char *str);
@@ -136,6 +146,7 @@ void			parse_sq(t_parse *parse, char *str);
 void			parse_cy(t_parse *parse, char *str);
 void			parse_tr(t_parse *parse, char *str);
 void			parse_cu(t_parse *parse, char *str);
+void			parse_co(t_parse *parse, char *str);
 t_parse			*init_parse(void);
 t_camera		*init_camera(void);
 t_light			*init_light(void);
@@ -146,6 +157,7 @@ t_square		*init_square(void);
 t_cylinder		*init_cylinder(void);
 t_triangle		*init_triangle(void);
 t_cube			*init_cube(void);
+t_cone			*init_cone(void);
 void			print_parse(t_parse *parse);
 void			print_camera(void *lst);
 void			print_light(void *lst);

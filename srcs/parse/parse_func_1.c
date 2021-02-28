@@ -353,3 +353,76 @@ void	parse_cu(t_parse *parse, char *str)
 	}
 	compose_cube(cube);
 }
+
+void	parse_co(t_parse *parse, char *str)
+{
+	t_cone		*cone;
+	int			ct;
+	double		sign;
+
+	if (!(cone = init_cone()))
+	{
+		printf("Error : not able to malloc\nabandon this line %s\n", str);
+		return ;
+	}
+	ft_lstadd_back(&(parse->objects), ft_lstnew(init_objects(co, cone)));
+	ct = -1;
+	while (++ct < 3)
+	{
+		sign = 1.0;
+		while (*str && ft_isdigit(*str) == 0 && *str != '.' && *str != '-')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid coordinate for coner\n");
+		if (*str == '-')
+		{
+			sign *= -1.0;
+			if (!ft_isdigit(*(++str)))
+				error_exit("find negative number in wrong format\n");
+		}
+		cone->coordinate[ct] = sign * ft_atodouble(&str);
+	}
+	ct = -1;
+	while (++ct < 3)
+	{
+		sign = 1.0;
+		while (*str && ft_isdigit(*str) == 0 && *str != '.' && *str != '-')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid orientation for cone\n");
+		if (*str == '-')
+		{
+			sign *= -1.0;
+			if (!ft_isdigit(*(++str)))
+				error_exit("find negative number in wrong format\n");
+		}
+		cone->orientation[ct] = sign * ft_atodouble(&str);
+		if (cone->orientation[ct] < -1.0 || cone->orientation[ct] > 1.0)
+			error_exit("Cone orientation out of range\n");
+	}
+	while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		str++;
+	if (*str == 0)
+		error_exit("couldn't find valid diameter for cone\n");
+	cone->diameter = ft_atodouble(&str);
+	while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		str++;
+	if (*str == 0)
+		error_exit("couldn't find valid height for cone\n");
+	cone->height = ft_atodouble(&str);
+	ct = -1;
+	while (++ct < 3)
+	{
+		while (*str && ft_isdigit(*str) == 0 && *str != '.')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid color for cone\n");
+		cone->color[ct] = (int)ft_atodouble(&str);
+		if (cone->color[ct] < 0 || cone->color[ct] > 255)
+			error_exit("Cone color out of range\n");
+	}
+	modify_length(cone->orientation, cone->height / 2.0);
+	cone->end_point[1] = two_points_vector(cone->orientation, cone->coordinate);
+	modify_length(cone->orientation, -1.0 * cone->height);
+	cone->end_point[0] = two_points_vector(cone->orientation, cone->end_point[1]);
+}

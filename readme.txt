@@ -29,6 +29,10 @@ x,y,z coordinate for the center point : -50,0,500
 side size : 500
 R,G,B colors in range [0,255] : 255,255,255
 
+Cone :
+
+co ... like cylinder
+
 TEST : 
 R 1000 1000
 A 1.0 255 255 255
