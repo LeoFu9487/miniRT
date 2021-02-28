@@ -47,10 +47,7 @@ static void		ft_lstdelone_2(t_list **head, t_list *lst, void (*del)(void *))
 		while (temp && temp->next != lst)
 			temp = temp->next;
 		if (!temp)
-		{
-			ft_putstr_fd("ERROR_IN_FT_LSTDELONE_2\n", 1);
 			return ;
-		}
 		temp->next = lst->next;
 	}
 	if (del)

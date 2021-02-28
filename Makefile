@@ -6,6 +6,8 @@
 
 NAME = miniRT
 
+BONUS_NAME = miniRT_bonus
+
 HEAD = includes
 
 LIB = lib/
@@ -17,6 +19,8 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
 UNAME = $(shell uname)
 
 FILES = main.c	error.c
+
+BONUS_FILES = error.c
 
 OBJECT_FILES = 	camera.c	light.c\
 	objects.c	sphere.c	plane.c		square.c\
@@ -53,9 +57,25 @@ FILES += $(addprefix $(MATH_DIR), $(MATH_FILES))
 
 FILES += $(addprefix $(BMP_DIR), $(BMP_FILES))
 
+BONUS_FILES += $(addprefix $(OBJECT_DIR), $(OBJECT_FILES))
+
+BONUS_FILES += $(addprefix $(PUT_DIR), $(PUT_FILES))
+
+BONUS_FILES += $(addprefix $(PARSE_DIR), $(PARSE_FILES))
+
+BONUS_FILES += $(addprefix $(MATH_DIR), $(MATH_FILES))
+
+BONUS_FILES += $(addprefix $(BMP_DIR), $(BMP_FILES))
+
 SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 
+BONUS_SRCS = $(addprefix $(SRCS_DIR), $(BONUS_FILES))
+
+BONUS_SRCS += bonus/main_bonus.c	bonus/multithread.c	bonus/utils_bonus.c
+
 OBJS = $(SRCS:.c=.o)
+
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 LIBFLAGS = -L $(LIB)libft -lft
 
@@ -89,16 +109,23 @@ $(NAME):	$(OBJS)
 
 all : $(NAME)
 
-bonus : $(NAME)
+$(BONUS_NAME):	$(BONUS_OBJS)
+		make -C $(LIB)libft
+		$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFLAGS) -o $(BONUS_NAME)
+
+bonus : $(BONUS_NAME)
 
 clean :
 	make clean -C $(LIB)libft
 	rm -rf $(OBJS)
+	rm -rf $(BONUS_OBJS)
 
 fclean :
 	make fclean -C $(LIB)libft
 	rm -rf $(OBJS)
+	rm -rf $(BONUS_OBJS)
 	rm -rf $(NAME)
+	rm -rf $(BONUS_NAME)
 	
 re :	fclean all
 
@@ -115,4 +142,4 @@ git :
 	git add srcs/*.c includes/*.h Makefile lib/*/*.c lib/*/*.h lib/*/Makefile tests/*
 	git commit -m "$(message)"
 
-.PHONY : all clean fclean re norm
+.PHONY : all clean fclean re norm bonus
