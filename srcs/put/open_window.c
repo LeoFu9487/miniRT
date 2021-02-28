@@ -9,10 +9,10 @@ int		close_program(void *param)
 	while (info->parse->camera)
 	{
 		cam = info->parse->camera->content;
-		mlx_destroy_image(info->mlx_ptr, cam->img_ptr);
+		mlx_destroy_image(info->mlx_ptr, cam->img_ptr[0]);
+		mlx_destroy_image(info->mlx_ptr, cam->img_ptr[1]);
 		info->parse->camera = info->parse->camera->next;
 	}
-	
 	if (info->win_ptr)
 		mlx_destroy_window(info->mlx_ptr, info->win_ptr);
 	free(info->mlx_ptr);
@@ -35,15 +35,27 @@ void	change_camera(t_info *info)
 	camera = parse->cur_camera->content;
 	ft_putstr_fd("\rcamera ", 2);
 	ft_putnbr_fd(camera->num, 2);
-	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr, 0, 0);
+	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
 }
 
-int		deal_key(int key, void *info)
+int		deal_key(int key, void *ptr)
 {
+	t_info		*info;
+	t_camera	*camera;
+
+	info = ptr;
 	if (key == ESC)
 		close_program(info);
 	if (key == SPACE)
 		change_camera(info);
+	if (key == B)
+	{
+		info->filter ^= 1;
+		if (!(info->parse->cur_camera))
+			return (0);
+		camera = info->parse->cur_camera->content;
+		mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
+	}
 	return (0);
 }
 
@@ -51,10 +63,12 @@ t_info	*init_info(t_parse *parse, void *mlx_ptr, void *win_ptr)
 {
 	t_info	*info;
 
-	info = ft_malloc(1, sizeof(t_info));
+	if (!(info = ft_malloc(1, sizeof(t_info))))
+		return (NULL);
 	info->parse = parse;
 	info->mlx_ptr = mlx_ptr;
 	info->win_ptr = win_ptr;
+	info->filter = 0;
 	return (info);
 }
 

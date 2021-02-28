@@ -20,12 +20,19 @@ t_camera	*init_camera(void)
 	cam->vof = 0;
 	cam->num = num++;
 	cam->distance_to_screen = 0.0;
-	cam->img_ptr = NULL;
-	if (!(cam->bits_per_pixel = ft_malloc(1, sizeof(int))))
+	cam->img_ptr[0] = NULL;
+	cam->img_ptr[1] = NULL;
+	if (!(cam->bits_per_pixel[0] = ft_malloc(1, sizeof(int))))
 		error_exit("INIT_CAMERA_0\n");
-	if (!(cam->size_line = ft_malloc(1, sizeof(int))))
+	if (!(cam->bits_per_pixel[1] = ft_malloc(1, sizeof(int))))
+		error_exit("INIT_CAMERA_0\n");
+	if (!(cam->size_line[0] = ft_malloc(1, sizeof(int))))
 		error_exit("INIT_CAMERA_1\n");
-	if (!(cam->endian = ft_malloc(1, sizeof(int))))
+	if (!(cam->size_line[1] = ft_malloc(1, sizeof(int))))
+		error_exit("INIT_CAMERA_1\n");
+	if (!(cam->endian[0] = ft_malloc(1, sizeof(int))))
+		error_exit("INIT_CAMERA_2\n");
+	if (!(cam->endian[1] = ft_malloc(1, sizeof(int))))
 		error_exit("INIT_CAMERA_2\n");
 	return (cam);
 }

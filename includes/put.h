@@ -6,6 +6,7 @@ typedef struct	s_info
 	t_parse	*parse;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		filter;
 }				t_info;
 
 void			clean_screen(t_info *info);

@@ -15,6 +15,8 @@ will save the picture as a bmp file in the repository images
 ./miniRT <scene.rt> 
 will open a window
 press space to start or change a camera
+press b to turn on or turn off the Blue filter
+
 
 
 TEST : 

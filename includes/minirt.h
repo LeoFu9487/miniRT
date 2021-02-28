@@ -26,6 +26,7 @@
 #  define OS 0
 #  define ESC 65307
 #  define SPACE 32
+#  define B 98
 # endif
 # ifdef MACOS
 #  include "../lib/minilibx_opengl_20191021/mlx.h"

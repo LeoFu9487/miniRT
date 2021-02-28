@@ -69,7 +69,7 @@ void	write_pixel(int fd, t_parse *parse, t_camera *camera)
 	{
 		ct[1] = -1;
 		while (++ct[1] < parse->rx)
-			pixel[parse->rx * ct[0] + ct[1]] = camera->pixel[++ct[2]];
+			pixel[parse->rx * ct[0] + ct[1]] = camera->pixel[0][++ct[2]];
 	}
 	write(fd, pixel, parse->rx * parse->ry * sizeof(int) / sizeof(char));
 }
