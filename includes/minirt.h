@@ -26,6 +26,8 @@
 #  define OS 0
 #  define ESC 65307
 #  define SPACE 32
+#  define R 114
+#  define G 103
 #  define B 98
 # endif
 # ifdef MACOS

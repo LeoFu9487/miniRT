@@ -4,13 +4,15 @@ int		close_program(void *param)
 {
 	t_info		*info;
 	t_camera	*cam;
+	int			ct;
 
 	info = param;
 	while (info->parse->camera)
 	{
 		cam = info->parse->camera->content;
-		mlx_destroy_image(info->mlx_ptr, cam->img_ptr[0]);
-		mlx_destroy_image(info->mlx_ptr, cam->img_ptr[1]);
+		ct = -1;
+		while (++ct < 8)
+			mlx_destroy_image(info->mlx_ptr, cam->img_ptr[ct]);
 		info->parse->camera = info->parse->camera->next;
 	}
 	if (info->win_ptr)
@@ -33,8 +35,20 @@ void	change_camera(t_info *info)
 	else
 		parse->cur_camera = parse->cur_camera->next;
 	camera = parse->cur_camera->content;
-	ft_putstr_fd("\rcamera ", 2);
+	ft_putstr_fd("\rcurrent camera : ", 2);
 	ft_putnbr_fd(camera->num, 2);
+	if ((info->filter >> 2) & 1)
+		ft_putstr_fd(" filter R : on ", 2);
+	else
+		ft_putstr_fd(" filter R : off", 2);
+	if ((info->filter >> 1) & 1)
+		ft_putstr_fd(" filter G : on ", 1);
+	else
+		ft_putstr_fd(" filter G : off", 1);
+	if ((info->filter >> 0) & 1)
+		ft_putstr_fd(" filter B : on ", 2);
+	else
+		ft_putstr_fd(" filter B : off", 2);
 	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
 }
 
@@ -48,14 +62,30 @@ int		deal_key(int key, void *ptr)
 		close_program(info);
 	if (key == SPACE)
 		change_camera(info);
+	if (key == R)
+		info->filter ^= 4;
+	if (key == G)
+		info->filter ^= 2;
 	if (key == B)
-	{
 		info->filter ^= 1;
-		if (!(info->parse->cur_camera))
-			return (0);
-		camera = info->parse->cur_camera->content;
-		mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
-	}
+	if (!(info->parse->cur_camera))
+		return (0);
+	camera = info->parse->cur_camera->content;
+	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
+	ft_putstr_fd("\rcurrent camera : ", 2);
+	ft_putnbr_fd(camera->num, 2);
+	if ((info->filter >> 2) & 1)
+		ft_putstr_fd(" filter R : on ", 2);
+	else
+		ft_putstr_fd(" filter R : off", 2);
+	if ((info->filter >> 1) & 1)
+		ft_putstr_fd(" filter G : on ", 1);
+	else
+		ft_putstr_fd(" filter G : off", 1);
+	if ((info->filter >> 0) & 1)
+		ft_putstr_fd(" filter B : on ", 2);
+	else
+		ft_putstr_fd(" filter B : off", 2);
 	return (0);
 }
 
@@ -78,7 +108,6 @@ void	open_window(t_parse *parse, t_info *info)
 
 	win_ptr = mlx_new_window(info->mlx_ptr, parse->rx, parse->ry, "miniRT");
 	info->win_ptr = win_ptr;
-	ft_putendl_fd("current camera :", 2);
 	mlx_hook(win_ptr, 17, 131072, close_program, info);
 	mlx_key_hook(win_ptr, deal_key, info);
 	mlx_loop(info->mlx_ptr);
