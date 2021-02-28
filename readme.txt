@@ -18,7 +18,16 @@ press space to start or change a camera
 
 press r,g,b to turn on or turn off the red,green,blue filter respectively
 
+bonus objets :
 
+Cube :
+
+cu -50,0,800	500	255,255,255
+
+identifier : cu
+x,y,z coordinate for the center point : -50,0,500
+side size : 500
+R,G,B colors in range [0,255] : 255,255,255
 
 TEST : 
 R 1000 1000

@@ -44,6 +44,7 @@ static int	in_square(t_line *line, t_square *square, double t)
 	point[1] = line->y[0] * t + line->y[1];
 	point[2] = line->z[0] * t + line->z[1];
 	v = two_points_vector(square->start_point, point);
+	//printf("%\n v0 : %g %g %g\n v1 : %g %g %g \n", sq);
 	linear_equations(square->vector[0], square->vector[1], v, ans);
 	ft_free(v);
 	if (ans[0] < 1.0 - 1e-6 && ans[0] > 1e-6 && ans[1] < 1.0 - 1e-6 && ans[1] > 1e-6)

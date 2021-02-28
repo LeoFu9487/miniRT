@@ -7,12 +7,13 @@ static void	assigned_func(void **func)
 	func[cy] = &have_intersection_cy;
 	func[tr] = &have_intersection_tr;
 	func[sq] = &have_intersection_sq;
+	func[cu] = &have_intersection_cu;
 }
 
 int			have_intersection(t_list *lst, t_line *line)
 {
 	t_objects	*objs;
-	int			(*func[9])(t_line*, void*);
+	int			(*func[10])(t_line*, void*);
 
 	assigned_func((void**)func);
 	while (lst)
@@ -37,6 +38,8 @@ static int	*get_obj_color(t_objects *obj)
 		return (((t_cylinder*)(obj->ptr))->color);
 	if (obj->type == tr)
 		return (((t_triangle*)(obj->ptr))->color);
+	if (obj->type == cu)
+		return (((t_cube*)(obj->ptr))->color);
 	return (NULL);
 }
 
@@ -47,12 +50,13 @@ static void		assigned_func2(void **func)
 	func[tr] = &normal_vector_tr;
 	func[cy] = &normal_vector_cy;
 	func[sq] = &normal_vector_sq;
+	func[cu] = &normal_vector_cu;
 }
 
 static double	get_new_brightness(t_objects *obj, t_intersect *it, t_light *light, t_parse *parse)
 {
 	double	ans;
-	double	*(*func[9])(double*, void*);
+	double	*(*func[10])(double*, void*);
 	double	*vector[3];
 	double	len_sum;
 
@@ -118,7 +122,7 @@ void		intersect_color(t_intersect *it, t_parse *parse)
 			error_exit("intersect_color2\n");
 		ct = -1;
 		while (++ct < 3)
-			cur_color[ct] += new_color[ct];
+			cur_color[ct] += double_abs(new_color[ct]);
 		ft_free(new_color);
 		ft_free(line);
 	}

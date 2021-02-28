@@ -28,3 +28,10 @@ double	*make_point(double a, double b, double c)
 	ans[2] = c;
 	return (ans);
 }
+
+void	copy_vector(double *target, double *srcs)
+{
+	target[0] = srcs[0];
+	target[1] = srcs[1];
+	target[2] = srcs[2];
+}

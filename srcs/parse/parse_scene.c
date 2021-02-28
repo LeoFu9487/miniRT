@@ -37,6 +37,8 @@ static int	parse_type(char *str)
 		return ((t_parse_type)cy);
 	if (ft_strncmp(s, "tr", 2) == 0)
 		return ((t_parse_type)tr);
+	if (ft_strncmp(s, "cu", 2) == 0)
+		return ((t_parse_type)cu);
 	ft_free(s);
 	s = ft_substr(str, 0, 1);
 	if (ft_strncmp(s, "R", 1) == 0)
@@ -62,13 +64,14 @@ static void	assigned_func(void **func)
 	func[(t_parse_type)sq] = &parse_sq;
 	func[(t_parse_type)cy] = &parse_cy;
 	func[(t_parse_type)tr] = &parse_tr;
+	func[(t_parse_type)cu] = &parse_cu;
 }
 
 void		parse_scene(int fd, t_parse *parse)
 {
 	char	*str;
 	int		num[2];
-	void	(*func[9])(t_parse*, char *);
+	void	(*func[10])(t_parse*, char *);
 
 	assigned_func((void**)func);
 	num[0] = 1;

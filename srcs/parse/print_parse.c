@@ -83,8 +83,10 @@ void	print_sq(void *lst)
 	printf("Vx : %g Vy : %g Vz : %g ", temp->orientation[0],
 	temp->orientation[1], temp->orientation[2]);
 	printf("side_size : %g ", temp->side_size);
-	printf("R : %d g : %d B : %d\n", temp->color[0],
-	temp->color[1], temp->color[2]);
+	printf("R : %d g : %d B : %d ", temp->color[0],temp->color[1], temp->color[2]);
+	printf("start point : %g %g %g ", temp->start_point[0], temp->start_point[1], temp->start_point[2]);
+	printf("v0 : %g %g %g v1 : %g %g %g\n", temp->vector[0][0], temp->vector[0][1], temp->vector[0][2], temp->vector[1][0], temp->vector[1][1], temp->vector[1][2]);
+	
 }
 
 void	print_cy(void *lst)

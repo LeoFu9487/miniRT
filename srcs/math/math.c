@@ -47,11 +47,12 @@ static void	assigned_func(void **func)
 	func[(t_parse_type)sq] = &intersect_sq;
 	func[(t_parse_type)cy] = &intersect_cy;
 	func[(t_parse_type)tr] = &intersect_tr;
+	func[(t_parse_type)cu] = &intersect_cu;
 }
 
 void		find_intersect(t_intersect *is, t_line *l, t_list *lst)
 {
-	void		(*func[9])(t_intersect*, t_line*, void*, int);
+	void		(*func[10])(t_intersect*, t_line*, void*, int);
 	t_objects	*obj;
 
 	assigned_func((void**)func);
