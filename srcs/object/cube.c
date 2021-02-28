@@ -68,8 +68,8 @@ void	compose_cube(t_cube *cube)
 			modify_length(square->orientation, -0.5 * cube->side_size);
 		temp = two_points_vector(square->orientation, cube->coordinate);
 		copy_vector(square->coordinate, temp);
+		modify_length(square->orientation, -0.5 * cube->side_size);
 		ft_free(temp);
-		print_sq(square);
 	}
 	ft_free(point[0]);
 	ft_free(point[1]);
