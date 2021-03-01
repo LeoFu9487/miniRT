@@ -2,11 +2,14 @@
 
 int		close_program(void *param)
 {
-	t_info		*info;
+	/*t_info		*info;
 	t_camera	*cam;
-	int			ct;
+	int			ct;*/
 
-	info = param;
+	(void)param;
+	printf("\nfinished!\n");
+	exit(EXIT_SUCCESS);
+	/*info = param;
 	while (info->parse->camera)
 	{
 		cam = info->parse->camera->content;
@@ -19,9 +22,7 @@ int		close_program(void *param)
 		mlx_destroy_window(info->mlx_ptr, info->win_ptr);
 	free(info->mlx_ptr);
 	ft_free_all();
-	printf("\nfinished!\n");
-	exit(EXIT_SUCCESS);
-	return (1);
+	return (1);*/
 }
 
 void	change_camera(t_info *info)

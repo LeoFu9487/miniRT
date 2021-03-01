@@ -53,21 +53,23 @@ void	linear_equations(double *u, double *v, double *w, double *ans)
 {
 	int		ct[3];
 
-	ct[0] = 0;
-	if (u[0] == 0.0)
+	ct[0] = -1;
+	ct[2] = 1;
+	while (ct[2] && ++ct[0] < 3)
 	{
-		if (u[1] == 0.0)
-			ct[0] = 2;
-		else
-			ct[0] = 1;
+		ct[1] = -1;
+		while (ct[2] && ++ct[1] < 3)
+		{
+			if (ct[0] == ct[1] || u[ct[0]] == 0.0 || v[ct[0]] * u[ct[1]] - u[ct[0]] * v[ct[1]] == 0.0)
+				continue ;
+			ct[2] = 0;
+		}
 	}
-	ct[1] = 1 - ct[0];
-	if (v[ct[0]] * u[ct[1]] - u[ct[0]] * v[ct[1]] == 0.0)
-		ct[1] = 3 - ct[0] - ct[1];
-	if ((v[ct[0]] * u[ct[1]] - u[ct[0]] * v[ct[1]] == 0.0) || u[ct[0]] == 0.0)
+	if (ct[2])
 		error_exit("linear_equations\n");
 	ans[1] = (w[ct[0]] * u[ct[1]] - u[ct[0]] * w[ct[1]]) / (v[ct[0]] * u[ct[1]] - u[ct[0]] * v[ct[1]]);
 	ans[0] = (w[ct[0]] - v[ct[0]] * ans[1]) / u[ct[0]];
+
 }
 
 double	linear_equation(double *coef, t_line *line)

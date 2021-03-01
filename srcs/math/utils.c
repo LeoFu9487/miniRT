@@ -9,12 +9,13 @@ static void	assigned_func(void **func)
 	func[sq] = &have_intersection_sq;
 	func[cu] = &have_intersection_cu;
 	func[co] = &have_intersection_co;
+	func[py] = &have_intersection_py;
 }
 
 int			have_intersection(t_list *lst, t_line *line)
 {
 	t_objects	*objs;
-	int			(*func[11])(t_line*, void*);
+	int			(*func[12])(t_line*, void*);
 
 	assigned_func((void**)func);
 	while (lst)
@@ -43,6 +44,8 @@ static int	*get_obj_color(t_objects *obj)
 		return (((t_cube*)(obj->ptr))->color);
 	if (obj->type == co)
 		return (((t_cone*)(obj->ptr))->color);
+	if (obj->type == py)
+		return (((t_pyramid*)(obj->ptr))->square->color);
 	return (NULL);
 }
 
@@ -55,12 +58,13 @@ static void		assigned_func2(void **func)
 	func[sq] = &normal_vector_sq;
 	func[cu] = &normal_vector_cu;
 	func[co] = &normal_vector_co;
+	func[py] = &normal_vector_py;
 }
 
 static double	get_new_brightness(t_objects *obj, t_intersect *it, t_light *light, t_parse *parse)
 {
 	double	ans;
-	double	*(*func[11])(double*, void*);
+	double	*(*func[12])(double*, void*);
 	double	*vector[3];
 	double	len_sum;
 
@@ -70,7 +74,7 @@ static double	get_new_brightness(t_objects *obj, t_intersect *it, t_light *light
 	ans /= len_sum * len_sum;
 	assigned_func2((void**)func);
 	vector[0] = func[obj->type](it->coordinate, obj->ptr);
-	vector[1] = two_points_vector(it->coordinate, ((t_camera*)parse->cur_camera->content)->coordinate);
+	vector[1] = two_points_vector(it->coordinate, ((t_camera*)(parse->cur_camera->content))->coordinate);
 	vector[2] = two_points_vector(it->coordinate, light->coordinate);
 	ans *= cos(acos(cos_vector(vector[0], vector[1])) - acos(cos_vector(vector[0], vector[2])));
 	ft_free(vector[0]);

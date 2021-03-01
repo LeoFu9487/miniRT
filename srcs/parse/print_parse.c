@@ -114,6 +114,7 @@ void	print_tr(void *lst)
 	temp->point[1][1], temp->point[1][2]);
 	printf("triangle : Cx : %g Cy : %g Cz : %g ", temp->point[2][0],
 	temp->point[2][1], temp->point[2][2]);
+	printf("V0 : %g %g %g V1 : %g %g %g\n", temp->vector[0][0], temp->vector[0][1], temp->vector[0][2], temp->vector[1][0], temp->vector[1][1], temp->vector[1][2]);
 	printf("R : %d G : %d B : %d\n", temp->color[0], temp->color[1],
 	temp->color[2]);
 }

@@ -426,3 +426,115 @@ void	parse_co(t_parse *parse, char *str)
 	modify_length(cone->orientation, -1.0 * cone->height);
 	cone->end_point[0] = two_points_vector(cone->orientation, cone->end_point[1]);
 }
+
+void			parse_py(t_parse *parse, char *str)
+{
+	t_pyramid	*pyramid;
+	t_square	*square;
+	int			ct;
+	double		sign;
+	double		base_v[3];
+	double		height;
+	double		*top_point;
+	double		*point[4];
+
+	if (!(pyramid = init_pyramid()))
+		error_exit("parse_py\n");
+	if (!(square = init_square()))
+		error_exit("parse_pyramid/init_square\n");
+	pyramid->square = square;
+	ft_lstadd_back(&(parse->objects), ft_lstnew(init_objects(py, pyramid)));
+	ct = -1;
+	while (++ct < 3)
+	{
+		sign = 1.0;
+		while (*str && ft_isdigit(*str) == 0 && *str != '.' && *str != '-')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid coordinate for pyramid\n");
+		if (*str == '-')
+		{
+			sign *= -1.0;
+			if (!ft_isdigit(*(++str)))
+				error_exit("find negative number in wrong format\n");
+		}
+		square->coordinate[ct] = sign * ft_atodouble(&str);
+	}
+	ct = -1;
+	while (++ct < 3)
+	{
+		sign = 1.0;
+		while (*str && ft_isdigit(*str) == 0 && *str != '.' && *str != '-')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid orientation for pyramid\n");
+		if (*str == '-')
+		{
+			sign *= -1.0;
+			if (!ft_isdigit(*(++str)))
+				error_exit("find negative number in wrong format\n");
+		}
+		square->orientation[ct] = sign * ft_atodouble(&str);
+		if (square->orientation[ct] < -1.0 || square->orientation[ct] > 1.0)
+			error_exit("Square orientation out of range\n");
+	}
+	while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		str++;
+	if (*str == 0)
+		error_exit("couldn't find valid side_size for pyramid\n");
+	square->side_size = ft_atodouble(&str);
+	while (*str && ft_isdigit(*str) == 0 && *str != '.')
+		str++;
+	if (*str == 0)
+		error_exit("couldn't find valid height for pyramid\n");
+	height = ft_atodouble(&str);
+	ct = -1;
+	while (++ct < 3)
+	{
+		while (*str && ft_isdigit(*str) == 0 && *str != '.')
+			str++;
+		if (*str == 0)
+			error_exit("couldn't find valid color for pyramid\n");
+		square->color[ct] = (int)ft_atodouble(&str);
+		if (square->color[ct] < 0 || square->color[ct] > 255)
+			error_exit("Square color out of range\n");
+	}
+	base_v[0] = 0.0;
+	if (square->orientation[1] == 0.0 && square->orientation[0] == 0.0)
+		base_v[1] = 1.0;
+	else
+		base_v[1] = 0.0;
+	base_v[2] = 1.0 - base_v[1];
+	square->vector[0] = cross(base_v, square->orientation);
+	square->vector[1] = cross(square->vector[0], square->orientation);
+	modify_length(square->vector[0], square->side_size);
+	modify_length(square->vector[1], square->side_size);
+	ct = -1;
+	while (++ct < 3)
+		square->start_point[ct] = square->coordinate[ct] - square->vector[0][ct] / 2.0 - square->vector[1][ct] / 2.0;
+	modify_length(square->orientation, height);
+	top_point = add_vector(square->orientation, square->coordinate);
+	ct = -1;
+	point[0] = make_point(square->start_point[0], square->start_point[1], square->start_point[2]);
+	point[1] = add_vector(point[0], square->vector[0]);
+	point[2] = add_vector(point[1], square->vector[1]);
+	point[3] = add_vector(point[0], square->vector[1]);
+	while (++ct < 4)
+	{
+		if (!(pyramid->triangle[ct] = init_triangle()))
+			error_exit("parse_pyramid/init_triangle");
+		copy_color(pyramid->triangle[ct]->color, square->color);
+		copy_vector(pyramid->triangle[ct]->point[0], top_point);
+		copy_vector(pyramid->triangle[ct]->point[1], point[ct]);
+		copy_vector(pyramid->triangle[ct]->point[2], point[(ct + 1) % 4]);
+		pyramid->triangle[ct]->vector[0] = two_points_vector(pyramid->triangle[ct]->point[0], pyramid->triangle[ct]->point[1]);
+		pyramid->triangle[ct]->vector[1] = two_points_vector(pyramid->triangle[ct]->point[0], pyramid->triangle[ct]->point[2]);
+		pyramid->triangle[ct]->orientation = cross(pyramid->triangle[ct]->vector[0], pyramid->triangle[ct]->vector[1]);
+		if (pyramid->triangle[ct]->orientation[0] == 0.0 && pyramid->triangle[ct]->orientation[1] == 0.0 && pyramid->triangle[ct]->orientation[2] == 0.0)
+			error_exit("invalid points of triangle : form a line instead of a triangle\n");
+	}
+	ct = -1;
+	while (++ct < 4)
+		ft_free(point[ct]);
+	ft_free(top_point);
+}

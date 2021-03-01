@@ -30,3 +30,10 @@ double			double_abs(double a)
 {
 	return (a < 0.0 ? -1.0 * a : a);
 }
+
+void			copy_color(int *target, int *srcs)
+{
+	target[0] = srcs[0];
+	target[1] = srcs[1];
+	target[2] = srcs[2];
+}

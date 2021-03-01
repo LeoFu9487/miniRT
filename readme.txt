@@ -31,7 +31,25 @@ R,G,B colors in range [0,255] : 255,255,255
 
 Cone :
 
-co ... like cylinder
+co ... the rest is like cylinder
+
+identifier : co
+
+Pyramid :
+
+py -50,0,800	0,0,1	300	700	255,0,255
+
+identifier : py
+
+x,y,z coordinate for the center point of the bottom square : -50,0,800
+
+3d normalized orientation vector. In range [-1,1] for each x,y,z axis : 0,0,1
+
+side size : 300
+
+height : 700
+
+R,G,B colors in range [0,255] : 255,0,255
 
 TEST : 
 R 1000 1000
