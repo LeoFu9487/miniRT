@@ -15,6 +15,8 @@ int				in_flashlight_range(double *p0, t_flashlight *flashlight)
 	double	t;
 
 	t = (dot(flashlight->orientation, p0) - dot(flashlight->orientation, flashlight->coordinate)) / (len(flashlight->orientation) * len(flashlight->orientation));
+	if (t < 1e-6)
+		return (0);
 	p1 = make_point(flashlight->coordinate[0] + flashlight->orientation[0] * t, flashlight->coordinate[1] + flashlight->orientation[1] * t, flashlight->coordinate[2] + flashlight->orientation[2] * t);
 	if (two_points_distance(p0, p1) <= flashlight->diameter / 2.0 - 1e-6)
 	{
