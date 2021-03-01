@@ -4,19 +4,42 @@
 # if change minilibx, change minirt.h
 # take away DEBUG_FLAGS
 
-NAME = miniRT
+NAME = miniRT_bonus
 
-NAME_BONUS = miniRT_bonus
+UNAME = $(shell uname)
 
 HEAD = includes
 
-LIB = lib/
+LIB = ../lib/
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
 
-UNAME = $(shell uname)
+LIBFLAGS = -L $(LIB)libft -lft -I $(LIB)libft
+
+MACOS_MACRO = -D MACOS
+
+LINUX_MACRO = -D LINUX
+
+MACOS_MINILIBX = $(addprefix $(LIB), minilibx_opengl_20191021)
+
+LINUX_MINILIBX = $(addprefix $(LIB), minilibx-linux)
+
+MACOS_FLAGS =  -I $(MACOS_MINILIBX) -L $(MACOS_MINILIBX) -lmlx -framework OpenGL -framework AppKit
+
+LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lmlx_Linux -lm -lX11 -lXext -lpthread
+
+ifeq ($(UNAME),Darwin)
+	LIBFLAGS += $(MACOS_FLAGS)
+	CFLAGS = $(MACOS_MACRO) $(LIBFLAGS) $(DEBUG_FLAGS) $(FLAGS)
+endif
+
+ifeq ($(UNAME),Linux)
+	LIBFLAGS += $(LINUX_FLAGS)
+	CFLAGS += $(LINUX_MACRO) $(LIBFLAGS) $(DEBUG_FLAGS) $(FLAGS)
+endif
+
 
 FILES = main.c	error.c
 
@@ -60,53 +83,20 @@ SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 
 OBJS = $(SRCS:.c=.o)
 
-LIBFLAGS = -L $(LIB)libft -lft
-
-MACOS_MACRO = -D MACOS
-
-LINUX_MACRO = -D LINUX
-
-MACOS_MINILIBX = $(addprefix $(LIB), minilibx_opengl_20191021)
-
-LINUX_MINILIBX = $(addprefix $(LIB), minilibx-linux)
-
-MACOS_FLAGS =  -I $(MACOS_MINILIBX) -L $(MACOS_MINILIBX) -lmlx -framework OpenGL -framework AppKit
-
-LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lmlx_Linux -lm -lX11 -lXext -lpthread
-
-CFLAGS += $(DEBUG_FLAGS)
-
-ifeq ($(UNAME),Darwin)
-	LIBFLAGS += $(MACOS_FLAGS)
-	CFLAGS += $(MACOS_MACRO)
-endif
-
-ifeq ($(UNAME),Linux)
-	LIBFLAGS += $(LINUX_FLAGS)
-	CFLAGS += $(LINUX_MACRO)
-endif
-
 $(NAME):	$(OBJS)
 		make -C $(LIB)libft
-		$(CC) $(OBJS) $(CFLAGS) $(LIBFLAGS) -o $(NAME)
-
-$(NAME_BONUS):
-	make -C bonus
-	cp bonus/$(NAME_BONUS) .
+		$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 
 all : $(NAME)
 
-bonus :	$(NAME_BONUS)
+bonus : $(NAME)
 
 clean :
 	make clean -C $(LIB)libft
-	make clean -C bonus
 	rm -rf $(OBJS)
 
 fclean :
 	make fclean -C $(LIB)libft
-	make fclean -C bonus
-	rm -rf $(NAME_BONUS)
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
 	
