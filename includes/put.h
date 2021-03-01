@@ -1,6 +1,8 @@
 #ifndef PUT_H
 # define PUT_H
 # define GLASSES_DISTANCE 40
+# define WAVE_AMPLITUDE 10
+# define WAVE_LAMBDA 10
 
 typedef struct	s_info
 {

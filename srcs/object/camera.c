@@ -21,7 +21,7 @@ t_camera	*init_camera(void)
 	cam->num = num++;
 	cam->distance_to_screen = 0.0;
 	cnt = -1;
-	while (++cnt < 9)
+	while (++cnt < 17)
 	{
 		cam->img_ptr[cnt] = NULL;
 		if (!(cam->bits_per_pixel[cnt] = ft_malloc(1, sizeof(int))))
