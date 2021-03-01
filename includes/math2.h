@@ -22,6 +22,7 @@ double			*normal_vector_py(double *point, void *ptr);
 double			two_points_distance(double *a, double *b);
 double			*two_points_vector(double *start_point, double *end_point);
 double			*reflection_color(int *color, t_light *light, double new_brightness);
+double			*flashlight_reflection(int *color, t_flashlight *flashlight, double new_brightness);
 t_line			*two_points_line(double	*p1, double	*p2);
 int				have_intersection(t_list *lst, t_line *line);
 int				have_intersection_sp(t_line *l, void *ptr);
@@ -58,5 +59,6 @@ double			*make_point(double a, double b, double c);
 double			double_abs(double a);
 void			copy_vector(double *target, double *srcs);
 void			copy_color(int *target, int *srcs);
+int				in_flashlight_range(double *point, t_flashlight *flashlight);
 
 #endif

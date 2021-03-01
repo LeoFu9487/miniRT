@@ -85,18 +85,43 @@ static double	get_new_brightness(t_objects *obj, t_intersect *it, t_light *light
 	return (double_abs(ans));
 }
 
+static double	flashlight_new_brightness(t_objects *obj, t_intersect *it, t_flashlight *flashlight, t_parse *parse)
+{
+	double	ans;
+	double	*(*func[12])(double*, void*);
+	double	*vector[3];
+	double	len_sum;
+
+	ans = flashlight->brightness;
+	len_sum = two_points_distance(it->coordinate, flashlight->coordinate) + two_points_distance(it->coordinate, ((t_camera*)(parse->cur_camera->content))->coordinate);
+	len_sum /= LEN_UNIT;
+	ans /= len_sum * len_sum;
+	assigned_func2((void**)func);
+	vector[0] = func[obj->type](it->coordinate, obj->ptr);
+	vector[1] = two_points_vector(it->coordinate, ((t_camera*)(parse->cur_camera->content))->coordinate);
+	vector[2] = two_points_vector(it->coordinate, flashlight->coordinate);
+	//ans *= cos(acos(cos_vector(vector[0], vector[1])) - acos(cos_vector(vector[0], vector[2])));
+	ans *= cos_vector(vector[0], vector[2]);
+	ft_free(vector[0]);
+	ft_free(vector[1]);
+	ft_free(vector[2]);
+	(void)obj;
+	return (double_abs(ans));
+}
+
 void		intersect_color(t_intersect *it, t_parse *parse)
 {
-	t_light		*light;
-	int			*obj_color;
-	t_list		*lst;
-	t_line		*line;
-	int			ct;
-	double		*new_color;
-	double		cur_color[3];
-	int			color_max;
-	double		new_brightness;
-	t_objects	*obj;
+	t_light			*light;
+	int				*obj_color;
+	t_list			*lst;
+	t_line			*line;
+	int				ct;
+	double			*new_color;
+	double			cur_color[3];
+	int				color_max;
+	double			new_brightness;
+	t_objects		*obj;
+	t_flashlight	*flashlight;
 
 	lst = parse->objects;
 	while (lst)
@@ -127,6 +152,26 @@ void		intersect_color(t_intersect *it, t_parse *parse)
 		new_brightness = get_new_brightness(obj, it, light, parse);
 		if (!(new_color = reflection_color(obj_color, light, new_brightness)))
 			error_exit("intersect_color2\n");
+		ct = -1;
+		while (++ct < 3)
+			cur_color[ct] += double_abs(new_color[ct]);
+		ft_free(new_color);
+		ft_free(line);
+	}
+	lst = parse->flashlight;
+	while (lst)
+	{
+		flashlight = lst->content;
+		lst = lst->next;
+		if (!(in_flashlight_range(it->coordinate, flashlight)))
+			continue ;
+		if (!(line = two_points_line(flashlight->coordinate, it->coordinate)))
+			error_exit("intersect_color87\n");
+		if (have_intersection(parse->objects, line))
+			continue ;
+		new_brightness = flashlight_new_brightness(obj, it, flashlight, parse);
+		if (!(new_color = flashlight_reflection(obj_color, flashlight, new_brightness)))
+			error_exit("intersect_color88\n");
 		ct = -1;
 		while (++ct < 3)
 			cur_color[ct] += double_abs(new_color[ct]);

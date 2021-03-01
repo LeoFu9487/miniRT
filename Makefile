@@ -21,7 +21,7 @@ FILES = main.c	error.c
 OBJECT_FILES = 	camera.c	light.c\
 	objects.c	sphere.c	plane.c		square.c\
 	cylinder.c	triangle.c	cube.c		cone.c\
-	pyramid.c
+	pyramid.c	flashlight.c
 
 PARSE_FILES = parse_scene.c	parse_func_0.c	parse_func_1.c	print_parse.c
 

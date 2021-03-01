@@ -15,6 +15,7 @@ t_parse		*init_parse(void)
 	parse->light = NULL;
 	parse->camera = NULL;
 	parse->cur_camera = NULL;
+	parse->flashlight = NULL;
 	parse->aratio = -1.0;
 	parse->acolor[0] = -1;
 	parse->acolor[1] = -1;
@@ -43,6 +44,8 @@ static int	parse_type(char *str)
 		return ((t_parse_type)co);
 	if (ft_strncmp(s, "py", 2) == 0)
 		return ((t_parse_type)py);
+	if (ft_strncmp(s, "fl", 2) == 0)
+		return ((t_parse_type)fl);
 	ft_free(s);
 	s = ft_substr(str, 0, 1);
 	if (ft_strncmp(s, "R", 1) == 0)
@@ -71,13 +74,14 @@ static void	assigned_func(void **func)
 	func[(t_parse_type)cu] = &parse_cu;
 	func[(t_parse_type)co] = &parse_co;
 	func[(t_parse_type)py] = &parse_py;
+	func[(t_parse_type)fl] = &parse_fl;
 }
 
 void		parse_scene(int fd, t_parse *parse)
 {
 	char	*str;
 	int		num[2];
-	void	(*func[12])(t_parse*, char *);
+	void	(*func[13])(t_parse*, char *);
 
 	assigned_func((void**)func);
 	num[0] = 1;

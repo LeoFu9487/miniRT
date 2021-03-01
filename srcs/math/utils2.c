@@ -49,6 +49,19 @@ double	*reflection_color(int *color, t_light *light, double new_brightness)
 	return (ans);
 }
 
+double	*flashlight_reflection(int *color, t_flashlight *flashlight, double new_brightness)
+{
+	double	*ans;
+	int		ct;
+
+	if (!(ans = ft_malloc(3, sizeof(double))))
+		error_exit("reflection_color\n");
+	ct = -1;
+	while (++ct < 3)
+		ans[ct] = (double)color[ct] * (double)(flashlight->color[ct]) / 255.0 * new_brightness;
+	return (ans);
+}
+
 void	linear_equations(double *u, double *v, double *w, double *ans)
 {
 	int		ct[3];

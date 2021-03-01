@@ -55,6 +55,24 @@ height : 700
 
 R,G,B colors in range [0,255] : 255,0,255
 
+flashlight (parallel light)
+
+fl 0,500,-100 0,0,1 1.0 50 255,255,255
+
+identifier : fl
+
+coordinate : 0,500,-100
+
+orientation (x,y,z) in range [0,1] : 0,0,1
+
+brightness in range [0,1] : 1.0
+
+diameter : 50
+
+color (r,g,b) in range [0,255] : 255,255,255
+
+identifier : 
+
 TEST : 
 R 1000 1000
 A 1.0 255 255 255

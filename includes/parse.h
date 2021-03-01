@@ -29,6 +29,7 @@ typedef struct	s_parse
 	t_list	*cur_camera;
 	t_list	*light;
 	t_list	*objects;
+	t_list	*flashlight;
 }				t_parse;
 
 typedef enum	e_parse_type
@@ -44,7 +45,8 @@ typedef enum	e_parse_type
 	tr,
 	cu,
 	co,
-	py
+	py,
+	fl
 }				t_parse_type;
 
 typedef struct	s_camera
@@ -142,6 +144,15 @@ typedef struct	s_pyramid
 	t_triangle		*triangle[4];
 }				t_pyramid;
 
+typedef struct	s_flashlight
+{
+	double	coordinate[3];
+	double	orientation[3];
+	double	brightness;
+	double	diameter;
+	int		color[3];
+}				t_flashlight;
+
 void			parse_scene(int fd, t_parse *parse);
 void			parse_r(t_parse *parse, char *str);
 void			parse_a(t_parse *parse, char *str);
@@ -155,6 +166,7 @@ void			parse_tr(t_parse *parse, char *str);
 void			parse_cu(t_parse *parse, char *str);
 void			parse_co(t_parse *parse, char *str);
 void			parse_py(t_parse *parse, char *str);
+void			parse_fl(t_parse *parse, char *str);
 t_parse			*init_parse(void);
 t_camera		*init_camera(void);
 t_light			*init_light(void);
@@ -167,6 +179,7 @@ t_triangle		*init_triangle(void);
 t_cube			*init_cube(void);
 t_cone			*init_cone(void);
 t_pyramid		*init_pyramid(void);
+t_flashlight	*init_flashlight(void);
 void			print_parse(t_parse *parse);
 void			print_camera(void *lst);
 void			print_light(void *lst);
