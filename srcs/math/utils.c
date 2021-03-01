@@ -76,7 +76,8 @@ static double	get_new_brightness(t_objects *obj, t_intersect *it, t_light *light
 	vector[0] = func[obj->type](it->coordinate, obj->ptr);
 	vector[1] = two_points_vector(it->coordinate, ((t_camera*)(parse->cur_camera->content))->coordinate);
 	vector[2] = two_points_vector(it->coordinate, light->coordinate);
-	ans *= cos(acos(cos_vector(vector[0], vector[1])) - acos(cos_vector(vector[0], vector[2])));
+	//ans *= cos(acos(cos_vector(vector[0], vector[1])) - acos(cos_vector(vector[0], vector[2])));
+	ans *= cos_vector(vector[0], vector[2]);
 	ft_free(vector[0]);
 	ft_free(vector[1]);
 	ft_free(vector[2]);

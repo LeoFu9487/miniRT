@@ -29,6 +29,7 @@
 #  define R 114
 #  define G 103
 #  define B 98
+#  define S 115
 # endif
 # ifdef MACOS
 #  include "../lib/minilibx_opengl_20191021/mlx.h"

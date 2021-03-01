@@ -38,19 +38,27 @@ void	change_camera(t_info *info)
 	camera = parse->cur_camera->content;
 	ft_putstr_fd("\rcurrent camera : ", 2);
 	ft_putnbr_fd(camera->num, 2);
-	if ((info->filter >> 2) & 1)
-		ft_putstr_fd(" filter R : on ", 2);
+	if ((info->filter >> 3) & 1)
+	{
+		ft_putstr_fd(" wearing red-green glasses !                   ", 2);
+		mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[8], 0, 0);
+	}
 	else
-		ft_putstr_fd(" filter R : off", 2);
-	if ((info->filter >> 1) & 1)
-		ft_putstr_fd(" filter G : on ", 1);
-	else
-		ft_putstr_fd(" filter G : off", 1);
-	if ((info->filter >> 0) & 1)
-		ft_putstr_fd(" filter B : on ", 2);
-	else
-		ft_putstr_fd(" filter B : off", 2);
-	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
+	{
+		if ((info->filter >> 2) & 1)
+			ft_putstr_fd(" filter R : on ", 2);
+		else
+			ft_putstr_fd(" filter R : off", 2);
+		if ((info->filter >> 1) & 1)
+			ft_putstr_fd(" filter G : on ", 1);
+		else
+			ft_putstr_fd(" filter G : off", 1);
+		if ((info->filter >> 0) & 1)
+			ft_putstr_fd(" filter B : on ", 2);
+		else
+			ft_putstr_fd(" filter B : off", 2);
+		mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
+	}
 }
 
 int		deal_key(int key, void *ptr)
@@ -69,24 +77,34 @@ int		deal_key(int key, void *ptr)
 		info->filter ^= 2;
 	if (key == B)
 		info->filter ^= 1;
+	if (key == S)
+		info->filter ^= 8;
 	if (!(info->parse->cur_camera))
 		return (0);
 	camera = info->parse->cur_camera->content;
-	mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
 	ft_putstr_fd("\rcurrent camera : ", 2);
 	ft_putnbr_fd(camera->num, 2);
-	if ((info->filter >> 2) & 1)
-		ft_putstr_fd(" filter R : on ", 2);
+	if ((info->filter >> 3) & 1)
+	{
+		ft_putstr_fd(" wearing red-green glasses !                   ", 2);
+		mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[8], 0, 0);
+	}
 	else
-		ft_putstr_fd(" filter R : off", 2);
-	if ((info->filter >> 1) & 1)
-		ft_putstr_fd(" filter G : on ", 1);
-	else
-		ft_putstr_fd(" filter G : off", 1);
-	if ((info->filter >> 0) & 1)
-		ft_putstr_fd(" filter B : on ", 2);
-	else
-		ft_putstr_fd(" filter B : off", 2);
+	{
+		if ((info->filter >> 2) & 1)
+			ft_putstr_fd(" filter R : on ", 2);
+		else
+			ft_putstr_fd(" filter R : off", 2);
+		if ((info->filter >> 1) & 1)
+			ft_putstr_fd(" filter G : on ", 1);
+		else
+			ft_putstr_fd(" filter G : off", 1);
+		if ((info->filter >> 0) & 1)
+			ft_putstr_fd(" filter B : on ", 2);
+		else
+			ft_putstr_fd(" filter B : off", 2);
+		mlx_put_image_to_window(info->mlx_ptr, info->win_ptr, camera->img_ptr[info->filter], 0, 0);
+	}
 	return (0);
 }
 

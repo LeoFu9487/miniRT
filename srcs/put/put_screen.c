@@ -31,10 +31,10 @@ void	put_all(t_info *info)
 	u = cross(base_v, camera->orientation);
 	modify_length(u, 1.0);
 	ct[0] = -1;
-	while (++ct[0] < info->parse->rx)
+	while (++ct[0] < info->parse->rx + GLASSES_DISTANCE)
 	{
 		ft_putstr_fd("\rloading ... ", 2);
-		ft_putnbr_fd(ct[0] * 100 / info->parse->rx, 2);
+		ft_putnbr_fd(ct[0] * 100 / (info->parse->rx + GLASSES_DISTANCE), 2);
 		ft_putstr_fd(" %", 2);
 		ct[1] = -1;
 		while (++ct[1] < info->parse->ry)
@@ -51,6 +51,7 @@ void	put_pixel(t_info *info, int *pixel, double *u, double *v)
 	t_intersect	*intersect;
 	t_camera	*camera;
 	int			color[3];
+	int			use[2][3];
 	int			ct;
 
 	position[0] = ((double)pixel[0]) - ((double)info->parse->rx) / 2.0;
@@ -68,7 +69,22 @@ void	put_pixel(t_info *info, int *pixel, double *u, double *v)
 		color[0] = (((ct >> 2) & 1) ^ 1) * intersect->color[0];
 		color[1] = (((ct >> 1) & 1) ^ 1) * intersect->color[1];
 		color[2] = (((ct >> 0) & 1) ^ 1) * intersect->color[2];
-		camera->pixel[ct][pixel[0] + pixel[1] * info->parse->rx] = get_color(color);
+		if (pixel[0] < info->parse->rx)
+			camera->pixel[ct][pixel[0] + pixel[1] * info->parse->rx] = get_color(color);
+		if (ct == 3)
+			copy_color(use[0], color);
+		if (ct == 6)
+			copy_color(use[1], color);
+	}
+	if (pixel[0] < info->parse->rx)
+	{
+		camera->pixel[ct][pixel[0] + pixel[1] * info->parse->rx] = camera->pixel[5][pixel[0] + pixel[1] * info->parse->rx];
+		camera->pixel[ct][pixel[0] + pixel[1] * info->parse->rx] += camera->pixel[6][pixel[0] + pixel[1] * info->parse->rx] * 0.5;
+	}
+	if (info->parse->rx >= GLASSES_DISTANCE && pixel[0] >= GLASSES_DISTANCE)
+	{
+		camera->pixel[ct][pixel[0] + pixel[1] * info->parse->rx - GLASSES_DISTANCE] += get_color(use[0]);
+		camera->pixel[ct][pixel[0] + pixel[1] * info->parse->rx - GLASSES_DISTANCE] += get_color(use[1]) * 0.5;
 	}
 	ft_free(line);
 	ft_free(intersect);

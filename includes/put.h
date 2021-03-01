@@ -1,5 +1,6 @@
 #ifndef PUT_H
 # define PUT_H
+# define GLASSES_DISTANCE 40
 
 typedef struct	s_info
 {

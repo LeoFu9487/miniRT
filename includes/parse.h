@@ -54,11 +54,11 @@ typedef struct	s_camera
 	double	orientation[3];
 	double	vof;
 	double	distance_to_screen;
-	void	*img_ptr[8];
-	int		*pixel[8];
-	int		*bits_per_pixel[8];
-	int		*size_line[8];
-	int		*endian[8];
+	void	*img_ptr[9];
+	int		*pixel[9];
+	int		*bits_per_pixel[9];
+	int		*size_line[9];
+	int		*endian[9];
 }				t_camera;
 
 typedef struct	s_light
