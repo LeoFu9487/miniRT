@@ -42,7 +42,14 @@ int		main(int argc, char **argv)
 	parse_scene(fd, parse);
 	info = get_images(parse);
 	if (argc == 2)
+	{
+		ft_putendl_fd("press space to start and change camera", 2);
+		ft_putendl_fd("press r,g,b for RGB filter", 2);
+		ft_putendl_fd("press w for wave effect", 2);
+		ft_putendl_fd("press s for stereocopy", 2);
+		ft_putendl_fd("press ESC to close the program", 2);
 		open_window(parse, info);
+	}
 	else
 		do_bmp(info, argv[1]);
 	return (0);

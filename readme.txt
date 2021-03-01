@@ -16,7 +16,9 @@ will save the picture as a bmp file in the repository images
 will open a window
 press space to start or change a camera
 
-press s for stereoecopy
+press s for stereoecopy (red green glasses)
+
+press w for wave effect
 
 press r,g,b to turn on or turn off the red,green,blue filter respectively
 
