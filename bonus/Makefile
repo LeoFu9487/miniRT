@@ -33,11 +33,13 @@ LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lmlx_Linux -lm -l
 ifeq ($(UNAME),Darwin)
 	LIBFLAGS += $(MACOS_FLAGS)
 	CFLAGS = $(MACOS_MACRO) $(LIBFLAGS) $(DEBUG_FLAGS) $(FLAGS)
+	MINILIBX = $(MACOS_MINILIBX)
 endif
 
 ifeq ($(UNAME),Linux)
 	LIBFLAGS += $(LINUX_FLAGS)
 	CFLAGS += $(LINUX_MACRO) $(LIBFLAGS) $(DEBUG_FLAGS) $(FLAGS)
+	MINILIBX = $(LINUX_MINILIBX)
 endif
 
 
@@ -85,34 +87,22 @@ OBJS = $(SRCS:.c=.o)
 
 $(NAME):	$(OBJS)
 		make -C $(LIB)libft
+		make -C $(MINILIBX)
 		$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 
 all : $(NAME)
 
-bonus : $(NAME)
-
 clean :
 	make clean -C $(LIB)libft
+	make clean -C $(MINILIBX)
 	rm -rf $(OBJS)
 
 fclean :
 	make fclean -C $(LIB)libft
+	make clean -C $(MINILIBX)
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
 	
 re :	fclean all
 
-debug :
-	$(MAKE) fclean
-	$(MAKE) DEBUG_FLAGS=-D\ DEBUG=1
-	$(MAKE) clean
-
-norm :
-	norminette srcs/*.c includes/*.h
-	$(MAKE) norm -C lib/libft/
-
-git :
-	git add srcs/*.c includes/*.h Makefile lib/*/*.c lib/*/*.h lib/*/Makefile tests/*
-	git commit -m "$(message)"
-
-.PHONY : all clean fclean re norm
+.PHONY : all clean fclean re

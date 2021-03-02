@@ -79,15 +79,18 @@ CFLAGS += $(DEBUG_FLAGS)
 ifeq ($(UNAME),Darwin)
 	LIBFLAGS += $(MACOS_FLAGS)
 	CFLAGS += $(MACOS_MACRO)
+	MINILIBX = $(MACOS_MINILIBX)
 endif
 
 ifeq ($(UNAME),Linux)
 	LIBFLAGS += $(LINUX_FLAGS)
 	CFLAGS += $(LINUX_MACRO)
+	MINILIBX = $(LINUX_MINILIBX)
 endif
 
 $(NAME):	$(OBJS)
 		make -C $(LIB)libft
+		make -C $(MINILIBX)
 		$(CC) $(OBJS) $(CFLAGS) $(LIBFLAGS) -o $(NAME)
 
 $(NAME_BONUS):
@@ -101,11 +104,13 @@ bonus :	$(NAME_BONUS)
 clean :
 	make clean -C $(LIB)libft
 	make clean -C bonus
+	make clean -C $(MINILIBX)
 	rm -rf $(OBJS)
-
+	
 fclean :
 	make fclean -C $(LIB)libft
 	make fclean -C bonus
+	make clean -C $(MINILIBX)
 	rm -rf $(NAME_BONUS)
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
@@ -121,8 +126,4 @@ norm :
 	norminette srcs/*.c includes/*.h
 	$(MAKE) norm -C lib/libft/
 
-git :
-	git add srcs/*.c includes/*.h Makefile lib/*/*.c lib/*/*.h lib/*/Makefile tests/*
-	git commit -m "$(message)"
-
-.PHONY : all clean fclean re norm
+.PHONY : all clean fclean re bonus debug norm
