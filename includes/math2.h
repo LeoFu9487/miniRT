@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math2.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/02 19:55:48 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/02 22:30:22 by yfu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MATH2_H
 # define MATH2_H
 # define LEN_UNIT 500.0
@@ -21,8 +33,8 @@ double			*normal_vector_co(double *point, void *ptr);
 double			*normal_vector_py(double *point, void *ptr);
 double			two_points_distance(double *a, double *b);
 double			*two_points_vector(double *start_point, double *end_point);
-double			*reflection_color(int *color, t_light *light, double new_brightness);
-double			*flashlight_reflection(int *color, t_flashlight *flashlight, double new_brightness);
+double			*reflection_color(int *color, t_light *light, double b);
+double			*flashlight_reflection(int *color, t_flashlight *f, double b);
 t_line			*two_points_line(double	*p1, double	*p2);
 int				have_intersection(t_list *lst, t_line *line);
 int				have_intersection_sp(t_line *l, void *ptr);
@@ -38,7 +50,7 @@ int				quadratic_equation(double *coef, double *answer);
 t_intersect		*init_intersect(t_parse *parse);
 void			find_intersect(t_intersect *is, t_line *l, t_list *obj);
 void			modify_length(double *vector, double length);
-t_line			*new_line(t_camera *camera, double *u, double *v, double *position);
+t_line			*new_line(t_camera *camera, double *u, double *v, double *p);
 double			*cross(double *v1, double *v2);
 double			dot(double *v1, double *v2);
 double			len(double *v);
@@ -60,5 +72,6 @@ double			double_abs(double a);
 void			copy_vector(double *target, double *srcs);
 void			copy_color(int *target, int *srcs);
 int				in_flashlight_range(double *point, t_flashlight *flashlight);
+t_intersect		*get_intersect(t_info *info, int *pixel, double *u, double *v);
 
 #endif
