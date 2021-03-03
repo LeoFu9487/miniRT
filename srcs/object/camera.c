@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 02:26:03 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/03 02:27:00 by yfu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_camera	*init_camera(void)
@@ -11,12 +23,6 @@ t_camera	*init_camera(void)
 		printf("ERROR_IN_INIT_CAMERA\n");
 		return (NULL);
 	}
-	cnt = -1;
-	while (++cnt < 3)
-		cam->coordinate[cnt] = 0.0;
-	cnt = -1;
-	while (++cnt < 3)
-		cam->orientation[cnt] = 0.0;
 	cam->vof = 0;
 	cam->num = num++;
 	cam->distance_to_screen = 0.0;

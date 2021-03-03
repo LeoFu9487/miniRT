@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:59:54 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/02 19:59:55 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/03 21:34:57 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,8 @@ void			print_sq(void *lst);
 void			print_cy(void *lst);
 void			print_tr(void *lst);
 void			compose_cube(t_cube *cube);
+void			cone_coef(double *coef, double *alpha, t_line *l, t_cone *cone);
+void			cylinder_coef(double *coef, double *alpha, t_line *l, t_cylinder *cylinder);
+void			assign_v(double v[3][3], t_line *l);
 
 #endif

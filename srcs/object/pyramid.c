@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pyramid.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 02:18:40 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/03 02:18:54 by yfu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_pyramid		*init_pyramid(void)
@@ -48,13 +60,15 @@ double			*normal_vector_py(double *point, void *ptr)
 	square = pyramid->square;
 	if (!(ans = ft_malloc(3, sizeof(double))))
 		error_exit("normal_vector_py\n");
-	if (double_abs(dot(square->orientation, square->coordinate) - dot(square->orientation, point)) < 1e-6)
+	if (double_abs(dot(square->orientation, square->coordinate)
+	- dot(square->orientation, point)) < 1e-6)
 		copy_vector(ans, square->orientation);
 	ct = -1;
 	while (++ct < 4)
 	{
 		triangle = pyramid->triangle[ct];
-		if (double_abs(dot(triangle->orientation, triangle->point[0]) - dot(triangle->orientation, point)) < 1e-6)
+		if (double_abs(dot(triangle->orientation, triangle->point[0])
+		- dot(triangle->orientation, point)) < 1e-6)
 			copy_vector(ans, triangle->orientation);
 	}
 	return (ans);

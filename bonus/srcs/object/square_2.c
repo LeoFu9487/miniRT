@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.c                                          :+:      :+:    :+:   */
+/*   square_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/03 02:29:44 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:29:45 by yfu              ###   ########.fr       */
+/*   Created: 2021/03/03 02:38:40 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/03 02:39:21 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_objects	*init_objects(t_parse_type type, void *add)
+double		*normal_vector_sq(double *point, void *ptr)
 {
-	t_objects	*obj;
-	static int	num = 0;
+	double		*ans;
+	t_square	*square;
 
-	if (!(obj = ft_malloc(1, sizeof(t_objects))))
-	{
-		printf("ERROR_IN_INIT_OBJECTS\n");
-		return (NULL);
-	}
-	obj->type = type;
-	obj->ptr = add;
-	obj->num = num++;
-	return (obj);
+	if (!(ans = ft_malloc(3, sizeof(double))))
+		error_exit("normal_vector_sq\n");
+	square = ptr;
+	ans[0] = square->orientation[0];
+	ans[1] = square->orientation[1];
+	ans[2] = square->orientation[2];
+	(void)point;
+	return (ans);
 }

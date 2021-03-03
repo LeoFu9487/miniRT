@@ -21,8 +21,8 @@ UNAME = $(shell uname)
 FILES = main.c	error.c
 
 OBJECT_FILES = 	camera.c	light.c\
-	objects.c	sphere.c	plane.c		square.c\
-	cylinder.c	triangle.c	cube.c		cone.c\
+	objects.c	sphere.c	plane.c		square.c	square_2.c\
+	cylinder.c	cylinder_2.c	cylinder_3.c	triangle.c	triangle_2.c	cube.c	cube_2.c	cone.c	cone_2.c\
 	pyramid.c	flashlight.c
 
 PARSE_FILES = parse_scene.c	parse_func_0.c	parse_func_1.c	print_parse.c

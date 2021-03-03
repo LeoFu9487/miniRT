@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 02:20:38 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/03 02:21:15 by yfu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_plane		*init_plane(void)
@@ -27,7 +39,8 @@ static void	plane_coef(double *coef, t_plane *plane)
 	coef[0] = plane->orientation[0];
 	coef[1] = plane->orientation[1];
 	coef[2] = plane->orientation[2];
-	coef[3] = -1.0 * (plane->coordinate[0] * coef[0] + plane->coordinate[1] * coef[1] + plane->coordinate[2] * coef[2]);
+	coef[3] = -1.0 * (plane->coordinate[0] * coef[0] +
+	plane->coordinate[1] * coef[1] + plane->coordinate[2] * coef[2]);
 }
 
 void		intersect_pl(t_intersect *is, t_line *l, void *ptr, int num)
@@ -59,7 +72,7 @@ void		intersect_pl(t_intersect *is, t_line *l, void *ptr, int num)
 	}
 }
 
-int				have_intersection_pl(t_line *l, void *ptr)
+int			have_intersection_pl(t_line *l, void *ptr)
 {
 	t_plane	*plane;
 	double	res;
@@ -80,7 +93,7 @@ int				have_intersection_pl(t_line *l, void *ptr)
 	return (0);
 }
 
-double			*normal_vector_pl(double *point, void *ptr)
+double		*normal_vector_pl(double *point, void *ptr)
 {
 	double	*ans;
 	t_plane	*plane;
