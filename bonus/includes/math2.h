@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:55:48 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/02 19:58:16 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/02 23:05:56 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,9 @@ void			copy_vector(double *target, double *srcs);
 void			copy_color(int *target, int *srcs);
 int				in_flashlight_range(double *point, t_flashlight *flashlight);
 t_intersect		*anti_aliasing(t_info *info, int *pixel, double *u, double *v);
+double			flashlight_new_brightness(t_objects *obj, t_intersect *it,
+				t_flashlight *flashlight, t_parse *parse);
+double			get_new_brightness(t_objects *obj, t_intersect *it,
+				t_light *light, t_parse *parse);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 00:55:32 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/03 00:56:13 by yfu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 double	*cross(double *v1, double *v2)
@@ -24,7 +36,7 @@ double	len(double *v)
 
 double	cos_vector(double *v1, double *v2)
 {
-	return  (dot(v1, v2) / len(v1) / len(v2));
+	return (dot(v1, v2) / len(v1) / len(v2));
 }
 
 double	*add_vector(double *v1, double *v2)

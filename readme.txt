@@ -2,6 +2,8 @@ remember to abandon in parsing when orientaion = (0,0,0) (reconsider parsing)
 
 todo : need to redefine for apple, bonus, create more tests
 
+debug : problem of --save (need to reset the saving path, otherwise have problem if we call from other repository like ../../miniRT cone.rt --save)
+
 usage :
 
 1.

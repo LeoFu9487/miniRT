@@ -56,7 +56,7 @@ PUT_FILES = open_window.c	put_screen.c	put_screen_2.c	color.c\
 	    load_images.c
 
 MATH_FILES = vector.c	math.c	utils.c	utils2.c\
-	     vector2.c	utils3.c
+	     vector2.c	utils3.c utils1.c
 
 BMP_FILES = do_bmp.c
 

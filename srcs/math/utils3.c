@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 00:52:08 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/03 00:55:25 by yfu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-double	det(double **mat, int size)
+double			det(double **mat, int size)
 {
 	double	ans;
 	double	**submat;
@@ -36,4 +48,18 @@ void			copy_color(int *target, int *srcs)
 	target[0] = srcs[0];
 	target[1] = srcs[1];
 	target[2] = srcs[2];
+}
+
+int				quadratic_equation(double *coef, double *answer)
+{
+	double	det;
+
+	if (!coef || !answer)
+		return (-1);
+	det = coef[1] * coef[1] - 4 * coef[0] * coef[2];
+	if (det < 0.0)
+		return (0);
+	answer[0] = (-1.0 * coef[1] + sqrt(det)) / (2.0 * coef[0]);
+	answer[1] = (-1.0 * coef[1] - sqrt(det)) / (2.0 * coef[0]);
+	return (1);
 }
