@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 11:57:15 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/02 19:58:54 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 21:58:54 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 # endif
 # ifdef MACOS
 #  include "../lib/minilibx_opengl_20191021/mlx.h"
+#  include "../lib/mlx_int.h"
+#  include "../lib/mlx_new_window.h"
+#  include "../lib/mlx_opengl.h"
+#  include "../lib/mlx_png.h"
 #  define OS 1
 #  define ESC 53
 # endif

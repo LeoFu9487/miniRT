@@ -1,4 +1,4 @@
-todo : need to redefine for apple, bonus, create more tests
+todo : need to redefine for apple
 
 protection for using the mlx things ? (try bash test.sh in terminal)
 
@@ -22,6 +22,8 @@ press s for stereoecopy (red green glasses)
 press w for wave effect
 
 press r,g,b to turn on or turn off the red,green,blue filter respectively
+
+features : the invalid negative number will possibly be treated as a positive number to assure that the program will be applicable
 
 bonus objets :
 
@@ -71,14 +73,3 @@ brightness in range [0,1] : 1.0
 diameter : 50
 
 color (r,g,b) in range [0,255] : 255,255,255
-
-identifier : 
-
-TEST : 
-R 1000 1000
-A 1.0 255 255 255
-c -50.0,0,20 0,0.1,1 70
-l 100,50,50 1  255,0,0
-l 500,0,0 0.8 0,0,255
-sq -50,0,800 0,0,1 700 255,0,255
-tr -50,0,800 -550,0,800 -50,500,800 100,100,100
