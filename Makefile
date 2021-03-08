@@ -122,7 +122,8 @@ fclean :
 re :	fclean all
 
 norm :
-	norminette srcs/*.c includes/*.h
+	norminette srcs/ includes/
 	$(MAKE) norm -C lib/libft/
+	$(MAKE) norm -C bonus/
 
-.PHONY : all clean fclean re bonus debug norm
+.PHONY : all clean fclean re bonus norm

@@ -109,4 +109,7 @@ fclean :
 	
 re :	fclean all
 
+norm :
+	norminette srcs/ includes/	
+
 .PHONY : all clean fclean re
