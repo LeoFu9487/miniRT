@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 22:35:34 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/02 22:46:34 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 15:09:07 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		write_pixel(int fd, t_parse *parse, t_camera *camera)
 	write(fd, pixel, parse->rx * parse->ry * sizeof(int) / sizeof(char));
 }
 
-static void	get_file_name(char *str[2], char *file_name, t_info *info, int len)
+static void	get_file_name(char *str[3], char *file_name, t_info *info, int len)
 {
 	t_camera	*camera;
 
@@ -91,6 +91,7 @@ static void	get_file_name(char *str[2], char *file_name, t_info *info, int len)
 	if (!(str[0] = ft_malloc(len + 13 + ft_strlen(str[1]), sizeof(char))))
 		error_exit("do_bmp\n");
 	str[0][0] = '\0';
+	ft_strcat(str[0], str[2]);
 	ft_strcat(str[0], "images/");
 	ft_strcat(str[0], file_name);
 	ft_strcat(str[0], "_");
@@ -102,18 +103,22 @@ static void	get_file_name(char *str[2], char *file_name, t_info *info, int len)
 	ft_free(str[1]);
 }
 
-void		do_bmp(t_info *info, char *file_name)
+void		do_bmp(t_info *info, char *argv[2])
 {
-	char		*str[2];
+	char		*str[3];
+	char		*file_name;
 	int			len;
 
+	file_name = argv[1];
 	str[0] = file_name;
 	while (*(str[0]))
 		if (*(str[0]++) == '/')
 			file_name = str[0];
-	len = ft_strlen(file_name);
-	len -= 3;
-	file_name[len] = '\0';
+	len = ft_strlen(argv[0]) - 6;
+	str[2] = argv[0];
+	str[2][len] = '\0';
+	len += ft_strlen(file_name) - 3;
+	file_name[ft_strlen(file_name) - 3] = '\0';
 	while (info->parse->camera)
 		get_file_name(str, file_name, info, len);
 	ft_putstr_fd("check the repository \"images\" to ", 2);

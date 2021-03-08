@@ -1,8 +1,4 @@
-check the protection in init_*
-
 todo : need to redefine for apple, bonus, create more tests
-
-debug : problem of --save (need to reset the saving path, otherwise have problem if we call from other repository like ../../miniRT cone.rt --save)
 
 protection for using the mlx things ? (try bash test.sh in terminal)
 

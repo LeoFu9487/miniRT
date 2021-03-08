@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 19:21:44 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 19:29:58 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:27:38 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_cylinder		*init_cylinder(void)
 	int			ct;
 
 	if (!(cylinder = ft_malloc(1, sizeof(t_cylinder))))
-	{
-		printf("Error\nERROR_IN_INIT_CYLINDER\n");
-		return (NULL);
-	}
+		error_exit("CYLINDER\n");
 	ct = -1;
 	while (++ct < 3)
 		cylinder->coordinate[ct] = 0.0;

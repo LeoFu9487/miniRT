@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 11:57:30 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 01:27:59 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:40:30 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ int		main(int argc, char **argv)
 		open_window(parse, info);
 	}
 	else
-		do_bmp(info, argv[1]);
+		do_bmp(info, argv);
 	return (0);
 }

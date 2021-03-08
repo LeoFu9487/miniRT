@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:20:38 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:21:15 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:28:29 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_plane		*init_plane(void)
 	int		ct;
 
 	if (!(plane = ft_malloc(1, sizeof(t_plane))))
-	{
-		printf("ERROR_IN_INIT_PLANE\n");
-		return (NULL);
-	}
+		error_exit("PLANE\n");
 	ct = -1;
 	while (++ct < 3)
 		plane->coordinate[ct] = 0.0;

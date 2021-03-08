@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:19:15 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:19:17 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:27:56 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_light	*init_light(void)
 	t_light		*light;
 
 	if (!(light = ft_malloc(1, sizeof(t_light))))
-	{
-		printf("ERROR_IN_INIT_LIGHT\n");
-		return (NULL);
-	}
+		error_exit("LIGHT\n");
 	cnt = -1;
 	while (++cnt < 3)
 		light->coordinate[cnt] = 0.0;

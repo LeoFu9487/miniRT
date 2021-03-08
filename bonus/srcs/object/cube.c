@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:30:34 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:35:00 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:27:28 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_cube	*init_cube(void)
 	int		ct;
 
 	if (!(cube = ft_malloc(1, sizeof(t_cube))))
-		error_exit("INIT_CUBE\n");
+		error_exit("CUBE\n");
 	cube->side_size = -1.0;
 	ct = -1;
 	while (++ct < 6)

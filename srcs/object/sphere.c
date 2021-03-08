@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:12:53 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:17:13 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:28:45 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_sphere	*init_sphere(void)
 	t_sphere	*sphere;
 
 	if (!(sphere = ft_malloc(1, sizeof(t_sphere))))
-	{
-		printf("ERROR_IN_INIT_SPHERE\n");
-		return (NULL);
-	}
+		error_exit("SPHERE\n");
 	cnt = -1;
 	while (++cnt < 3)
 		sphere->coordinate[cnt] = 0.0;

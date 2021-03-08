@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:35:42 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:39:00 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:28:56 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_square	*init_square(void)
 	int			ct;
 
 	if (!(square = ft_malloc(1, sizeof(t_square))))
-	{
-		printf("ERROR_IN_INIT_SQUARE\n");
-		return (NULL);
-	}
+		error_exit("SQUARE\n");
 	ct = -1;
 	while (++ct < 3)
 		square->coordinate[ct] = 0.0;

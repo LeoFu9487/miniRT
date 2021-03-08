@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 03:14:53 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 13:44:07 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:27:22 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_cone			*init_cone(void)
 	int			ct;
 
 	if (!(cone = ft_malloc(1, sizeof(t_cone))))
-	{
-		printf("Error\nERROR_IN_INIT_CYLINDER\n");
-		return (NULL);
-	}
+		error_exit("CONE\n");
 	ct = -1;
 	while (++ct < 3)
 		cone->coordinate[ct] = 0.0;

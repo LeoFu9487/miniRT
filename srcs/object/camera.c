@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:26:03 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:27:00 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:26:05 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ t_camera	*init_camera(void)
 	static int	num = 0;
 
 	if (!(cam = ft_malloc(1, sizeof(t_camera))))
-	{
-		printf("ERROR_IN_INIT_CAMERA\n");
-		return (NULL);
-	}
+		error_exit("CAMERA\n");
 	cam->vof = 0;
 	cam->num = num++;
 	cam->distance_to_screen = 0.0;

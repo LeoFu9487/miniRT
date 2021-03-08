@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:19:25 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:25:05 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 14:29:08 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_triangle	*init_triangle(void)
 	int			ct[2];
 
 	if (!(triangle = ft_malloc(1, sizeof(t_triangle))))
-	{
-		printf("Error\nERROR_IN_INIT_TRIANGLE\n");
-		return (NULL);
-	}
+		error_exit("TRIANGLE\n");
 	ct[0] = -1;
 	while (++ct[0] < 3)
 	{

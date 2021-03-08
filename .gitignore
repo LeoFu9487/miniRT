@@ -1,0 +1,9 @@
+*/*.bmp
+*/*/*.bmp
+*/*/*.a
+*/*/*.o
+*/*/*/*.o
+miniRT
+miniRT_bonus
+lib/minilibx-linux/test/mlx-test
+*/*.o
