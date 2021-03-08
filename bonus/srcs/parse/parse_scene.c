@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_scene.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/07 18:16:25 by yfu               #+#    #+#             */
+/*   Updated: 2021/03/07 18:46:53 by yfu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_parse		*init_parse(void)
@@ -21,6 +33,23 @@ t_parse		*init_parse(void)
 	parse->acolor[1] = -1;
 	parse->acolor[2] = -1;
 	return (parse);
+}
+
+static int	parse_type_2(char *str)
+{
+	char	*s;
+
+	s = ft_substr(str, 0, 1);
+	if (ft_strncmp(s, "R", 1) == 0)
+		return ((t_parse_type)R);
+	if (ft_strncmp(s, "A", 1) == 0)
+		return ((t_parse_type)A);
+	if (ft_strncmp(s, "c", 1) == 0)
+		return ((t_parse_type)c);
+	if (ft_strncmp(s, "l", 1) == 0)
+		return ((t_parse_type)l);
+	ft_free(s);
+	return (-1);
 }
 
 static int	parse_type(char *str)
@@ -47,17 +76,7 @@ static int	parse_type(char *str)
 	if (ft_strncmp(s, "fl", 2) == 0)
 		return ((t_parse_type)fl);
 	ft_free(s);
-	s = ft_substr(str, 0, 1);
-	if (ft_strncmp(s, "R", 1) == 0)
-		return ((t_parse_type)R);
-	if (ft_strncmp(s, "A", 1) == 0)
-		return ((t_parse_type)A);
-	if (ft_strncmp(s, "c", 1) == 0)
-		return ((t_parse_type)c);
-	if (ft_strncmp(s, "l", 1) == 0)
-		return ((t_parse_type)l);
-	ft_free(s);
-	return (-1);
+	return (parse_type_2(str));
 }
 
 static void	assigned_func(void **func)
@@ -94,12 +113,10 @@ void		parse_scene(int fd, t_parse *parse)
 		ft_free(str);
 	}
 	if (parse->rx == 0 || parse->ry == 0)
-		error_exit("couldn't find rendering size\n");
+		error_exit("rendering size not found\n");
 	if (parse->aratio == -1.0 || parse->acolor[0] == -1 ||
 	parse->acolor[1] == -1 || parse->acolor[2] == -1)
-		error_exit("couldn't find Ambient lightning\n");
+		error_exit("Ambient lightning not found\n");
 	if (parse->camera == 0)
-		error_exit("couldn't find any camera\n");
-	if (DEBUG == 1)
-		print_parse(parse);
+		error_exit("NO CAMERA!\n");
 }

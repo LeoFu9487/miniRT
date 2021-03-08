@@ -12,16 +12,6 @@
 
 #include "minirt.h"
 
-static void		assign_v(double v[3][3], t_line *l)
-{
-	v[0][0] = l->x[1];
-	v[0][1] = l->y[1];
-	v[0][2] = l->z[1];
-	v[1][0] = l->x[0];
-	v[1][1] = l->y[0];
-	v[1][2] = l->z[0];
-}
-
 static void		intersect_co_sub(t_cone *cone,
 t_intersect *is, t_line *l, int num)
 {

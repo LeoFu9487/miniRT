@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:59:54 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 21:34:43 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/07 18:22:29 by yfu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,18 +192,10 @@ t_cube			*init_cube(void);
 t_cone			*init_cone(void);
 t_pyramid		*init_pyramid(void);
 t_flashlight	*init_flashlight(void);
-void			print_parse(t_parse *parse);
-void			print_camera(void *lst);
-void			print_light(void *lst);
-void			print_objects(void *lst);
-void			print_sp(void *lst);
-void			print_pl(void *lst);
-void			print_sq(void *lst);
-void			print_cy(void *lst);
-void			print_tr(void *lst);
 void			compose_cube(t_cube *cube);
 void			cone_coef(double *coef, double *alpha, t_line *l, t_cone *cone);
-void			cylinder_coef(double *coef, double *alpha, t_line *l, t_cylinder *cylinder);
+void			cylinder_coef(double *coef, double *alpha, t_line *l,
+t_cylinder *cylinder);
 void			assign_v(double v[3][3], t_line *l);
 
 #endif
