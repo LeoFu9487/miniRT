@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 11:57:30 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/08 21:45:47 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 21:45:47 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ t_info	*get_images(t_parse *parse)
 		mlx_get_screen_size(mlx_ptr, &sizex, &sizey);
 		parse->rx = ft_min(parse->rx, sizex);
 		parse->ry = ft_min(parse->ry, sizey);
+	}
+	else
+	{
+		parse->rx = ft_min(parse->rx, 2560);
+		parse->ry = ft_min(parse->ry, 1440);
 	}
 	info = init_info(parse, mlx_ptr, (void*)NULL);
 	load_images(info);

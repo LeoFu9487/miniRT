@@ -1,9 +1,3 @@
-#take the -fsanitize=address away ?
-#if uname == darwin ? 
-#change minilibx
-# if change minilibx, change minirt.h
-# take away DEBUG_FLAGS
-
 NAME = miniRT
 
 NAME_BONUS = miniRT_bonus
@@ -122,8 +116,8 @@ fclean :
 re :	fclean all
 
 norm :
-	norminette srcs/ includes/
-	$(MAKE) norm -C lib/libft/
-	$(MAKE) norm -C bonus/
+	@norminette srcs/ includes/
+	@$(MAKE) norm -C lib/libft/
+	@$(MAKE) norm -C bonus/
 
 .PHONY : all clean fclean re bonus norm

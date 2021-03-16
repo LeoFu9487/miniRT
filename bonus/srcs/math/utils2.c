@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:52:43 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 00:55:12 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/03 00:55:12 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ t_line	*two_points_line(double *p1, double *p2)
 {
 	t_line	*line;
 
-	if (!p1 || !p2 || (p1[0] == p2[0] && p1[1] == p2[1] && p1[2] == p2[2])
-	|| !(line = ft_malloc(1, sizeof(t_line))))
+	if (!p1 || !p2 || (p1[0] == p2[0] && p1[1] == p2[1] && p1[2] == p2[2]))
+		error_exit("two_points_line\n");
+	if (!(line = ft_malloc(1, sizeof(t_line))))
 		error_exit("two_points_line\n");
 	line->x[1] = p1[0];
 	line->y[1] = p1[1];

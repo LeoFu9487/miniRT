@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 01:57:54 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/03 02:05:54 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/03 02:05:54 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int			deal_key(int key, void *ptr)
 		close_program(info);
 	if (key == SPACE)
 		change_camera(info);
-	if (key == R)
+	if (key == _R)
 		info->filter ^= 4;
 	if (key == G)
 		info->filter ^= 2;

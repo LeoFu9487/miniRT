@@ -6,7 +6,7 @@
 #    By: yfu <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/12 12:17:32 by yfu               #+#    #+#              #
-#    Updated: 2021/02/02 12:02:56 by yfu              ###   ########lyon.fr    #
+#    Updated: 2021/03/09 14:11:49 by yfu              ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,6 @@ fclean:
 re: fclean all
 
 norm :
-	norminette $(shell find *.c *.h)
+	@norminette $(shell find *.c *.h)
 
 .PHONY : all bonus clean fclean re

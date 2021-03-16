@@ -1,9 +1,3 @@
-#take the -fsanitize=address away ?
-#if uname == darwin ? 
-#change minilibx
-# if change minilibx, change minirt.h
-# take away DEBUG_FLAGS
-
 NAME = miniRT_bonus
 
 UNAME = $(shell uname)
@@ -14,9 +8,9 @@ LIB = ../lib/
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -I $(HEAD)	-I $(LIB)libft
 
-LIBFLAGS = -L $(LIB)libft -lft -I $(LIB)libft
+LIBFLAGS =  -L $(LIB)libft -lft 
 
 MACOS_MACRO = -D MACOS
 
@@ -26,19 +20,19 @@ MACOS_MINILIBX = $(addprefix $(LIB), minilibx_opengl_20191021)
 
 LINUX_MINILIBX = $(addprefix $(LIB), minilibx-linux)
 
-MACOS_FLAGS =  -I $(MACOS_MINILIBX) -L $(MACOS_MINILIBX) -lmlx -framework OpenGL -framework AppKit
+MACOS_FLAGS =  -L $(MACOS_MINILIBX) -lmlx -framework OpenGL -framework AppKit
 
-LINUX_FLAGS = -I $(LINUX_MINILIBX) -L $(LINUX_MINILIBX) -lmlx -lmlx_Linux -lm -lX11 -lXext -lpthread
+LINUX_FLAGS =  -L $(LINUX_MINILIBX) -lmlx -lmlx_Linux -lm -lX11 -lXext -lpthread
 
 ifeq ($(UNAME),Darwin)
 	LIBFLAGS += $(MACOS_FLAGS)
-	CFLAGS = $(MACOS_MACRO) $(LIBFLAGS) $(DEBUG_FLAGS) $(FLAGS)
+	CFLAGS = $(MACOS_MACRO) $(FLAGS) -I $(MACOS_MINILIBX) 
 	MINILIBX = $(MACOS_MINILIBX)
 endif
 
 ifeq ($(UNAME),Linux)
 	LIBFLAGS += $(LINUX_FLAGS)
-	CFLAGS += $(LINUX_MACRO) $(LIBFLAGS) $(DEBUG_FLAGS) $(FLAGS)
+	CFLAGS += $(LINUX_MACRO) $(FLAGS) -I $(LINUX_MINILIBX) 
 	MINILIBX = $(LINUX_MINILIBX)
 endif
 
@@ -92,7 +86,7 @@ OBJS = $(SRCS:.c=.o)
 $(NAME):	$(OBJS)
 		make -C $(LIB)libft
 		make -C $(MINILIBX)
-		$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
+		$(CC) $(OBJS) $(CFLAGS) $(LIBFLAGS) -o $(NAME)
 
 all : $(NAME)
 
@@ -110,6 +104,6 @@ fclean :
 re :	fclean all
 
 norm :
-	norminette srcs/ includes/	
+	@norminette srcs/ includes/	
 
 .PHONY : all clean fclean re

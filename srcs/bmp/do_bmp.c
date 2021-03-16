@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 22:35:34 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/08 15:09:07 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/08 15:09:07 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,26 @@ t_bmp		*set_bmp(t_info *info)
 
 void		write_pixel(int fd, t_parse *parse, t_camera *camera)
 {
-	int	pixel[parse->rx * parse->ry];
-	int	ct[3];
+	int		ct[3];
+	char	str[4];
 
 	ct[0] = parse->ry;
-	ct[2] = -1;
 	while (--ct[0] >= 0)
 	{
 		ct[1] = -1;
 		while (++ct[1] < parse->rx)
-			pixel[parse->rx * ct[0] + ct[1]] = camera->pixel[0][++ct[2]];
+		{
+			str[3] = (camera->pixel[0][ct[0] * parse->rx + ct[1]] >> 24) &
+			((1 << 8) - 1);
+			str[2] = (camera->pixel[0][ct[0] * parse->rx + ct[1]] >> 16) &
+			((1 << 8) - 1);
+			str[1] = (camera->pixel[0][ct[0] * parse->rx + ct[1]] >> 8) &
+			((1 << 8) - 1);
+			str[0] = (camera->pixel[0][ct[0] * parse->rx + ct[1]] >> 0) &
+			((1 << 8) - 1);
+			write(fd, str, 4);
+		}
 	}
-	write(fd, pixel, parse->rx * parse->ry * sizeof(int) / sizeof(char));
 }
 
 static void	get_file_name(char *str[3], char *file_name, t_info *info, int len)

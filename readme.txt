@@ -1,8 +1,3 @@
-todo : need to redefine for apple
-
-protection for using the mlx things ? (try bash test.sh in terminal)
-
-
 usage :
 
 1.

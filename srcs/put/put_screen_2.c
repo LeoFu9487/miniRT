@@ -6,7 +6,7 @@
 /*   By: yfu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 20:22:28 by yfu               #+#    #+#             */
-/*   Updated: 2021/03/02 22:33:32 by yfu              ###   ########.fr       */
+/*   Updated: 2021/03/02 22:33:32 by yfu              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void		put_screen(t_info *info)
 	camera = (t_camera*)(info->parse->cur_camera->content);
 	if (camera->vof > 170.0)
 		camera->vof = 170.0;
+	if (camera->vof < 1.0)
+		camera->vof = 1.0;
 	if (camera->distance_to_screen == 0.0)
 		camera->distance_to_screen =
 		((double)info->parse->rx) / 2.0 / tan(camera->vof / 2.0 * M_PI / 180.0);
